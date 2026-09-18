@@ -40,11 +40,15 @@ The Grader's job is to pick the right label for the student's answer.
 
 \## Decisions
 
-\- Main config: v6 prompt (two-step - step 1 describes the comparison with no label hints, step 2 makes the letter decision) running on llama3.1:8b. qwen2.5:7b stays as the second model for side-by-side comparison.
+\- Main config (current): v2 prompt (rubric definitions, no examples, single-step) running on qwen2.5:7b. llama3.1:8b stays as the second model for side-by-side comparison.
 
-\- Why: of every prompt version x model combination tried, v6 on llama3.1:8b gave the widest gap between confidence when the grader is right vs when it is wrong: avg top probability 0.819 when correct vs 0.636 when wrong (gap 0.183), and only 3 of 29 wrong predictions were "confidently wrong" (top probability above 0.9). The same v6 prompt on qwen2.5:7b showed almost no gap (0.984 correct vs 0.962 wrong) with 26 of 30 wrong predictions confidently wrong, so qwen's confidence numbers are close to meaningless as a safety signal in this setup. Accuracy was similar either way (llama3.1:8b 19/48 = 0.396, qwen2.5:7b 18/48 = 0.375), so the choice was made on confidence calibration, not raw accuracy.
+\- Why: after fixing the mass-capture measurement bug (see finding below) and rerunning every version x model combination on all 120 tasks with prefilling, v2+qwen2.5:7b is now the best on both accuracy (59/120 = 0.492, the highest of any combo tested) and confidence gap (avg top probability 0.792 when correct vs 0.727 when wrong, gap 0.065, also the highest of any combo tested). No combo tested has a strong gap in absolute terms, so treat this as "least bad," not "solved" - a confidence threshold gate built on this will still let a meaningful share of wrong answers through.
 
-\- Caveat to keep in mind: llama3.1:8b often does not answer with a bare letter as its literal first token in the v6 decision step (it wants to start writing a sentence). In about a third of v6/llama3.1:8b cases, the reported confidence is renormalized from a small slice of its real output distribution, which adds noise to the confidence numbers above.
+\- Superseded decision: v6 + llama3.1:8b was previously recorded as the main config, based on a 0.183 confidence gap measured on 48 tasks without prefilling. That decision is retracted; see finding below.
+
+\- Finding - the mass-capture bug manufactured an apparent signal: llama3.1:8b often does not answer with a bare letter as its literal first token (it wants to start writing a sentence), so without prefilling, only a small slice of its real output distribution was being renormalized into the reported confidence. On v6+llama3.1:8b specifically, fixing this with prefilling (planting "Label: " so the next token must be a letter) took average captured probability mass from 0.693 to 0.994 on a 10-task check, and the confidence gap that had looked like the best result of the project (0.183) collapsed to 0.013 once measured properly on all 120 tasks. Lesson: a confidence number is only trustworthy if you also check how much of the real output distribution it was computed from (see "mass" in src/llm.py's choice\_probabilities).
+
+\- All four version x model combinations retested with prefilling on the full 120 tasks (accuracy, avg captured mass, confidence gap): v2+qwen2.5:7b 0.492 / 0.981 / 0.065; v2+llama3.1:8b 0.317 / 0.996 / 0.014; v6+qwen2.5:7b 0.408 / 0.991 / -0.000; v6+llama3.1:8b 0.358 / 0.994 / 0.013.
 
 
 
