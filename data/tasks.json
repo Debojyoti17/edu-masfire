@@ -1,0 +1,338 @@
+[
+  {
+    "task_id": "II.13b.543.1",
+    "question": "Look at the finger patterns below, then answer the questions. What is different about the finger patterns?",
+    "reference_answer": "The loops begin at opposite sides of the print.",
+    "student_answer": "On his A arch.",
+    "gold_label": "irrelevant"
+  },
+  {
+    "task_id": "PS.46b.141.1",
+    "question": "Why was the siren's sound designed to have this property?",
+    "reference_answer": "So that people notice the sound.",
+    "student_answer": "To get cars out of the way.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "MX.36a.572b.1",
+    "question": "Grace set up a science experiment. Here's what she wrote in her notebook. First I put eggshells into a cup and covered them with vinegar. After a while, small bubbles appeared on the surface of the eggshells. The next day there were more bubbles. In a couple of days, the eggshells were gone and the liquid was clear. I think I made a solution and a reaction. Explain why Grace thinks she made a solution.",
+    "reference_answer": "A solution was created when the eggshells disappeared (dissolved) and the mixture ended up as a clear liquid.",
+    "student_answer": "She made a solution because she did eggshells and vinegar. Vinegar makes stuff bubble.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "ME.78b.159.1",
+    "question": "Look at the picture of the circuit to the right. What will happen to the motor if the light bulb burns out?",
+    "reference_answer": "The motor will continue to run because the motor still has a pathway to the D-cell.",
+    "student_answer": "The motor will keep running.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "ME.5b.311.1",
+    "question": "Anne is investigating which objects stick to magnets. She recorded this in her notebook. I was surprised! A nail was stuck to the magnet. When I accidentally touched the nail to a paperclip, the paperclip stuck to the nail. If Anne touched the nail to a brass ring, what do you think would happen and why?",
+    "reference_answer": "The brass ring would not stick to the nail because the ring is not iron. The nail is a temporary magnet, but brass cannot become a temporary magnet and thus does not stick to magnets.",
+    "student_answer": "I think that the nail will fall. Because the brass ring is too much weight on the nail and magnet.",
+    "gold_label": "contradictory"
+  },
+  {
+    "task_id": "SE.45.418.1",
+    "question": "Betty was puzzled. In the morning the shadow of the bus sign is in the street. In the afternoon the shadow of the bus sign points the opposite direction. Explain to Betty why this happens.",
+    "reference_answer": "In the morning the Sun is in the east so shadows point west. In the afternoon the Sun is in the west so shadows point east.",
+    "student_answer": "The sun rises in the east and it sets in the west, so the school bus must be facing east so that is why.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "SE.24a.505.1",
+    "question": "The drawing above shows a plaza in the afternoon. Label the west side of the drawing with a W. Label the north side of the drawing with an N. How did you know which direction was west?",
+    "reference_answer": "In the afternoon, shadows point east because the Sun is in the west. So the west side is opposite of the shadows.",
+    "student_answer": "Because I remember a compass rose and west is on the left side.",
+    "gold_label": "irrelevant"
+  },
+  {
+    "task_id": "II.13b.531.1",
+    "question": "Look at the finger patterns below, then answer the questions. What is different about the finger patterns?",
+    "reference_answer": "The loops begin at opposite sides of the print.",
+    "student_answer": "The loop are go different.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "ME.78b.254.1",
+    "question": "Look at the picture of the circuit to the right. What will happen to the motor if the light bulb burns out?",
+    "reference_answer": "The motor will continue to run because the motor still has a pathway to the D-cell.",
+    "student_answer": "The motor will stop working because it is in a series.",
+    "gold_label": "contradictory"
+  },
+  {
+    "task_id": "SE.25a.319.1",
+    "question": "The graph shows temperature data from 2 containers. One container had 100 milliliters of water and the other had 100 milliliters of dry soil. Each container was placed in the sun for 20 minutes and then in the shade for 20 minutes. Which container, A or B, had the dry soil? Explain how the graph helped you decide which container had the dry soil.",
+    "reference_answer": "A. Dry soil heats more quickly and cools off more quickly than water. The graph shows A heats and cools more quickly than B, so A must be the dry soil.",
+    "student_answer": "A. Because it has a higher temperature than water.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "ME.17b.311.1",
+    "question": "Denise made a circuit to light a bulb or run a motor off a D-cell battery. She used a special switch. Below is the schematic diagram of her circuit. The switch is inside the dotted box. Why will the bulb light when she moves the switch to the left?",
+    "reference_answer": "There is a complete circuit connecting the bulb to the D-cell battery.",
+    "student_answer": "Moving the switch the light bulb will make it light up.",
+    "gold_label": "irrelevant"
+  },
+  {
+    "task_id": "FN.27b.267.1",
+    "question": "Jana and Emily used indophenol to test 3 beverages for vitamin C. The number of drops they added to make a 10 milliliters sample of the blue indophenol indicator become colorless are given here: 8 drops of Overly Orange 13 drops of Luscious Lemon 33 drops of Fruitsnap (and it still didn't change color). Why didn't the indophenol change color with Fruitsnap?",
+    "reference_answer": "Fruitsnap contains little or no vitamin C so Fruitsnap does not change the color of the indophenol.",
+    "student_answer": "There probably was not any vitamin C in it.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "II.13a.612.1",
+    "question": "Look at the finger patterns below, then answer the questions. What is the same about the finger patterns?",
+    "reference_answer": "Both finger patterns are loops.",
+    "student_answer": "They are both arches.",
+    "gold_label": "contradictory"
+  },
+  {
+    "task_id": "SE.10.519.1",
+    "question": "Bryan taped a golf tee to a globe of the Earth. He shined a flashlight on the globe. The best way for Bryan to demonstrate how shadows change during the day would be to: (rotate the globe.) move the flashlight. Why would this best demonstrate how shadows change during the day?",
+    "reference_answer": "Shadows change during the day because the Earth is turning. The Sun stays in one place.",
+    "student_answer": "Because only the earth move not the sun and if you are on the earth you could feel the sun beam on you all the time when you are outside.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "EM.48b.521.1",
+    "question": "Emily evaporated a solution and drew a picture of the crystals that remained. Using the crystal-shape key below, what was dissolved in the solution? A. Epsom salt (B. alum) C. sodium thiosulfate.  Explain why you chose that answer.",
+    "reference_answer": "The crystals are the same shape as the alum crystals.",
+    "student_answer": "I was seen the Epsom salt rock, alum rock. And I see it is the sodium the sulfate rock and I said yes.",
+    "gold_label": "contradictory"
+  },
+  {
+    "task_id": "LF.27a.407.1",
+    "question": "The change in elevation between contour line A and contour line B is 20 meters. What is the change in elevation between contour line A and contour line C? How do you know that is the change in elevation between A and C?",
+    "reference_answer": "40 meters. The change in elevation is 20 meters between A and B and 20 meters between B and C. So the change between A and C is 40 meters. 20 m plus 20 m equals 40 m.",
+    "student_answer": "Because the circle is gets bigger.",
+    "gold_label": "irrelevant"
+  },
+  {
+    "task_id": "ME.27b.115.1",
+    "question": "How can you use a magnet to find out if the key is iron or aluminum?",
+    "reference_answer": "If the key sticks, the key is iron; if the key does not stick the key is aluminum.",
+    "student_answer": "If it attracts, it is iron. If it does not, it is aluminum.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "EM.45c.340.1",
+    "question": "You used several methods to separate and identify the substances in mock rocks. How did you know the crystals were salt?",
+    "reference_answer": "The crystals were square with Xs on the surface.",
+    "student_answer": "Well because we broke them apart.",
+    "gold_label": "irrelevant"
+  },
+  {
+    "task_id": "MX.52b.459.1",
+    "question": "Emily put 20 milliliters of a mystery solution in an evaporation dish. When all the water was gone, she drew the picture of the dish you see here.  Using the crystal-shape key below, what chemical do you think was dissolved in the solution? A. Epsom salt B. Sodium thiosulfate (C. Alum) D. None of the above. Explain why you chose that answer.",
+    "reference_answer": "Emily's crystals are the same shape as the alum crystals shown on the key.",
+    "student_answer": "I think that the Epsom salt because it look like salt crystal. It is sodium hyposulfite or alum.",
+    "gold_label": "contradictory"
+  },
+  {
+    "task_id": "FN.17a.495.1",
+    "question": "Paula wants to test a food to see if it contains acid and/or sugar. When Paula added water and yeast to a sample of the food and put the mixture in a warm water bath, the mixture began to fizz and bubble. What does this chemical reaction indicate?",
+    "reference_answer": "The food contains sugar.",
+    "student_answer": "The chemical reaction creates acid.",
+    "gold_label": "irrelevant"
+  },
+  {
+    "task_id": "VB.42.495.1",
+    "question": "Don wanted to find out if a battery powered toy truck would always travel the same distance in 10 seconds no matter how heavy a load the truck carried. He placed one or more blocks (the load) in the back of the truck and recorded his results. (Each block had the same mass.) The following graph displays his results. What is the relationship between the number of blocks and the distance traveled by the truck in 10 seconds?",
+    "reference_answer": "The more blocks the truck carries, the less distance the truck travels in 10 seconds.",
+    "student_answer": "The more blocks he adds the more heavier it gets so the more heavier it is the more slow distance it will go.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "ME.5b.318.1",
+    "question": "Anne is investigating which objects stick to magnets. She recorded this in her notebook. I was surprised! A nail was stuck to the magnet. When I accidentally touched the nail to a paperclip, the paperclip stuck to the nail. If Anne touched the nail to a brass ring, what do you think would happen and why?",
+    "reference_answer": "The brass ring would not stick to the nail because the ring is not iron. The nail is a temporary magnet, but brass cannot become a temporary magnet and thus does not stick to magnets.",
+    "student_answer": "Probably not it depends on how heavy it is and if it is made of iron.",
+    "gold_label": "contradictory"
+  },
+  {
+    "task_id": "II.20b.457.1",
+    "question": "When Sarah did the chromatography test, she saw that one black ink stayed black and didn't separate. She discovered that she had used a permanent marker. She wondered what would happen if she used a different liquid. She wrote in her science notebook, What if I used vinegar in place of the water? Can I get the pigments in permanent ink to separate? How will Sarah know if vinegar separated the permanent ink?",
+    "reference_answer": "Seeing multiple colors would show that vinegar can separate the permanent ink.",
+    "student_answer": "By looking at the pigment and chromatography.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "SE.51b.398.1",
+    "question": "Look at the 2 solar water heaters shown here. The black triangular area is the solar collector in each container. If both heaters contain the same amount of water, would you expect the temperature change in heater X to be greater than, less than, or the same as the temperature change in heater Y after 30 minutes? (Same) Explain your answer.",
+    "reference_answer": "The black areas in the 2 collectors (and the collectors themselves) are the same size. The amount of heat absorbed will be the same so the temperature change will also be the same.",
+    "student_answer": "I think the same because it is the same size, same shape, same color. It is just placed differently in the container which would not have an impact.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "LF.28a2.810.1",
+    "question": "Use the \"slope\" and \"no slope\" stream-table maps and logs on the facing page to answer these questions. What information do you get from the stream-table logs that you do not get from the stream-table maps?",
+    "reference_answer": "You can see how much time is taken for the earth materials to move.",
+    "student_answer": "Water flows faster.",
+    "gold_label": "irrelevant"
+  },
+  {
+    "task_id": "SE.51b.497.1",
+    "question": "Look at the 2 solar water heaters shown here. The black triangular area is the solar collector in each container. If both heaters contain the same amount of water, would you expect the temperature change in heater X to be greater than, less than, or the same as the temperature change in heater Y after 30 minutes? (Same) Explain your answer.",
+    "reference_answer": "The black areas in the 2 collectors (and the collectors themselves) are the same size. The amount of heat absorbed will be the same so the temperature change will also be the same.",
+    "student_answer": "They would be the same because they are the exact same size in the same position with the same size of containers.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "MS.50a.101.1",
+    "question": "Jen was talking on the phone with her Uncle Bill who lives in Canada. When she asked him how the weather was, he said it was nice and warm, about 28 degrees. What unit is Uncle Bill using to report the temperature?",
+    "reference_answer": "Bill must have been using degrees Celsius if 28 is a warm temperature.",
+    "student_answer": "A mass.",
+    "gold_label": "irrelevant"
+  },
+  {
+    "task_id": "PS.15b.644.1",
+    "question": "Below are pictures of wind instruments. You blow air through them to produce sounds. Why does [the saxophone] make the lowest sounds?",
+    "reference_answer": "The saxophone has the longest and fattest tube.",
+    "student_answer": "The sound goes a long distance.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "MS.39.598.1",
+    "question": "Why is it important to use a standard unit when making a measurement?",
+    "reference_answer": "So people know exactly what the measurement means. A standard is necessary so everyone measures using the same unit and everyone gets the same measurement.",
+    "student_answer": "We use a standard unit so we do not get the measurement wrong.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "FN.27b.117.1",
+    "question": "Jana and Emily used indophenol to test 3 beverages for vitamin C. The number of drops they added to make a 10 milliliters sample of the blue indophenol indicator become colorless are given here: 8 drops of Overly Orange 13 drops of Luscious Lemon 33 drops of Fruitsnap (and it still didn't change color). Why didn't the indophenol change color with Fruitsnap?",
+    "reference_answer": "Fruitsnap contains little or no vitamin C so Fruitsnap does not change the color of the indophenol.",
+    "student_answer": "Because it had no vitamin C.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "MX.53.473.1",
+    "question": "Adam's friend gave him a cup filled with a water solution. Adam did not know what solid material was used to make it. He evaporated the solution and found crystals in the dish after all of the water was gone. How will the crystals help him decide what solid material was used to make the solution?",
+    "reference_answer": "Crystals of different materials have different shapes. So the shape will help identify the material.",
+    "student_answer": "By comparing them to other solutions.",
+    "gold_label": "irrelevant"
+  },
+  {
+    "task_id": "MX.11c.304.1",
+    "question": "Jim used a solid and water to make Mixtures one (one spoon of solid in 100 milliliters water was clear with nothing on the bottom), 3 (3 spoons of solid in 100 milliliters water was clear with nothing on the bottom), 4 (4 spoons of solid in 100 milliliters water was clear with material on the bottom), and 5 (5 spoons of solid in 100 milliliters water was clear with material on the bottom) as shown below. He stirred each one and observed the results. Is the concentration of Mixture 5 less than, greater than, or the same as the concentration of Mixture 4? Explain your answer.",
+    "reference_answer": "The concentrations are the same because both mixtures are saturated.",
+    "student_answer": "Mixture 5 is greater than mixture 4, it had more solid.",
+    "gold_label": "contradictory"
+  },
+  {
+    "task_id": "MX.53.425.1",
+    "question": "Adam's friend gave him a cup filled with a water solution. Adam did not know what solid material was used to make it. He evaporated the solution and found crystals in the dish after all of the water was gone. How will the crystals help him decide what solid material was used to make the solution?",
+    "reference_answer": "Crystals of different materials have different shapes. So the shape will help identify the material.",
+    "student_answer": "Yes, because he could find out what type of crystals they are.",
+    "gold_label": "irrelevant"
+  },
+  {
+    "task_id": "ME.7a.178.1",
+    "question": "Lee has an object he wants to test to see if it is an insulator or a conductor. He is going to use the circuit you see in the picture. Explain how he can use the circuit to test the object.",
+    "reference_answer": "Lee should put one of the loose wires on one part of the object and the other loose wire on another part of the object and see if the object completes the circuit.",
+    "student_answer": "He will put one part of the wire one side and the other on the other side.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "MX.16a.636.1",
+    "question": "Mariella made a saturated solution by adding a solid to 100 milliliters water. Richard made a saturated solution by adding the same solid to 250 milliliters water. Do the 2 saturated solutions have the same concentration? Explain your answer.",
+    "reference_answer": "Yes. If both solutions are saturated (and at the same temperature), the solutions will both have the same concentration. Once a solution is saturated, the solution cannot get any more concentrated.",
+    "student_answer": "No because one has 100 milliliters of water and the other has 250 milliliters of water.",
+    "gold_label": "contradictory"
+  },
+  {
+    "task_id": "SE.25a.600.1",
+    "question": "The graph shows temperature data from 2 containers. One container had 100 milliliters of water and the other had 100 milliliters of dry soil. Each container was placed in the sun for 20 minutes and then in the shade for 20 minutes. Which container, A or B, had the dry soil? Explain how the graph helped you decide which container had the dry soil.",
+    "reference_answer": "A. Dry soil heats more quickly and cools off more quickly than water. The graph shows A heats and cools more quickly than B, so A must be the dry soil.",
+    "student_answer": "B. I think dry soil goes down so it bring plants do not grow quickly so it goes down.",
+    "gold_label": "contradictory"
+  },
+  {
+    "task_id": "VB.40a.249.1",
+    "question": "Jack made a lifeboat out of a large paper cup. He decided to measure how far the boat sank when different numbers of marbles were added. His data are shown in the table. Identify the standard for Jack's experiment.",
+    "reference_answer": "The boat with 0 marbles is the standard in this experiment.",
+    "student_answer": "10 marbles and 5.8 amount the boat sank.",
+    "gold_label": "contradictory"
+  },
+  {
+    "task_id": "VB.22c.452.1",
+    "question": "Describe what the graph tells you about the relationship between the number of scoops of fertilizer and the mass of beans harvested?",
+    "reference_answer": "When less than 3 scoops of fertilizer are used, the more fertilizer used, the greater the mass of beans harvested. When more than 3 scoops of fertilizer are used, the more fertilizer used, the less the mass of beans harvested.",
+    "student_answer": "The more you scoop you scoop, the higher, but if you get too deep the less you will get.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "ME.6b.107.1",
+    "question": "Look at the diagram of a circuit at the right. Will the motor run? Why?",
+    "reference_answer": "The circuit is not complete. The electrical pathway is broken.",
+    "student_answer": "I choose no because the wires are not connecting.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "MX.18.176.1",
+    "question": "A solution of water and material A is clear. A solution of water and material B is also clear. When the 2 solutions are mixed, a white solid settles to the bottom, leaving a clear liquid. What does the white solid indicate?",
+    "reference_answer": "A chemical reaction occurred. [The white solid is a precipitate (a new material) which indicates the reaction.]",
+    "student_answer": "That indicates that there is a precipitate on the sides.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "II.38.151.1",
+    "question": "Describe what you would see if a mirror were placed along a line of symmetry on a flat object.",
+    "reference_answer": "The mirror would complete the image of the object and make the object appear whole.",
+    "student_answer": "You would see the whole shape.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "LF.31b.827.1",
+    "question": "What process forms deltas? A. Gravity B. Erosion (C. Deposition) D. Decomposition.  Explain how deltas form.",
+    "reference_answer": "Earth materials erode and are carried by flowing water (a river). The earth materials form a delta when the materials are dropped off or deposited when the water stops flowing (at the mouth of a river).",
+    "student_answer": "Deltas form by the water wearing down the mouth and dragging it down.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "MX.46b.385.1",
+    "question": "Nigel made solutions in the bottles as shown below. Solution A was 2 spoons solute in 50 milliliters water and was clear with no material on the bottom. Solution B was 4 spoons solute in 100 milliliters water and was clear with no material on the bottom. Nigel took 50 milliliters of solution from bottle A and put it in cup A and 50 milliliters of solution from bottle B and put it into cup B. He put the cups on each side of the balance. Which picture shows what would happen? A is heavier than B, B is heavier than A, (A and B are the same weight). Explain your choice.",
+    "reference_answer": "The solutions have the same concentration (2 spoons in 50 milliliters is the same as 4 spoons in 100 milliliters) so the mass would also be the same.",
+    "student_answer": "Because they are equally concentrated and they both have some of water.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "EM.21b.645.1",
+    "question": "Georgia found one brown mineral and one black mineral. How will she know which one is harder?",
+    "reference_answer": "The harder mineral will leave a scratch on the less hard mineral. If the black mineral is harder, the brown mineral will have a scratch.",
+    "student_answer": "The harder one leave a scratch on the less scratch mineral.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "FN.20b.171.1",
+    "question": "Anna wants to compare the fat in walnuts and peanuts. Using only the results from her experiment, how will Anna know which one, walnuts or peanuts, has more fat? The experiment has the following procedure: Measure out equal masses of walnuts and peanuts (for example, one gram). Smash the samples uniformly in the same size area on brown paper. Wait (the same time for each).",
+    "reference_answer": "Anna should compare the size of the grease spots. The sample with the larger grease spot has more fat.",
+    "student_answer": "By looking at the scale and seeing which one is lower.",
+    "gold_label": "contradictory"
+  },
+  {
+    "task_id": "SE.22c.527.1",
+    "question": "Andi and Scott decided to investigate solar water heaters using collectors of different colors (but the same size) as one variable and covered versus uncovered as a second variable. Look at the graph of their data and answer the questions below. Why would comparing only the red uncovered heater with the blue covered heater not provide useful information?",
+    "reference_answer": "When 2 variables are changed, it is impossible to determine which variable is causing what effect.",
+    "student_answer": "Because blue goes so high and red goes so low you cannot tell anything.",
+    "gold_label": "irrelevant"
+  },
+  {
+    "task_id": "FN.17c.331.1",
+    "question": "Paula wants to test a food to see if it contains acid and/or sugar. When Paula added water and yeast to a sample of the food and put the mixture in a warm water bath, the mixture began to fizz and bubble. Paula tested for the other substance. What would the test results tell her?",
+    "reference_answer": "If gas (carbon dioxide) is produced, the food contains acid. If no gas is produced, the food does not contain acid.",
+    "student_answer": "What amount of sugar and acid that is in the food.",
+    "gold_label": "irrelevant"
+  },
+  {
+    "task_id": "MX.11c.592.1",
+    "question": "Jim used a solid and water to make Mixtures one (one spoon of solid in 100 milliliters water was clear with nothing on the bottom), 3 (3 spoons of solid in 100 milliliters water was clear with nothing on the bottom), 4 (4 spoons of solid in 100 milliliters water was clear with material on the bottom), and 5 (5 spoons of solid in 100 milliliters water was clear with material on the bottom) as shown below. He stirred each one and observed the results. Is the concentration of Mixture 5 less than, greater than, or the same as the concentration of Mixture 4? Explain your answer.",
+    "reference_answer": "The concentrations are the same because both mixtures are saturated.",
+    "student_answer": "More because there is more solid.",
+    "gold_label": "contradictory"
+  }
+]
