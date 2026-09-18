@@ -1,0 +1,58 @@
+[
+  {
+    "task_id": "EM.43b.401.1",
+    "question": "If Phil, a geologist, wants to test for calcite while in the field, what should he bring with him? (an acid such as vinegar). Describe what Phil should do to test for calcite and what he would observe.",
+    "reference_answer": "Put acid on a rock. If the acid fizzes, Phil would know that the rock has calcite.",
+    "student_answer": "He should put the rock or mineral in a cup and pour vinegar and if it bubble then it calcite.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "EM.45b.502.1",
+    "question": "You used several methods to separate and identify the substances in mock rocks. How did you separate the salt from the water?",
+    "reference_answer": "The water was evaporated, leaving the salt.",
+    "student_answer": "I put it on the evaporating dish.",
+    "gold_label": "correct"
+  },
+  {
+    "task_id": "EM.16b.321.1",
+    "question": "Ms. Teridann, a geologist, made a chart showing the scratch-test data for 3 minerals (Mineral X, Mineral Y, and Mineral Z). She wrote \"yes\" if the tool scratched the mineral and wrote \"no\" if it did not scratch it. Topaz is a mineral that cannot be scratched by a fingernail, a penny, or a paperclip. How hard is topaz compared to minerals X, Y, and Z? Explain how you know.",
+    "reference_answer": "Topaz would be the hardest of the 4 minerals because none of the tools could scratch topaz and at least one tool could scratch each of the other minerals.",
+    "student_answer": "A topaz is compared to Z because it cannot be scratched with 2 thirds things. Y is all the opposite of topaz. X cannot be scratched with one third of a topaz cannot be scratched.",
+    "gold_label": "contradictory"
+  },
+  {
+    "task_id": "EM.16b.528.1",
+    "question": "Ms. Teridann, a geologist, made a chart showing the scratch-test data for 3 minerals (Mineral X, Mineral Y, and Mineral Z). She wrote \"yes\" if the tool scratched the mineral and wrote \"no\" if it did not scratch it. Topaz is a mineral that cannot be scratched by a fingernail, a penny, or a paperclip. How hard is topaz compared to minerals X, Y, and Z? Explain how you know.",
+    "reference_answer": "Topaz would be the hardest of the 4 minerals because none of the tools could scratch topaz and at least one tool could scratch each of the other minerals.",
+    "student_answer": "Mineral Z can scratch topaz because mineral Z cannot be scratched by a penny or a fingernail but it can get scratched by a paperclip.",
+    "gold_label": "contradictory"
+  },
+  {
+    "task_id": "EM.43b.395.1",
+    "question": "If Phil, a geologist, wants to test for calcite while in the field, what should he bring with him? (an acid such as vinegar). Describe what Phil should do to test for calcite and what he would observe.",
+    "reference_answer": "Put acid on a rock. If the acid fizzes, Phil would know that the rock has calcite.",
+    "student_answer": "First find calcite put it in a vial. Second put vinegar in and let it sit. Third pour out the vinegar.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "EM.43b.384.1",
+    "question": "If Phil, a geologist, wants to test for calcite while in the field, what should he bring with him? (an acid such as vinegar). Describe what Phil should do to test for calcite and what he would observe.",
+    "reference_answer": "Put acid on a rock. If the acid fizzes, Phil would know that the rock has calcite.",
+    "student_answer": "He should put a rock and vinegar into a vial and if the rock has calcite, the water will turn murky.",
+    "gold_label": "partially_correct_incomplete"
+  },
+  {
+    "task_id": "EM.45c.259.1",
+    "question": "You used several methods to separate and identify the substances in mock rocks. How did you know the crystals were salt?",
+    "reference_answer": "The crystals were square with Xs on the surface.",
+    "student_answer": "We looked at a piece of paper and one of the pictures looked like the crystals.",
+    "gold_label": "irrelevant"
+  },
+  {
+    "task_id": "EM.45b.645.1",
+    "question": "You used several methods to separate and identify the substances in mock rocks. How did you separate the salt from the water?",
+    "reference_answer": "The water was evaporated, leaving the salt.",
+    "student_answer": "The crystals were salt.",
+    "gold_label": "irrelevant"
+  }
+]
