@@ -11,12 +11,20 @@ DEFAULT_MODEL = "qwen2.5:7b"
 BASE_OPTIONS = {"temperature": 0, "seed": 42, "num_ctx": 4096}
 
 
-def generate(prompt, model=DEFAULT_MODEL):
-    """Send a prompt to an Ollama model and return its text reply as a string."""
+def generate(prompt, model=DEFAULT_MODEL, max_tokens=None):
+    """Send a prompt to an Ollama model and return its text reply as a string.
+
+    max_tokens: if given, caps how many tokens the model is allowed to
+    generate (passed to Ollama as num_predict). Left unset means no cap.
+    """
+    options = dict(BASE_OPTIONS)
+    if max_tokens is not None:
+        options["num_predict"] = max_tokens
+
     response = ollama.chat(
         model=model,
         messages=[{"role": "user", "content": prompt}],
-        options=BASE_OPTIONS,
+        options=options,
     )
     return response.message.content
 
