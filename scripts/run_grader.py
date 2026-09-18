@@ -19,6 +19,13 @@
 # By default everything runs on src.llm.DEFAULT_MODEL. Pass a second
 # argument to use a different Ollama model instead, e.g.:
 #   python -m scripts.run_grader v2 llama3.1:8b
+#
+# Add --prefill to plant "Label: " as the start of the model's decision
+# reply, so the next token has to be a letter. This fixes a measurement
+# problem where some models (llama3.1:8b especially) want to open their
+# reply with a full sentence instead of a bare letter, leaving most of
+# the probability mass on non-option tokens:
+#   python -m scripts.run_grader v6 llama3.1:8b --prefill
 import json
 import sys
 
@@ -30,6 +37,7 @@ LABELS = ["correct", "contradictory", "partially_correct_incomplete", "irrelevan
 LETTER_TO_LABEL = dict(zip(LETTERS, LABELS))
 VERSIONS = ["v1", "v2", "v3", "v4", "v5", "v6"]
 REASONING_MAX_TOKENS = 200
+PREFILL_TEXT = "Label: "
 
 # v5's 3-label scheme: "contradictory" and "irrelevant" merged into "incorrect".
 V5_LETTERS = ["A", "B", "C"]
@@ -204,7 +212,7 @@ Based on this comparison, answer with one letter only: A, B, C, or D.
 """
 
 
-def package_result(task, result, letter_to_label, labels, model, reasoning=None, gold_label=None):
+def package_result(task, result, letter_to_label, labels, model, prefill=None, reasoning=None, gold_label=None):
     """Turn a choice_probabilities() result into the dict we save per task."""
     if result["probs"] is None:
         # The model didn't produce any of the option letters among its top candidates.
@@ -222,34 +230,38 @@ def package_result(task, result, letter_to_label, labels, model, reasoning=None,
         "probabilities": probabilities,
         "mass": result["mass"],
         "model": model,
+        "prefill": prefill,
     }
     if reasoning is not None:
         packaged["reasoning"] = reasoning
     return packaged
 
 
-def grade_task(task, version, model):
-    """Ask the model to grade one task with the given prompt version."""
+def grade_task(task, version, model, prefill=None):
+    """Ask the model to grade one task with the given prompt version.
+    prefill, if given, is planted as the start of the model's decision
+    reply (see choice_probabilities) - it never affects the reasoning/
+    comparison step, only the final letter-choosing call."""
     if version == "v4":
         reasoning = generate(build_reasoning_prompt(task), model=model, max_tokens=REASONING_MAX_TOKENS)
-        result = choice_probabilities(build_decision_prompt(task, reasoning), LETTERS, model=model)
-        return package_result(task, result, LETTER_TO_LABEL, LABELS, model, reasoning=reasoning)
+        result = choice_probabilities(build_decision_prompt(task, reasoning), LETTERS, model=model, prefill=prefill)
+        return package_result(task, result, LETTER_TO_LABEL, LABELS, model, prefill=prefill, reasoning=reasoning)
 
     if version == "v5":
         reasoning = generate(build_v5_reasoning_prompt(task), model=model, max_tokens=REASONING_MAX_TOKENS)
-        result = choice_probabilities(build_v5_decision_prompt(task, reasoning), V5_LETTERS, model=model)
+        result = choice_probabilities(build_v5_decision_prompt(task, reasoning), V5_LETTERS, model=model, prefill=prefill)
         gold_label = merge_label_v5(task["gold_label"])
-        return package_result(task, result, V5_LETTER_TO_LABEL, V5_LABELS, model,
+        return package_result(task, result, V5_LETTER_TO_LABEL, V5_LABELS, model, prefill=prefill,
                                reasoning=reasoning, gold_label=gold_label)
 
     if version == "v6":
         comparison = generate(build_comparison_prompt(task), model=model, max_tokens=REASONING_MAX_TOKENS)
-        result = choice_probabilities(build_v6_decision_prompt(task, comparison), LETTERS, model=model)
-        return package_result(task, result, LETTER_TO_LABEL, LABELS, model, reasoning=comparison)
+        result = choice_probabilities(build_v6_decision_prompt(task, comparison), LETTERS, model=model, prefill=prefill)
+        return package_result(task, result, LETTER_TO_LABEL, LABELS, model, prefill=prefill, reasoning=comparison)
 
     prompt = build_prompt(task, version)
-    result = choice_probabilities(prompt, LETTERS, model=model)
-    return package_result(task, result, LETTER_TO_LABEL, LABELS, model)
+    result = choice_probabilities(prompt, LETTERS, model=model, prefill=prefill)
+    return package_result(task, result, LETTER_TO_LABEL, LABELS, model, prefill=prefill)
 
 
 def model_slug(model):
@@ -259,32 +271,41 @@ def model_slug(model):
 
 
 def main():
-    if len(sys.argv) not in (2, 3) or sys.argv[1] not in VERSIONS:
-        print(f"Usage: python -m scripts.run_grader <{'|'.join(VERSIONS)}> [model]")
+    args = sys.argv[1:]
+    use_prefill = "--prefill" in args
+    if use_prefill:
+        args = [a for a in args if a != "--prefill"]
+
+    if len(args) not in (1, 2) or args[0] not in VERSIONS:
+        print(f"Usage: python -m scripts.run_grader <{'|'.join(VERSIONS)}> [model] [--prefill]")
         sys.exit(1)
 
-    version = sys.argv[1]
-    model = sys.argv[2] if len(sys.argv) == 3 else DEFAULT_MODEL
+    version = args[0]
+    model = args[1] if len(args) == 2 else DEFAULT_MODEL
+    prefill = PREFILL_TEXT if use_prefill else None
     tasks = json.load(open("data/tasks.json", encoding="utf-8"))
 
     results = []
     for i, task in enumerate(tasks, start=1):
-        print(f"[{i}/{len(tasks)}] grading {task['task_id']} ({version}, {model})...")
-        results.append(grade_task(task, version, model))
+        print(f"[{i}/{len(tasks)}] grading {task['task_id']} ({version}, {model}{', prefill' if use_prefill else ''})...")
+        results.append(grade_task(task, version, model, prefill=prefill))
 
-    # Keep the original filename for the default model, so existing results
-    # stay where earlier scripts and the comparison table expect them.
-    # Other models get their name added to the filename.
-    if model == DEFAULT_MODEL:
-        out_path = f"results/grader_{version}.json"
-    else:
-        out_path = f"results/grader_{version}_{model_slug(model)}.json"
+    # Keep the original filename for the default model with no prefill, so
+    # existing results stay where earlier scripts expect them. Non-default
+    # model and/or prefill each add a piece to the filename.
+    name_parts = [f"grader_{version}"]
+    if use_prefill:
+        name_parts.append("prefill")
+    if model != DEFAULT_MODEL:
+        name_parts.append(model_slug(model))
+    out_path = f"results/{'_'.join(name_parts)}.json"
 
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)
 
     correct = sum(1 for r in results if r["predicted_label"] == r["gold_label"])
-    print(f"\n{version} ({model}) accuracy: {correct}/{len(results)} = {correct / len(results):.3f}")
+    print(f"\n{version} ({model}{', prefill' if use_prefill else ''}) "
+          f"accuracy: {correct}/{len(results)} = {correct / len(results):.3f}")
     print(f"Saved results to {out_path}")
 
 

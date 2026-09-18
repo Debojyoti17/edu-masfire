@@ -29,7 +29,7 @@ def generate(prompt, model=DEFAULT_MODEL, max_tokens=None):
     return response.message.content
 
 
-def choice_probabilities(prompt, options, model=DEFAULT_MODEL, top_logprobs=20):
+def choice_probabilities(prompt, options, model=DEFAULT_MODEL, top_logprobs=20, prefill=None):
     """
     Ask a multiple-choice question (e.g. prompt tells the model to answer
     with one letter like "A") and return how confident the model was in
@@ -37,6 +37,14 @@ def choice_probabilities(prompt, options, model=DEFAULT_MODEL, top_logprobs=20):
 
     options: a list of short strings the model was told to answer with,
              e.g. ["A", "B", "C", "D"].
+
+    prefill: optional text to plant as the start of the model's reply
+             (added as a final assistant message), so the model continues
+             from that text instead of starting a fresh reply. Ending it
+             with something like "Label: " forces the very next token to
+             be the answer, instead of the model wanting to open with a
+             whole sentence - which otherwise leaves most of the
+             probability mass on non-option tokens and makes "mass" low.
 
     Returns a dict with two parts:
       "probs": dict of option -> probability, renormalized so the values
@@ -47,9 +55,13 @@ def choice_probabilities(prompt, options, model=DEFAULT_MODEL, top_logprobs=20):
                means the model mostly wanted to say something else, which
                is a useful warning sign (e.g. a corrupted prompt).
     """
+    messages = [{"role": "user", "content": prompt}]
+    if prefill is not None:
+        messages.append({"role": "assistant", "content": prefill})
+
     response = ollama.chat(
         model=model,
-        messages=[{"role": "user", "content": prompt}],
+        messages=messages,
         logprobs=True,
         top_logprobs=top_logprobs,
         options={**BASE_OPTIONS, "num_predict": 1},  # only need the first token
