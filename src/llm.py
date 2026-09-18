@@ -11,15 +11,24 @@ DEFAULT_MODEL = "qwen2.5:7b"
 BASE_OPTIONS = {"temperature": 0, "seed": 42, "num_ctx": 4096}
 
 
-def generate(prompt, model=DEFAULT_MODEL, max_tokens=None):
+def generate(prompt, model=DEFAULT_MODEL, max_tokens=None, temperature=None, seed=None):
     """Send a prompt to an Ollama model and return its text reply as a string.
 
     max_tokens: if given, caps how many tokens the model is allowed to
     generate (passed to Ollama as num_predict). Left unset means no cap.
+
+    temperature, seed: if given, override the project defaults (0 and 42)
+    for this call only. Needed for things like self-consistency sampling,
+    which requires the model to actually vary its answer across repeated
+    calls - impossible under the usual fixed temperature=0/seed=42.
     """
     options = dict(BASE_OPTIONS)
     if max_tokens is not None:
         options["num_predict"] = max_tokens
+    if temperature is not None:
+        options["temperature"] = temperature
+    if seed is not None:
+        options["seed"] = seed
 
     response = ollama.chat(
         model=model,
