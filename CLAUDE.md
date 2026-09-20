@@ -52,6 +52,10 @@ The Grader's job is to pick the right label for the student's answer.
 
 \- All four version x model combinations retested with prefilling on the full 120 tasks (accuracy, avg captured mass, confidence gap): v2+qwen2.5:7b 0.492 / 0.981 / 0.065; v2+llama3.1:8b 0.317 / 0.996 / 0.014; v6+qwen2.5:7b 0.408 / 0.991 / -0.000; v6+llama3.1:8b 0.358 / 0.994 / 0.013.
 
+\- Confirmed main config: v2 + qwen2.5:7b, accuracy 0.492 (59/120), the best of everything tested. llama3.1:8b stays as the second model for comparison.
+
+\- Conclusion - the confidence gate is a tested and rejected mitigation, not a proposed one: all four confidence-estimation methods tried on v2+qwen2.5:7b (first\_token, verbalized, self\_consistency, verifier) gave AUROC between 0.547 and 0.605 on the full 120 tasks - barely above 0.5 (chance) and far short of what a safety gate would need to reliably tell right answers from wrong ones before they reach the student. This applies on top of the earlier finding that raw confidence gaps are also weak (see above). No method or prompt version tested so far gives a usable confidence signal.
+
 
 
 \## Rules
