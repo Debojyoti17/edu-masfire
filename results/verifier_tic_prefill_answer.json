@@ -1,0 +1,122 @@
+[
+  {
+    "task_id": "LF.27a.407.1",
+    "mass": 0.9999469956627336,
+    "confidence": 1.4350055465253698e-07,
+    "is_correct": true
+  },
+  {
+    "task_id": "ME.17b.144.1",
+    "mass": 0.9999434914745813,
+    "confidence": 6.58366511712193e-07,
+    "is_correct": true
+  },
+  {
+    "task_id": "EM.21b.645.1",
+    "mass": 0.999979821388682,
+    "confidence": 0.9773088123068164,
+    "is_correct": false
+  },
+  {
+    "task_id": "VB.5b.423.1",
+    "mass": 0.9999517570053403,
+    "confidence": 0.9321025573585594,
+    "is_correct": true
+  },
+  {
+    "task_id": "PS.26.319.1",
+    "mass": 0.9999103658409528,
+    "confidence": 0.0005666057893141601,
+    "is_correct": false
+  },
+  {
+    "task_id": "ME.78b.140.1",
+    "mass": 0.9999589250642021,
+    "confidence": 2.5796153403681557e-06,
+    "is_correct": false
+  },
+  {
+    "task_id": "II.13a.612.1",
+    "mass": 0.9908319638977694,
+    "confidence": 0.0,
+    "is_correct": false
+  },
+  {
+    "task_id": "SE.47b.132.1",
+    "mass": 0.9999977166509073,
+    "confidence": 0.007092416093238354,
+    "is_correct": false
+  },
+  {
+    "task_id": "PS.2a.146.1",
+    "mass": 0.9999720846438748,
+    "confidence": 0.00394167528845612,
+    "is_correct": false
+  },
+  {
+    "task_id": "MS.50a.101.1",
+    "mass": 0.9999740741791082,
+    "confidence": 0.014347690984692633,
+    "is_correct": true
+  },
+  {
+    "task_id": "MX.53.528.1",
+    "mass": 0.999983592686082,
+    "confidence": 0.0,
+    "is_correct": true
+  },
+  {
+    "task_id": "EM.48b.187.1",
+    "mass": 0.9998986845336351,
+    "confidence": 0.7475473598653861,
+    "is_correct": false
+  },
+  {
+    "task_id": "SE.31b.246.1",
+    "mass": 0.999993691354526,
+    "confidence": 3.731491955136312e-06,
+    "is_correct": false
+  },
+  {
+    "task_id": "LF.27a.414.1",
+    "mass": 0.9973250001681276,
+    "confidence": 0.9929843234914126,
+    "is_correct": true
+  },
+  {
+    "task_id": "MX.10.431.1",
+    "mass": 0.9999908726637502,
+    "confidence": 0.00017258513517731783,
+    "is_correct": false
+  },
+  {
+    "task_id": "LF.28a2.480.1",
+    "mass": 0.9999472274415094,
+    "confidence": 0.25622727896265257,
+    "is_correct": true
+  },
+  {
+    "task_id": "SE.24a.505.1",
+    "mass": 0.9998731112250463,
+    "confidence": 0.01545158338267327,
+    "is_correct": false
+  },
+  {
+    "task_id": "MX.11f.425.1",
+    "mass": 0.9999330185840872,
+    "confidence": 0.00112147619924354,
+    "is_correct": false
+  },
+  {
+    "task_id": "EM.46.185.1",
+    "mass": 0.9998474174701727,
+    "confidence": 0.1098957014937903,
+    "is_correct": true
+  },
+  {
+    "task_id": "VB.12d.636.1",
+    "mass": 0.9999978514021769,
+    "confidence": 0.9968819276720561,
+    "is_correct": true
+  }
+]

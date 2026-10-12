@@ -1,0 +1,142 @@
+[
+  {
+    "task_id": "LF.27a.407.1",
+    "label_verified": "irrelevant",
+    "gold_label": "irrelevant",
+    "first_word": "no",
+    "full_answer": "No.\n\nThe label \"irrelevant\" is correct because the student's answer does not address the question about the change in elevation between contour lines A and C. Instead, the student's response is about the size of a circle, which is not related to the concept of contour lines or elevation changes."
+  },
+  {
+    "task_id": "ME.17b.144.1",
+    "label_verified": "contradictory",
+    "gold_label": "contradictory",
+    "first_word": "no",
+    "full_answer": "No.\n\nThe student's answer is contradictory because it states that the circuit is open when the switch is moved to the left, which would mean the bulb would not light. However, the reference answer correctly states that the bulb will light when the switch is moved to the left, implying that the circuit is complete. Therefore, the student's answer is incorrect, not contradictory. The grader's label is not appropriate in this case."
+  },
+  {
+    "task_id": "EM.21b.645.1",
+    "label_verified": "partially_correct_incomplete",
+    "gold_label": "correct",
+    "first_word": "yes",
+    "full_answer": "Yes.\n\nThe student's answer is close but not entirely accurate. The correct statement should be that the harder mineral will leave a scratch on the less hard mineral, not the \"less scratch mineral.\" The grader's label of \"partially_correct_incomplete\" is appropriate because the student's answer is partially correct in identifying the concept but contains a key error in terminology."
+  },
+  {
+    "task_id": "VB.5b.423.1",
+    "label_verified": "irrelevant",
+    "gold_label": "irrelevant",
+    "first_word": "yes",
+    "full_answer": "Yes."
+  },
+  {
+    "task_id": "PS.26.319.1",
+    "label_verified": "irrelevant",
+    "gold_label": "contradictory",
+    "first_word": "no",
+    "full_answer": "No.\n\nThe student's answer is not entirely irrelevant, as it does present a counterexample to Kate's statement. However, the grader's label might be considered too harsh because the student's response is not structured to effectively address the question. A more appropriate response would clarify the relationship between movement and sound production, possibly by explaining that while the TV itself does not move in the traditional sense, it does vibrate to produce sound waves. The grader's label could be seen as too strict,"
+  },
+  {
+    "task_id": "ME.78b.140.1",
+    "label_verified": "irrelevant",
+    "gold_label": "contradictory",
+    "first_word": "no",
+    "full_answer": "No.\n\nThe label \"irrelevant\" is not correct. The student's answer, while it contains an incorrect assumption about the circuit configuration, does address the question asked. The student suggests that the motor will also burn out with the light bulb, which is a plausible misconception if the circuits are thought to be in series. However, the grader's feedback should have focused on the incorrect assumption about the circuit configuration rather than labeling the entire response as irrelevant. A more appropriate feedback would be to correct the"
+  },
+  {
+    "task_id": "II.13a.612.1",
+    "label_verified": "irrelevant",
+    "gold_label": "contradictory",
+    "first_word": "no",
+    "full_answer": "No. The label is incorrect. The student answer states that the finger patterns are both arches, which is not correct based on the reference answer that states they are both loops. Therefore, the student's answer does not match the reference answer, but it is not irrelevant to the task of comparing the finger patterns. The grader's label seems to be based on a misunderstanding of the task."
+  },
+  {
+    "task_id": "SE.47b.132.1",
+    "label_verified": "contradictory",
+    "gold_label": "correct",
+    "first_word": "no",
+    "full_answer": "No.\n\nThe label \"contradictory\" is not correct in this context. The student's answer, \"Because the darker the color the hotter it gets,\" is a generalization that aligns with the principle that darker colors absorb more heat than lighter colors. While it is not a fully detailed explanation, it captures the essence of the correct answer provided in the reference answer. The reference answer explains that darker colors absorb more heat, and the student's answer conveys the same idea, just in a"
+  },
+  {
+    "task_id": "PS.2a.146.1",
+    "label_verified": "partially_correct_incomplete",
+    "gold_label": "correct",
+    "first_word": "no",
+    "full_answer": "No.\n\nThe student's answer, \"Because the vibration makes it,\" is too vague and incomplete to fully capture the physics involved, but it does contain the correct idea that the sound is produced by vibration. A more precise and complete answer would be: \"The rubber band makes a sound when you pluck it because the vibration of the rubber band creates sound waves that travel through the air and reach your ears.\" This would better align with the reference answer provided. However, the label \"partially_correct"
+  },
+  {
+    "task_id": "MS.50a.101.1",
+    "label_verified": "irrelevant",
+    "gold_label": "irrelevant",
+    "first_word": "no",
+    "full_answer": "No.\n\nThe student's answer of \"A mass\" is indeed irrelevant to the question, which asks about the unit Uncle Bill is using to report the temperature. The reference answer correctly identifies that 28 degrees, when describing warm weather, is likely in degrees Celsius. Therefore, the label \"irrelevant\" is correct for the student's answer."
+  },
+  {
+    "task_id": "MX.53.528.1",
+    "label_verified": "irrelevant",
+    "gold_label": "irrelevant",
+    "first_word": "no",
+    "full_answer": "No.\n\nThe label \"irrelevant\" is not correct in this context. The student's answer \"Weight them all\" does not directly address how the shape of the crystals can help identify the material, but it is not entirely irrelevant to the question. Weighing the crystals could provide additional information about the material, such as its density or mass, which could be useful in identifying the substance. However, the reference answer specifically mentions the shape of the crystals, which is a key characteristic for identification."
+  },
+  {
+    "task_id": "EM.48b.187.1",
+    "label_verified": "irrelevant",
+    "gold_label": "partially_correct_incomplete",
+    "first_word": "yes",
+    "full_answer": "Yes.\n\nThe grader's label is correct. The student's answer \"The pictures look the same\" does not provide a substantive response to the question. The question asks for an explanation of why a particular substance was dissolved based on the crystal shape, and the reference answer indicates that the crystals are the same shape as alum crystals. The student's response does not address the reasoning behind the identification of the substance or connect the crystal shape to the substance dissolved."
+  },
+  {
+    "task_id": "SE.31b.246.1",
+    "label_verified": "partially_correct_incomplete",
+    "gold_label": "contradictory",
+    "first_word": "no",
+    "full_answer": "No.\n\nThe student's answer does not correctly identify which box Julie built or provide the necessary evidence to support the answer. The reference answer correctly identifies that Julie's box (A) would get hotter faster because it has a greater surface area, which allows for more absorption of solar energy. The student's answer does not address the key point about surface area and temperature change, and instead focuses on commonalities between the two heaters rather than the differences that would indicate which one heats up faster. Therefore,"
+  },
+  {
+    "task_id": "LF.27a.414.1",
+    "label_verified": "correct",
+    "gold_label": "correct",
+    "first_word": "yes",
+    "full_answer": "Yes.\n\nThe student's answer is correct. The student correctly identified that the change in elevation between contour line A and contour line C is 40 meters, reasoning that each contour line represents a 20-meter change in elevation. The grader's label of \"correct\" is appropriate."
+  },
+  {
+    "task_id": "MX.10.431.1",
+    "label_verified": "partially_correct_incomplete",
+    "gold_label": "irrelevant",
+    "first_word": "no",
+    "full_answer": "No.\n\nThe student's answer, \"Because it bubbled,\" is a simplified version of the reference answer and captures the essence of the reasoning, even though it lacks the detailed explanation provided in the reference answer. The grader's label of \"partially_correct_incomplete\" might be too strict for this context, as the student's answer correctly identifies the key observation (bubbling) and its implication (gas formation), which is the core of the explanation."
+  },
+  {
+    "task_id": "LF.28a2.480.1",
+    "label_verified": "partially_correct_incomplete",
+    "gold_label": "partially_correct_incomplete",
+    "first_word": "yes",
+    "full_answer": "Yes.\n\nThe label \"partially_correct_incomplete\" is appropriate because the student's answer, \"It tells you when things happened,\" is somewhat related to the reference answer, as it does suggest that the logs provide temporal information. However, it is incomplete and not as specific as the reference answer, which more accurately states that the logs show \"how much time is taken for the earth materials to move.\" The student's answer is more general and does not capture the specific detail about the duration of movement"
+  },
+  {
+    "task_id": "SE.24a.505.1",
+    "label_verified": "partially_correct_incomplete",
+    "gold_label": "irrelevant",
+    "first_word": "no",
+    "full_answer": "No.\n\nThe student's answer is based on a general knowledge of compass directions, which is correct. However, the reference answer provided a specific context (shadows in the afternoon pointing east because the sun is in the west) to determine the west side. Since the student did not reference this specific context, the grader's label of \"partially_correct_incomplete\" is appropriate."
+  },
+  {
+    "task_id": "MX.11f.425.1",
+    "label_verified": "irrelevant",
+    "gold_label": "partially_correct_incomplete",
+    "first_word": "no",
+    "full_answer": "No.\n\nThe student's answer is not entirely irrelevant, but it does not correctly interpret the evidence from the given mixtures. The student correctly notes that Mixture 1 and Mixture 3 show that one spoon more or less of solid in 100 milliliters of water still results in a clear solution, but this does not logically lead to the conclusion that Mixture 2 would show \"nothing\" or be a solution without any solid on the bottom. \n\nThe reference answer correctly"
+  },
+  {
+    "task_id": "EM.46.185.1",
+    "label_verified": "partially_correct_incomplete",
+    "gold_label": "partially_correct_incomplete",
+    "first_word": "no",
+    "full_answer": "No.\n\nThe student answer correctly identifies that calcite crystals look different than salt crystals, which is accurate based on the reference answer provided. However, the student's response is too vague and does not provide the specific details about the shapes of the crystals as described in the reference answer. Therefore, \"partially_correct_incomplete\" is a reasonable label, as the answer is correct in its general statement but lacks the specific information required."
+  },
+  {
+    "task_id": "VB.12d.636.1",
+    "label_verified": "correct",
+    "gold_label": "correct",
+    "first_word": "yes",
+    "full_answer": "Yes.\n\nThe student's answer accurately reflects the relationship described in the reference answer. The statement \"If the string is short it has more swings but if it is long it has less swings\" correctly captures the inverse relationship between string length and the number of swings in 15 seconds."
+  }
+]

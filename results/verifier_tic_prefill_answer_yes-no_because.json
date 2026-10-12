@@ -1,0 +1,122 @@
+[
+  {
+    "task_id": "LF.27a.407.1",
+    "mass": 0.0,
+    "confidence": null,
+    "is_correct": true
+  },
+  {
+    "task_id": "ME.17b.144.1",
+    "mass": 0.00043915675046847004,
+    "confidence": 1.0,
+    "is_correct": true
+  },
+  {
+    "task_id": "EM.21b.645.1",
+    "mass": 5.295250849218216e-05,
+    "confidence": 1.0,
+    "is_correct": false
+  },
+  {
+    "task_id": "VB.5b.423.1",
+    "mass": 0.00018783609774457354,
+    "confidence": 1.0,
+    "is_correct": true
+  },
+  {
+    "task_id": "PS.26.319.1",
+    "mass": 0.0,
+    "confidence": null,
+    "is_correct": false
+  },
+  {
+    "task_id": "ME.78b.140.1",
+    "mass": 0.00011903900093740531,
+    "confidence": 1.0,
+    "is_correct": false
+  },
+  {
+    "task_id": "II.13a.612.1",
+    "mass": 0.0,
+    "confidence": null,
+    "is_correct": false
+  },
+  {
+    "task_id": "SE.47b.132.1",
+    "mass": 0.001085167417879973,
+    "confidence": 1.0,
+    "is_correct": false
+  },
+  {
+    "task_id": "PS.2a.146.1",
+    "mass": 0.00020824442300664163,
+    "confidence": 1.0,
+    "is_correct": false
+  },
+  {
+    "task_id": "MS.50a.101.1",
+    "mass": 0.0,
+    "confidence": null,
+    "is_correct": true
+  },
+  {
+    "task_id": "MX.53.528.1",
+    "mass": 0.0,
+    "confidence": null,
+    "is_correct": true
+  },
+  {
+    "task_id": "EM.48b.187.1",
+    "mass": 0.0004633297421235817,
+    "confidence": 1.0,
+    "is_correct": false
+  },
+  {
+    "task_id": "SE.31b.246.1",
+    "mass": 0.00012906142168565805,
+    "confidence": 1.0,
+    "is_correct": false
+  },
+  {
+    "task_id": "LF.27a.414.1",
+    "mass": 0.0,
+    "confidence": null,
+    "is_correct": true
+  },
+  {
+    "task_id": "MX.10.431.1",
+    "mass": 0.0002516422080107968,
+    "confidence": 1.0,
+    "is_correct": false
+  },
+  {
+    "task_id": "LF.28a2.480.1",
+    "mass": 0.0,
+    "confidence": null,
+    "is_correct": true
+  },
+  {
+    "task_id": "SE.24a.505.1",
+    "mass": 0.0,
+    "confidence": null,
+    "is_correct": false
+  },
+  {
+    "task_id": "MX.11f.425.1",
+    "mass": 0.0,
+    "confidence": null,
+    "is_correct": false
+  },
+  {
+    "task_id": "EM.46.185.1",
+    "mass": 0.0002568742469193383,
+    "confidence": 1.0,
+    "is_correct": true
+  },
+  {
+    "task_id": "VB.12d.636.1",
+    "mass": 8.2333010899828e-05,
+    "confidence": 1.0,
+    "is_correct": true
+  }
+]

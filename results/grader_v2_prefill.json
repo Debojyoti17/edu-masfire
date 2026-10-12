@@ -1,0 +1,1682 @@
+[
+  {
+    "task_id": "LF.27a.407.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.00026610961840512225,
+      "partially_correct_incomplete": 0.0006043333396657012,
+      "irrelevant": 0.9991295570419292
+    },
+    "mass": 0.9811742054378672,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.17b.144.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0003116556431571245,
+      "contradictory": 0.5446653931388598,
+      "partially_correct_incomplete": 0.013418039172655393,
+      "irrelevant": 0.44160491204532776
+    },
+    "mass": 0.9718335823179585,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "EM.21b.645.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.06934697536690097,
+      "contradictory": 0.3209509177317151,
+      "partially_correct_incomplete": 0.5269382337834093,
+      "irrelevant": 0.08276387311797469
+    },
+    "mass": 0.9981775236431554,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "VB.5b.423.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0060327945909237285,
+      "contradictory": 0.28274905560443864,
+      "partially_correct_incomplete": 0.1282501409852315,
+      "irrelevant": 0.5829680088194061
+    },
+    "mass": 0.9846309496384626,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "PS.26.319.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0001814748097834676,
+      "contradictory": 0.2560569894792658,
+      "partially_correct_incomplete": 0.006060414691607793,
+      "irrelevant": 0.7377011210193429
+    },
+    "mass": 0.9900396852072677,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.78b.140.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0001399265104481658,
+      "contradictory": 0.37956506316721905,
+      "partially_correct_incomplete": 0.01452829371083488,
+      "irrelevant": 0.605766716611498
+    },
+    "mass": 0.988709510430058,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "II.13a.612.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0221081145186771,
+      "partially_correct_incomplete": 0.0034551960595375366,
+      "irrelevant": 0.9744366894217854
+    },
+    "mass": 0.9967450065354888,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.47b.132.1",
+    "gold_label": "correct",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.022189506129704828,
+      "contradictory": 0.8583475081183853,
+      "partially_correct_incomplete": 0.1130855102636697,
+      "irrelevant": 0.006377475488240142
+    },
+    "mass": 0.9978758547003086,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "PS.2a.146.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.027072226661643918,
+      "contradictory": 0.01736059832622027,
+      "partially_correct_incomplete": 0.9417437494407985,
+      "irrelevant": 0.013823425571337252
+    },
+    "mass": 0.9958942545350411,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MS.50a.101.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0002826294219867043,
+      "partially_correct_incomplete": 6.72325622282719e-05,
+      "irrelevant": 0.9996501380157851
+    },
+    "mass": 0.998800657873737,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MX.53.528.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0010019058576593227,
+      "contradictory": 0.016530730675063998,
+      "partially_correct_incomplete": 0.12568905981722955,
+      "irrelevant": 0.8567783036500471
+    },
+    "mass": 0.9803846064880553,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "EM.48b.187.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.02888780005038649,
+      "contradictory": 0.1350782597939538,
+      "partially_correct_incomplete": 0.31518967845491597,
+      "irrelevant": 0.5208442617007437
+    },
+    "mass": 0.9946360274710899,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.31b.246.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0035151559747963663,
+      "contradictory": 0.41466594412896324,
+      "partially_correct_incomplete": 0.4870310769809341,
+      "irrelevant": 0.09478782291530632
+    },
+    "mass": 0.9969832179899208,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "LF.27a.414.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.89145042226727,
+      "contradictory": 0.015015864446568637,
+      "partially_correct_incomplete": 0.09339461750552147,
+      "irrelevant": 0.00013909578063988056
+    },
+    "mass": 0.9608019072077298,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MX.10.431.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.010079103965001505,
+      "contradictory": 0.03992907224043022,
+      "partially_correct_incomplete": 0.8167035755005295,
+      "irrelevant": 0.13328824829403876
+    },
+    "mass": 0.9955770518639468,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "LF.28a2.480.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.09035123676900007,
+      "contradictory": 0.06209613351444214,
+      "partially_correct_incomplete": 0.5392570422572194,
+      "irrelevant": 0.3082955874593384
+    },
+    "mass": 0.9783346103640419,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.24a.505.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.3128285072112484,
+      "contradictory": 0.2752175076762343,
+      "partially_correct_incomplete": 0.32451179736915814,
+      "irrelevant": 0.08744218774335907
+    },
+    "mass": 0.8397918174337382,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MX.11f.425.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0002499142948572989,
+      "contradictory": 0.08636355487977151,
+      "partially_correct_incomplete": 0.1953758390126816,
+      "irrelevant": 0.7180106918126896
+    },
+    "mass": 0.9913911921817463,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "EM.46.185.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.08858654804321053,
+      "contradictory": 0.014287443693133941,
+      "partially_correct_incomplete": 0.7597004456346046,
+      "irrelevant": 0.13742556262905092
+    },
+    "mass": 0.9877590393966654,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "VB.12d.636.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.5075689753520946,
+      "contradictory": 0.46591525131449396,
+      "partially_correct_incomplete": 0.02650153805776876,
+      "irrelevant": 1.423527564271057e-05
+    },
+    "mass": 0.9988136753673801,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.45.151.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.02383487802455883,
+      "contradictory": 0.624250287913013,
+      "partially_correct_incomplete": 0.10219125198679849,
+      "irrelevant": 0.24972358207562967
+    },
+    "mass": 0.9968282535249237,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ST.31b.474.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.12058220156096675,
+      "partially_correct_incomplete": 0.0008603217363753311,
+      "irrelevant": 0.8785574767026579
+    },
+    "mass": 0.9896290151877773,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.22a.532.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.002107088697069419,
+      "contradictory": 0.29807968082861636,
+      "partially_correct_incomplete": 0.01042087803094838,
+      "irrelevant": 0.6893923524433659
+    },
+    "mass": 0.9910510673782865,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "EM.48b.571.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.00022335940515608572,
+      "contradictory": 0.011372204098631981,
+      "partially_correct_incomplete": 0.06753893120954454,
+      "irrelevant": 0.9208655052866673
+    },
+    "mass": 0.9975165170653838,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "EM.26.487.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.7869029431534302,
+      "contradictory": 0.02020447847084385,
+      "partially_correct_incomplete": 0.19281824919470933,
+      "irrelevant": 7.432918101665478e-05
+    },
+    "mass": 0.998817482191594,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.66a.313.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.24128367007298412,
+      "partially_correct_incomplete": 0.0018180344295410293,
+      "irrelevant": 0.7568982954974749
+    },
+    "mass": 0.9657500349734045,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "II.13b.580.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 2.5330590108842192e-05,
+      "contradictory": 0.003622712193487949,
+      "partially_correct_incomplete": 0.0006058361361290644,
+      "irrelevant": 0.9957461210802742
+    },
+    "mass": 0.9975708818750462,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "VB.15a.495.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0014298699503798528,
+      "contradictory": 0.09007028380150381,
+      "partially_correct_incomplete": 0.015396362954815192,
+      "irrelevant": 0.8931034832933011
+    },
+    "mass": 0.9944781989407478,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "EM.43b.600.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 6.122467352585628e-05,
+      "contradictory": 0.001140126309733358,
+      "partially_correct_incomplete": 0.007573870506295802,
+      "irrelevant": 0.991224778510445
+    },
+    "mass": 0.9937180627157269,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MX.36b.455.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.7979027247992618,
+      "contradictory": 0.028166469801889256,
+      "partially_correct_incomplete": 0.17342749675748775,
+      "irrelevant": 0.0005033086413611476
+    },
+    "mass": 0.9985524465553822,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MX.16a.636.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0027826552485112647,
+      "contradictory": 0.8144518877163069,
+      "partially_correct_incomplete": 0.06518107264046166,
+      "irrelevant": 0.11758438439472012
+    },
+    "mass": 0.9958832376987217,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.4a.506.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.01392557729371009,
+      "contradictory": 0.1262110502428628,
+      "partially_correct_incomplete": 0.4007358970970259,
+      "irrelevant": 0.4591274753664012
+    },
+    "mass": 0.9940091276717093,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.7a.178.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.15245646538480553,
+      "contradictory": 0.13705211989331845,
+      "partially_correct_incomplete": 0.48842303646503527,
+      "irrelevant": 0.22206837825684073
+    },
+    "mass": 0.9939184035306832,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.5b.311.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0005379710444025462,
+      "contradictory": 0.047862590721082864,
+      "partially_correct_incomplete": 0.06617479142560151,
+      "irrelevant": 0.8854246468089131
+    },
+    "mass": 0.9988092441156488,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.22c.401.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.25582388983317267,
+      "contradictory": 0.4500085189549949,
+      "partially_correct_incomplete": 0.2700328282346496,
+      "irrelevant": 0.02413476297718283
+    },
+    "mass": 0.991508512706972,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.6b.107.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.09403416199060396,
+      "contradictory": 0.27912437132648776,
+      "partially_correct_incomplete": 0.45270680708337185,
+      "irrelevant": 0.1741346595995364
+    },
+    "mass": 0.9894304342939878,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "EM.16b.645.1",
+    "gold_label": "contradictory",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.40221653219785114,
+      "contradictory": 0.18292906176782384,
+      "partially_correct_incomplete": 0.38705970668084677,
+      "irrelevant": 0.027794699353478208
+    },
+    "mass": 0.9923337481876757,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "PS.45b.457.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.028393776448106287,
+      "contradictory": 0.6896528017789751,
+      "partially_correct_incomplete": 0.22901598166598652,
+      "irrelevant": 0.052937440106931966
+    },
+    "mass": 0.9965335644723179,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.51b.497.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.856953235686615,
+      "contradictory": 0.03752046775653487,
+      "partially_correct_incomplete": 0.09988592585337872,
+      "irrelevant": 0.005640370703471456
+    },
+    "mass": 0.9963308744289607,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MS.14b.571.1",
+    "gold_label": "correct",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.002090039454337958,
+      "contradictory": 0.5233519299764122,
+      "partially_correct_incomplete": 0.045067316465401575,
+      "irrelevant": 0.4294907141038482
+    },
+    "mass": 0.9802655853371944,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "VB.15a.407.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.977287396596858,
+      "contradictory": 0.016756462199180283,
+      "partially_correct_incomplete": 0.0056301028280203065,
+      "irrelevant": 0.000326038375941325
+    },
+    "mass": 0.9934286134112837,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "FN.24b.425.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.006618624046449062,
+      "contradictory": 0.1407593771840629,
+      "partially_correct_incomplete": 0.41286685678043455,
+      "irrelevant": 0.4397551419890535
+    },
+    "mass": 0.998088495190902,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "II.38.151.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.52019722301001,
+      "contradictory": 0.009120195767802274,
+      "partially_correct_incomplete": 0.470188591299011,
+      "irrelevant": 0.0004939899231766675
+    },
+    "mass": 0.9922546591081789,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "LF.31b.827.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.00012178439063276526,
+      "contradictory": 0.0795837276239689,
+      "partially_correct_incomplete": 0.7289328787738312,
+      "irrelevant": 0.19136160921156717
+    },
+    "mass": 0.9845813209617341,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.16b2.506.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.7358229108632817,
+      "partially_correct_incomplete": 0.009224462084974074,
+      "irrelevant": 0.2549526270517443
+    },
+    "mass": 0.8968794798115323,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "PS.26.152.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.1089061521955885,
+      "contradictory": 0.014721028589594334,
+      "partially_correct_incomplete": 0.8758004941696637,
+      "irrelevant": 0.0005723250451535164
+    },
+    "mass": 0.9996165404903231,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MX.11e.304.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.003700011623632295,
+      "contradictory": 0.2695732690524493,
+      "partially_correct_incomplete": 0.13774854451944765,
+      "irrelevant": 0.5889781748044707
+    },
+    "mass": 0.9959467386555722,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "LP.15c.145.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0005489089187411743,
+      "partially_correct_incomplete": 0.0013060460047721618,
+      "irrelevant": 0.9981450450764866
+    },
+    "mass": 0.997067130427665,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.25a.502.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.003343160742936992,
+      "contradictory": 0.979905615001546,
+      "partially_correct_incomplete": 0.015169398221048519,
+      "irrelevant": 0.0015818260344684515
+    },
+    "mass": 0.9943170749780033,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "II.13b.601.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.03528566768486744,
+      "contradictory": 0.21819936648556226,
+      "partially_correct_incomplete": 0.14604040465908819,
+      "irrelevant": 0.6004745611704821
+    },
+    "mass": 0.9889941750697507,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "II.24b.430.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 3.204908643576945e-05,
+      "partially_correct_incomplete": 2.0545694532537436e-05,
+      "irrelevant": 0.9999474052190317
+    },
+    "mass": 0.9976815218634874,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.10.519.1",
+    "gold_label": "correct",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.00032684467173453845,
+      "contradictory": 0.19668565182691705,
+      "partially_correct_incomplete": 0.06101316339565179,
+      "irrelevant": 0.7419743401056966
+    },
+    "mass": 0.9973548887227766,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "PS.51a.116.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.00022738466245997917,
+      "contradictory": 0.05256137526464728,
+      "partially_correct_incomplete": 0.015586854033439346,
+      "irrelevant": 0.9316243860394534
+    },
+    "mass": 0.998484854923155,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "VB.15b.634.1",
+    "gold_label": "correct",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.05388965372688127,
+      "contradictory": 0.01207098576021459,
+      "partially_correct_incomplete": 0.3457178316757489,
+      "irrelevant": 0.5883215288371553
+    },
+    "mass": 0.9331501138101603,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "FN.27b.117.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.15442567300174082,
+      "contradictory": 0.004020594973049346,
+      "partially_correct_incomplete": 0.824010874202287,
+      "irrelevant": 0.017542857822922746
+    },
+    "mass": 0.9452530238854504,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MX.11f.560.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.015071046087915667,
+      "contradictory": 0.055534172707368164,
+      "partially_correct_incomplete": 0.8994429318206059,
+      "irrelevant": 0.029951849384110326
+    },
+    "mass": 0.9977306356835304,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "LF.13a.493.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.014353631599589602,
+      "partially_correct_incomplete": 0.000849736621734034,
+      "irrelevant": 0.9847966317786764
+    },
+    "mass": 0.9665709434174907,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "PS.12.510.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0006304782098644762,
+      "contradictory": 0.016370408248575736,
+      "partially_correct_incomplete": 0.12258165969833894,
+      "irrelevant": 0.8604174538432209
+    },
+    "mass": 0.9910944831545607,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MX.49.488.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.018609932886856383,
+      "contradictory": 0.7212642981472136,
+      "partially_correct_incomplete": 0.01833588569656798,
+      "irrelevant": 0.24178988326936202
+    },
+    "mass": 0.993969107086623,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "FN.20b.171.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 1.803571844426239e-05,
+      "contradictory": 0.006089659821807839,
+      "partially_correct_incomplete": 0.0012014534055786198,
+      "irrelevant": 0.9926908510541693
+    },
+    "mass": 0.9991684119671639,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.65a.292.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.00010554174094762415,
+      "contradictory": 0.9189202792907459,
+      "partially_correct_incomplete": 0.005354523336444853,
+      "irrelevant": 0.07561965563186164
+    },
+    "mass": 0.9901180788579095,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.78b.254.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0010695087717968045,
+      "contradictory": 0.6661101688393711,
+      "partially_correct_incomplete": 0.05962229645455091,
+      "irrelevant": 0.2731980259342812
+    },
+    "mass": 0.9386842380173153,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MS.14b.116.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.00036949838523038536,
+      "contradictory": 0.21616541737142952,
+      "partially_correct_incomplete": 0.022395977602073583,
+      "irrelevant": 0.7610691066412665
+    },
+    "mass": 0.9891021053566372,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "FN.17c.399.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.22986145962233995,
+      "contradictory": 0.23113057848208887,
+      "partially_correct_incomplete": 0.4381443268299252,
+      "irrelevant": 0.10086363506564594
+    },
+    "mass": 0.9422030681658236,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "PS.12.641.1",
+    "gold_label": "correct",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.00040597906898080815,
+      "contradictory": 0.004192169159917343,
+      "partially_correct_incomplete": 0.1181653048934758,
+      "irrelevant": 0.8772365468776261
+    },
+    "mass": 0.9936360475513754,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MX.19.381.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.6150138053376852,
+      "contradictory": 0.01443708643371523,
+      "partially_correct_incomplete": 0.370309133055556,
+      "irrelevant": 0.00023997517304351855
+    },
+    "mass": 0.997180948044359,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.24a.600.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.1392616824756132,
+      "contradictory": 0.4364532363150824,
+      "partially_correct_incomplete": 0.4054587745054348,
+      "irrelevant": 0.01882630670386961
+    },
+    "mass": 0.8022406285089789,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "PS.46b.141.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.03740929725023392,
+      "contradictory": 0.38074566097908275,
+      "partially_correct_incomplete": 0.5529976068710805,
+      "irrelevant": 0.02884743489960281
+    },
+    "mass": 0.991006326506427,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "EM.46.401.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0003648134160671586,
+      "partially_correct_incomplete": 0.0004447239262183821,
+      "irrelevant": 0.9991904626577145
+    },
+    "mass": 0.993733751153069,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MX.41.462.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.9929766844275061,
+      "contradictory": 0.0043976430147162175,
+      "partially_correct_incomplete": 0.002609217286963969,
+      "irrelevant": 1.6455270813749346e-05
+    },
+    "mass": 0.9998291031969386,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "II.38.473.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.01673724491599022,
+      "contradictory": 0.05372839794593861,
+      "partially_correct_incomplete": 0.873450896467879,
+      "irrelevant": 0.05608346067019226
+    },
+    "mass": 0.973629057769314,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "PS.4b.332.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9754995562994673,
+      "partially_correct_incomplete": 0.014486844100362361,
+      "irrelevant": 0.010013599600170326
+    },
+    "mass": 0.9915469064683682,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "II.38.485.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.00514934452156313,
+      "contradictory": 0.01092159441905098,
+      "partially_correct_incomplete": 0.17702057287239997,
+      "irrelevant": 0.8069084881869859
+    },
+    "mass": 0.982880292903085,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "LF.18a.912.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9989587471987109,
+      "partially_correct_incomplete": 0.00037422504456101504,
+      "irrelevant": 0.000667027756728088
+    },
+    "mass": 0.9906508471622494,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.66a.329.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.4282379662408149,
+      "partially_correct_incomplete": 0.0072393314356726576,
+      "irrelevant": 0.5645227023235124
+    },
+    "mass": 0.9538090291732839,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.3c.134.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0002803708229734503,
+      "contradictory": 0.8844727206483233,
+      "partially_correct_incomplete": 0.024572642132085917,
+      "irrelevant": 0.09067426639661728
+    },
+    "mass": 0.9833252828122145,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "LF.27a.461.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.00015484814824395318,
+      "contradictory": 0.06151728888310453,
+      "partially_correct_incomplete": 0.05109106277450402,
+      "irrelevant": 0.8872368001941474
+    },
+    "mass": 0.98683897316185,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "FN.27b.267.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.7166975540011666,
+      "contradictory": 0.0037495734594701663,
+      "partially_correct_incomplete": 0.279258618478943,
+      "irrelevant": 0.000294254060420201
+    },
+    "mass": 0.9946051009961475,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "LF.39.394.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0006268974791486311,
+      "partially_correct_incomplete": 0.004139990473501417,
+      "irrelevant": 0.9952331120473499
+    },
+    "mass": 0.8368245690265695,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.65a.207.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.00011276359414170008,
+      "contradictory": 0.9561678709225575,
+      "partially_correct_incomplete": 0.005048593199835318,
+      "irrelevant": 0.038670772283465535
+    },
+    "mass": 0.9970797344738287,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "EM.46.171.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.00212317880283599,
+      "contradictory": 0.3672304441692227,
+      "partially_correct_incomplete": 0.4353676044472002,
+      "irrelevant": 0.19527877258074117
+    },
+    "mass": 0.9796888297170661,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.24a.404.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.056600609198754634,
+      "contradictory": 0.180729555995097,
+      "partially_correct_incomplete": 0.6728508395163659,
+      "irrelevant": 0.0898189952897825
+    },
+    "mass": 0.8845977175796013,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "LF.31b.526.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.10980506646898988,
+      "contradictory": 0.0629559708885699,
+      "partially_correct_incomplete": 0.8271147211747606,
+      "irrelevant": 0.0001242414676796085
+    },
+    "mass": 0.9965007241416147,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.38a.152.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.03635630119458212,
+      "contradictory": 0.2554625207329177,
+      "partially_correct_incomplete": 0.21306270902623625,
+      "irrelevant": 0.49511846904626394
+    },
+    "mass": 0.9869428748995072,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MX.11e.637.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0013657396623573455,
+      "contradictory": 0.11722444375567502,
+      "partially_correct_incomplete": 0.0249411127149781,
+      "irrelevant": 0.8564687038669895
+    },
+    "mass": 0.99900799180515,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.51b.398.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.7776445810232848,
+      "contradictory": 0.03989514895732035,
+      "partially_correct_incomplete": 0.18031810660448136,
+      "irrelevant": 0.0021421634149134633
+    },
+    "mass": 0.9978519206145673,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.17d.111.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.025623420303397926,
+      "contradictory": 0.1859823876359716,
+      "partially_correct_incomplete": 0.6623105022849022,
+      "irrelevant": 0.1260836897757283
+    },
+    "mass": 0.9909413424182325,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MX.53.473.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.003045790670853504,
+      "contradictory": 0.014193592133418309,
+      "partially_correct_incomplete": 0.39288557633055415,
+      "irrelevant": 0.589875040865174
+    },
+    "mass": 0.9957061126347931,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "PS.15b.602.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.00020203194462492513,
+      "contradictory": 0.013866265161467207,
+      "partially_correct_incomplete": 0.28258885702443803,
+      "irrelevant": 0.7033428458694698
+    },
+    "mass": 0.9761420610277013,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.27b.148.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.5787366533933509,
+      "contradictory": 0.42087562081723384,
+      "partially_correct_incomplete": 0.0003844331690103826,
+      "irrelevant": 3.292620404867963e-06
+    },
+    "mass": 0.9995460080817433,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "VB.15c.628.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.37794415358789196,
+      "contradictory": 0.091840696564159,
+      "partially_correct_incomplete": 0.5299548743565243,
+      "irrelevant": 0.0002602754914246982
+    },
+    "mass": 0.991464092016888,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "LP.15c.425.1",
+    "gold_label": "correct",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.006930626297852367,
+      "contradictory": 0.8382005520776731,
+      "partially_correct_incomplete": 0.15083723430002596,
+      "irrelevant": 0.004031587324448647
+    },
+    "mass": 0.9920012693636313,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "PS.44.255.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.9778948862105966,
+      "contradictory": 0.015004194177862515,
+      "partially_correct_incomplete": 0.00710091961154079,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9977876514229016,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.27b.115.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.9868337418677734,
+      "contradictory": 0.012746628078718753,
+      "partially_correct_incomplete": 0.00041698776319857444,
+      "irrelevant": 2.642290309259505e-06
+    },
+    "mass": 0.9997378085396074,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "VB.15b.626.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.5586052615510331,
+      "contradictory": 0.003552681756591093,
+      "partially_correct_incomplete": 0.43705736649062604,
+      "irrelevant": 0.0007846902017497731
+    },
+    "mass": 0.9102184132696279,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MS.50a.496.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 2.123232343102245e-05,
+      "contradictory": 0.0008253140085362199,
+      "partially_correct_incomplete": 0.0004694521563476691,
+      "irrelevant": 0.9986840015116851
+    },
+    "mass": 0.9994307420584657,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "FN.27a.456.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.09330627866918947,
+      "contradictory": 0.5602788793687146,
+      "partially_correct_incomplete": 0.25252783494818104,
+      "irrelevant": 0.09388700701391495
+    },
+    "mass": 0.9381084117268254,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "EM.45c.645.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.002892276110715341,
+      "contradictory": 0.013383445947369432,
+      "partially_correct_incomplete": 0.0418141878620922,
+      "irrelevant": 0.941910090079823
+    },
+    "mass": 0.996208993319801,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.22b.494.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.7138468334596149,
+      "contradictory": 0.21804676302966863,
+      "partially_correct_incomplete": 0.0668851162969359,
+      "irrelevant": 0.0012212872137805611
+    },
+    "mass": 0.9962385517681953,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "II.26.395.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0059233527445574285,
+      "contradictory": 0.08151532471732074,
+      "partially_correct_incomplete": 0.8180714631291743,
+      "irrelevant": 0.09448985940894747
+    },
+    "mass": 0.9879037215774943,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.31b.530.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0006098822712382577,
+      "contradictory": 0.9492528772794486,
+      "partially_correct_incomplete": 0.027142896345151706,
+      "irrelevant": 0.022994344104161433
+    },
+    "mass": 0.9929392940941126,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "VB.15b.545.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.02542430181854157,
+      "contradictory": 0.022344961666813153,
+      "partially_correct_incomplete": 0.16293781675649432,
+      "irrelevant": 0.789292919758151
+    },
+    "mass": 0.9172353628502397,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.65a.217.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9900893582776378,
+      "partially_correct_incomplete": 0.0003229603185255138,
+      "irrelevant": 0.009587681403836758
+    },
+    "mass": 0.9943379749729616,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "VB.5a.634.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.23893675916063797,
+      "contradictory": 0.019458859887509523,
+      "partially_correct_incomplete": 0.6824301559607672,
+      "irrelevant": 0.05917422499108542
+    },
+    "mass": 0.9598808642805058,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "II.24b.527.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0006675497074976165,
+      "contradictory": 0.003505594783260383,
+      "partially_correct_incomplete": 0.014769172642259304,
+      "irrelevant": 0.9810576828669827
+    },
+    "mass": 0.9859818427603926,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "SE.4a.327.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 4.296602806613469e-06,
+      "contradictory": 0.00016167519724143904,
+      "partially_correct_incomplete": 0.00013774097700283195,
+      "irrelevant": 0.9996962872229491
+    },
+    "mass": 0.9981533360634348,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "EM.21b.401.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.19612622132892943,
+      "contradictory": 0.07592539555011206,
+      "partially_correct_incomplete": 0.6713876158754666,
+      "irrelevant": 0.056560767245491965
+    },
+    "mass": 0.9970368721468394,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ST.25b2.576.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.425271161501187,
+      "contradictory": 0.04077778780361933,
+      "partially_correct_incomplete": 0.4981471339576048,
+      "irrelevant": 0.035803916737588905
+    },
+    "mass": 0.9032988420362821,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MS.43b.417.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.007460913726955473,
+      "contradictory": 0.06371913740250171,
+      "partially_correct_incomplete": 0.16569463163030113,
+      "irrelevant": 0.7631253172402417
+    },
+    "mass": 0.9949581797969729,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.5b.318.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0032862653890244195,
+      "contradictory": 0.04500513265802471,
+      "partially_correct_incomplete": 0.347625500046028,
+      "irrelevant": 0.6040831019069229
+    },
+    "mass": 0.9803050180618179,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "EM.26.388.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.14149016898790256,
+      "contradictory": 0.10177477211979967,
+      "partially_correct_incomplete": 0.7376964307760123,
+      "irrelevant": 0.019038628116285428
+    },
+    "mass": 0.99881595184332,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "MX.11c.304.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.00012109598768544315,
+      "contradictory": 0.9160553795300801,
+      "partially_correct_incomplete": 0.034905476516374906,
+      "irrelevant": 0.04891804796585961
+    },
+    "mass": 0.9970227210374861,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "FN.17c.410.1",
+    "gold_label": "correct",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.000624971641884522,
+      "contradictory": 0.060893531004868565,
+      "partially_correct_incomplete": 0.23429720924632177,
+      "irrelevant": 0.7041842881069251
+    },
+    "mass": 0.9732257746949395,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "PS.15b.393.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.006503617589279736,
+      "partially_correct_incomplete": 0.03211589461582513,
+      "irrelevant": 0.9613804877948952
+    },
+    "mass": 0.991237759503808,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.66b.143.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.02329255821443245,
+      "contradictory": 0.24669264505523963,
+      "partially_correct_incomplete": 0.49321564683130037,
+      "irrelevant": 0.2367991498990275
+    },
+    "mass": 0.995509462835306,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.30.247.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0025627497191808295,
+      "contradictory": 0.04213407806048352,
+      "partially_correct_incomplete": 0.10764958721021889,
+      "irrelevant": 0.8476535850101168
+    },
+    "mass": 0.9917696745211649,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.17e.147.1",
+    "gold_label": "contradictory",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0026279000446311996,
+      "contradictory": 0.09314089804030992,
+      "partially_correct_incomplete": 0.060028904847155035,
+      "irrelevant": 0.8442022970679038
+    },
+    "mass": 0.9764670526436848,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.66a.146.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.00037984744505616873,
+      "contradictory": 0.03848190119748942,
+      "partially_correct_incomplete": 0.01728272053593301,
+      "irrelevant": 0.9438555308215214
+    },
+    "mass": 0.9805122087106404,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "ME.30.227.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.9864227162306022,
+      "contradictory": 0.005039065671563866,
+      "partially_correct_incomplete": 0.008530991176226299,
+      "irrelevant": 7.226921607680895e-06
+    },
+    "mass": 0.9996084802736104,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  },
+  {
+    "task_id": "PS.46b.603.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.1381508836955338,
+      "contradictory": 0.08172329491880208,
+      "partially_correct_incomplete": 0.7666182622052174,
+      "irrelevant": 0.013507559180446632
+    },
+    "mass": 0.9945982349164408,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: "
+  }
+]

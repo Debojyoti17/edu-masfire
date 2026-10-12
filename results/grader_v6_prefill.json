@@ -1,0 +1,1802 @@
+[
+  {
+    "task_id": "LF.27a.407.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999386512352489,
+      "irrelevant": 6.134876475108543e-05
+    },
+    "mass": 0.9914621829105067,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is partially correct in noting that the circles get bigger, which implies higher elevations, but this does not directly address the numerical change in elevation. The reference answer correctly calculates the total change in elevation by summing the individual changes. The student's response lacks the specific numerical values and the clear calculation provided in the reference answer. There is no contradiction, but the student's answer is incomplete in explaining the numerical relationship between the contour lines."
+  },
+  {
+    "task_id": "ME.17b.144.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9998969556791648,
+      "partially_correct_incomplete": 0.0,
+      "irrelevant": 0.00010304432083513832
+    },
+    "mass": 0.9842562146978007,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer suggests that the circuit is open when the switch is moved to the left, which would prevent the bulb from lighting. This contradicts the reference answer, which states that the bulb will light when the switch is moved to the left. The student answer is missing the key point that the circuit is completed when the switch is moved to the left, allowing current to flow from the battery to the bulb."
+  },
+  {
+    "task_id": "EM.21b.645.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0025220906119406625,
+      "contradictory": 4.354927022369784e-05,
+      "partially_correct_incomplete": 0.9974343601178357,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9987345403960303,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer correctly identifies that the harder mineral will scratch the less hard one, which aligns with the reference answer. However, it uses the term \"scratch mineral\" instead of \"less hard mineral,\" which is slightly less precise but conveys the same concept. The student answer omits the specific detail about the black mineral potentially being the harder one, which is present in the reference answer. There is no contradiction between the two answers, but the reference answer provides a bit more specificity."
+  },
+  {
+    "task_id": "VB.5b.423.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.00021540219695784688,
+      "contradictory": 0.12774437063688818,
+      "partially_correct_incomplete": 0.7540357529029923,
+      "irrelevant": 0.11800447426316168
+    },
+    "mass": 0.9821931645374637,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the basic idea that the speed of light changes with the number of times it goes, but it does not accurately reflect the relationship between speed and time as described in the reference answer. The reference answer correctly states that the speed of light remains constant over time, which is not addressed in the student's response. Additionally, the student answer does not mention the relationship between speed and time at all, focusing instead on a vague description of light's movement. There is no contradiction, but the student answer lacks the key information provided in the reference answer."
+  },
+  {
+    "task_id": "PS.26.319.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 1.0,
+      "partially_correct_incomplete": 0.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.995638195360851,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the idea that objects can produce sound without moving, using the example of a TV. This contrasts with the reference answer, which supports the idea that movement is necessary for sound production. The student's response contradicts the reference answer by providing a counterexample, while the reference answer aligns with Kate's statement by explaining that vibrations (which are a form of movement) are required to produce sound."
+  },
+  {
+    "task_id": "ME.78b.140.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9992593988379217,
+      "partially_correct_incomplete": 0.0007406011620783088,
+      "irrelevant": 0.0
+    },
+    "mass": 0.974284869212449,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the idea that the motor and light bulb are part of the same circuit, suggesting a connection between their failure. However, it is missing the specific detail that the motor has an alternative pathway to the power source (the D-cell), which allows it to continue functioning even if the light bulb burns out. The student answer also incorrectly implies that the motor will burn out along with the light bulb, which contradicts the reference answer that states the motor will continue to run."
+  },
+  {
+    "task_id": "II.13a.612.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9961322774542478,
+      "partially_correct_incomplete": 0.003867722545752161,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9420816462764274,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer focuses on the similarity that both finger patterns are arches, which is not accurate according to the reference answer. The reference answer correctly states that both patterns are loops, indicating that the student's answer is missing this key detail. There is no contradiction, but the student's answer does not cover the correct information provided in the reference answer."
+  },
+  {
+    "task_id": "SE.47b.132.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.00042139526357991904,
+      "contradictory": 0.000518458509204668,
+      "partially_correct_incomplete": 0.9989604287970664,
+      "irrelevant": 9.97174301490802e-05
+    },
+    "mass": 0.9990487045342705,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is more concise but lacks the specific detail about color absorption that the reference answer provides. While the student correctly identifies that darker colors get hotter, they do not explain the connection to heat absorption, which is crucial for understanding why the dark green sheeting would be more effective. The student answer does not mention the concept of color absorption or reflectivity, which are key elements in the reference answer. There is no contradiction, but the student answer is less comprehensive in explaining the scientific reasoning behind the choice."
+  },
+  {
+    "task_id": "PS.2a.146.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 4.826478276127061e-05,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999517352172388,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9961355261176097,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is concise but lacks detail. It correctly identifies that the sound is produced due to vibration but does not explain the specific action that causes the vibration, such as plucking the rubber band. The reference answer provides a more complete explanation by stating that the rubber band vibrates when plucked, which is the mechanism behind the sound. There is no contradiction, but the student answer is less comprehensive."
+  },
+  {
+    "task_id": "MS.50a.101.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.0,
+      "irrelevant": 1.0
+    },
+    "mass": 0.9944620842432959,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer \"A mass\" is unrelated to the reference answer, which correctly identifies that Uncle Bill is using degrees Celsius to report the temperature. The student answer does not cover the topic of temperature units at all, thus missing the key point of the question. There is no contradiction with the reference answer, but the student's response is entirely off-topic."
+  },
+  {
+    "task_id": "MX.53.528.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999394135576964,
+      "irrelevant": 6.058644230362107e-05
+    },
+    "mass": 0.9991280499613409,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student's answer suggests weighing the crystals, which could provide information about the mass of the material but does not address how the shape of the crystals can help identify the material. The reference answer focuses on the shape of the crystals as a key identifier. While weighing the crystals might be a useful step, it does not directly help in identifying the material based on the information given. There is no contradiction, but the student's answer misses the point about using crystal shape for identification."
+  },
+  {
+    "task_id": "EM.48b.187.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.1334936159920312e-05,
+      "contradictory": 7.018825024359273e-06,
+      "partially_correct_incomplete": 0.9999539200604901,
+      "irrelevant": 2.772617832558096e-05
+    },
+    "mass": 0.9990991640048605,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is brief and lacks detail, merely stating that the pictures look the same without providing any reasoning or explanation. This response covers that the crystals match in shape but does not explain why this indicates the presence of alum. It also doesn't mention the crystal-shape key or the specific crystal shapes involved. There is no contradiction with the reference answer, but the explanation is incomplete and lacks the necessary context to fully support the conclusion."
+  },
+  {
+    "task_id": "SE.31b.246.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 1.0,
+      "partially_correct_incomplete": 0.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9298906681641721,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers some initial conditions, such as the painting and filling of the heaters, but does not address the key evidence regarding the temperature change over time. It also incorrectly identifies the box built by Julie as B, which contradicts the reference answer. The reference answer correctly identifies that Julie's box (A) would heat up faster due to the greater surface area, while the student's answer incorrectly suggests the opposite."
+  },
+  {
+    "task_id": "LF.27a.414.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0025435090984680846,
+      "contradictory": 6.243396435075668e-05,
+      "partially_correct_incomplete": 0.9973940569371812,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9788333276315596,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer correctly identifies the change in elevation between contour line A and contour line C as 40 meters and explains that each contour line represents a 20-meter change. However, it does not explicitly state that the change between B and C is also 20 meters, which is implied in the reference answer. There is no contradiction, but the explanation could be more detailed to fully mirror the reference answer's structure."
+  },
+  {
+    "task_id": "MX.10.431.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.456106591781943e-05,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999645952684882,
+      "irrelevant": 2.0843665593908304e-05
+    },
+    "mass": 0.9988943112175023,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is brief and lacks the detailed explanation present in the reference answer. While it correctly identifies that the bubbling indicates a chemical reaction, it does not explain why the bubbling is significant (i.e., that gas formation leads to new material creation). The reference answer provides a more comprehensive explanation, linking the bubbling to the formation of a gas, the creation of a new material, and ultimately the occurrence of a chemical reaction. There is no contradiction, but the student answer is less thorough."
+  },
+  {
+    "task_id": "LF.28a2.480.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999915223383101,
+      "irrelevant": 8.477661689822584e-06
+    },
+    "mass": 0.9985049036736102,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer focuses on the timing aspect of events, stating \"It tells you when things happened,\" which is a broader and less specific interpretation compared to the reference answer. The reference answer is more precise, indicating that the logs provide information on the duration of time taken for earth materials to move. The student answer does not mention the specific detail about the movement of earth materials, which is covered in the reference answer. There is no contradiction, but the student answer lacks the specific information provided in the reference answer."
+  },
+  {
+    "task_id": "SE.24a.505.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 5.826823880509434e-06,
+      "contradictory": 2.1661461866482598e-05,
+      "partially_correct_incomplete": 0.999940913455318,
+      "irrelevant": 3.1598258935038495e-05
+    },
+    "mass": 0.9998082277343218,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the concept of using a compass rose to identify west, which is a valid method. However, it lacks the context provided by the reference answer, which explains the reasoning based on the direction of shadows in the afternoon. The reference answer also includes a specific reason (shadows point east in the afternoon because the Sun is in the west) that the student answer does not mention. There is no contradiction, but the student answer is more generalized and less specific to the given scenario."
+  },
+  {
+    "task_id": "MX.11f.425.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9880865655178818,
+      "partially_correct_incomplete": 0.011333867006462783,
+      "irrelevant": 0.0005795674756555473
+    },
+    "mass": 0.9950659712506037,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers that Mixture 2 would be a solution, similar to Mixtures 1 and 3, but it incorrectly states that no material would be observed on the bottom. This is missing the key point that the amount of solid that dissolves increases with the amount added, as evidenced by Mixtures 3, 4, and 5. The student's response also contradicts the reference answer by suggesting that Mixture 2 would be completely clear with nothing on the bottom, when in fact, it would be a clear solution with some material potentially settling at the bottom, as seen in Mixtures 4 and 5."
+  },
+  {
+    "task_id": "EM.46.185.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.8835634917927618e-05,
+      "contradictory": 8.589962214291382e-06,
+      "partially_correct_incomplete": 0.9999625744028678,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9997389095938743,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer succinctly states that calcite crystals look different than salt crystals, which is a correct observation. However, it lacks specific details about the shapes of the crystals, such as the distinctive square shape with little Xs of salt crystals and the needle-like shape of calcite crystals. There is no contradiction, but the answer is more general and less informative compared to the reference answer."
+  },
+  {
+    "task_id": "VB.12d.636.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0017918579972012343,
+      "contradictory": 4.487137733550336e-05,
+      "partially_correct_incomplete": 0.9981632706254633,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9976550828397716,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer accurately captures the relationship described in the reference answer, noting that shorter strings result in more swings and longer strings result in fewer swings within 15 seconds. However, it does not explicitly mention the time frame of 15 seconds, which is a key detail in the reference answer. There is no contradiction, but the student answer could be more precise by including the time frame."
+  },
+  {
+    "task_id": "SE.45.151.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 7.853193934654076e-06,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999921468060654,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9990889064294765,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer captures the essence that the sun's position changes, causing shadows to point in opposite directions. However, it lacks the specific details about the sun's position in the morning and afternoon, which are provided in the reference answer. The student's explanation is more general and does not mention the east and west directions. There is no direct contradiction, but the reference answer provides a clearer and more precise explanation of the phenomenon."
+  },
+  {
+    "task_id": "ST.31b.474.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9992033659098833,
+      "partially_correct_incomplete": 0.0,
+      "irrelevant": 0.0007966340901167172
+    },
+    "mass": 0.968684746791475,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer suggests that the elytra are used for strangulating, which is not accurate according to the reference answer. The reference answer correctly states that one function of the elytra is to make sounds. The student answer is missing the correct information about the elytra's function in sound production and introduces an incorrect function that does not align with the known biological functions of the elytra in beetles."
+  },
+  {
+    "task_id": "SE.22a.532.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9909099184938132,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is more general and less precise compared to the reference answer. It mentions that the covered container can conceal heat, which is a vague way of describing the effect of a cover. The reference answer, on the other hand, clearly states that water heats up faster when covered, providing a more specific and accurate description of the observed effect. The student answer does not mention the key outcome of faster heating, which is present in the reference answer. There is no direct contradiction, but the student answer lacks the specificity and clarity needed to fully capture the information provided by the graph."
+  },
+  {
+    "task_id": "EM.48b.571.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.9463302290611687e-05,
+      "contradictory": 6.377627822039306e-05,
+      "partially_correct_incomplete": 0.9997227523764767,
+      "irrelevant": 0.00019400804301225732
+    },
+    "mass": 0.9998928985743348,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is quite brief and lacks specific details. It mentions that the crystals have some shapes, which is not as precise as the reference answer that specifically states the crystals are the same shape as alum crystals. The reference answer provides a clear comparison to a known crystal shape, while the student answer is vague and does not address the crystal shape key or the specific substance dissolved. There is no contradiction, but the student answer is less informative and lacks the specificity present in the reference answer."
+  },
+  {
+    "task_id": "EM.26.487.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 3.503412699273144e-06,
+      "contradictory": 4.718846184789913e-06,
+      "partially_correct_incomplete": 0.999991777741116,
+      "irrelevant": 0.0
+    },
+    "mass": 0.999383823728274,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the basic shape and distinctive marking of the salt crystals, similar to the reference answer. However, it does not specify the exact shape as \"squares,\" which is mentioned in the reference answer. Additionally, the student answer does not include the \"Xs\" detail, which is a key feature in the reference answer. There is no contradiction between the two answers."
+  },
+  {
+    "task_id": "ME.66a.313.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9994134207057249,
+      "partially_correct_incomplete": 0.0005865792942750667,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9541175465490612,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the idea that the string could potentially make a connection, but it lacks the scientific explanation of why it wouldn't work. Specifically, it misses the crucial point that string is an insulator and does not conduct electricity. The student answer also contradicts the reference answer by suggesting that the string would \"hook and make it work,\" which is not accurate."
+  },
+  {
+    "task_id": "II.13b.580.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999649295162877,
+      "irrelevant": 3.507048371237298e-05
+    },
+    "mass": 0.9958407636766572,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer focuses on the contrast in darkness between the two fingerprint images, whereas the reference answer highlights the difference in the starting sides of the loops within the prints. The student answer is missing the specific detail about the loops beginning at opposite sides, which is a key difference according to the reference. There is no contradiction, but the student's observation does not address the main point of the reference answer."
+  },
+  {
+    "task_id": "VB.15a.495.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9948440724455495,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer focuses on the girls' strength as a variable, while the reference answer correctly identifies the launch position as the controlled variable. The student answer misses the specific detail about the launch position, which was explicitly mentioned in the scenario. There is no direct contradiction, but the student answer does not align with the information provided in the reference answer."
+  },
+  {
+    "task_id": "EM.43b.600.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.0,
+      "irrelevant": 1.0
+    },
+    "mass": 0.9983150208839149,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student's answer focuses on the concept of looking for crystals in a cube, which is not directly related to the acid test for calcite. The reference answer correctly describes the procedure of applying an acid to a rock and observing a fizzing reaction, which is the proper method for testing calcite. The student's response is missing the key steps of using an acid test and observing the reaction, and it introduces an unrelated concept of crystal formation that does not address the calcite test."
+  },
+  {
+    "task_id": "MX.36b.455.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.3750698699839871e-05,
+      "contradictory": 2.3303856107037898e-06,
+      "partially_correct_incomplete": 0.9999839189156895,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9994423621574487,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer succinctly captures that the bubbles indicate a reaction, which aligns with the reference answer. However, it does not explain the nature of the reaction, specifically mentioning the production of a new material (gas). The reference answer provides a more detailed explanation by identifying the bubbles as a sign of gas production, which is a key aspect of a chemical reaction. The student answer is missing this specific detail about the new material produced. There is no contradiction between the two answers, but the reference answer offers a more comprehensive explanation."
+  },
+  {
+    "task_id": "MX.16a.636.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.8916295637315801,
+      "partially_correct_incomplete": 0.10837043626841988,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9909221095684317,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer incorrectly states that the solutions have different concentrations due to the difference in water volume. This overlooks the key point that both solutions are saturated, which means they contain the maximum amount of dissolved solid at the same temperature. The reference answer correctly identifies that the concentration is the same for both saturated solutions, regardless of the volume of water used. The student answer misses the crucial aspect of saturation and does not align with the reference answer's explanation."
+  },
+  {
+    "task_id": "SE.4a.506.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 6.099843039310259e-06,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999434995533255,
+      "irrelevant": 5.0400603635088914e-05
+    },
+    "mass": 0.9994180216541123,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is overly simplistic, as it suggests that sand is a heat sink without providing context or detail. While it correctly identifies that sand can absorb heat, it does not explain the broader definition of a heat sink as given in the reference answer, which states that a heat sink is any material that absorbs a lot of heat. The reference answer is more comprehensive, covering the general concept without limiting it to a specific material. There is no contradiction, but the student answer lacks depth and specificity."
+  },
+  {
+    "task_id": "ME.7a.178.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 4.571886351583901e-05,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999542811364842,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9988881805896502,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is concise and captures the essence of the reference answer by mentioning that Lee should place one wire on one side of the object and the other wire on the other side. However, it lacks the detail about checking if the object completes the circuit, which is a crucial step in determining whether the object is an insulator or a conductor. There is no contradiction with the reference answer, but the student's response is less comprehensive."
+  },
+  {
+    "task_id": "ME.5b.311.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 5.396052450527255e-05,
+      "partially_correct_incomplete": 0.9995567797242917,
+      "irrelevant": 0.00038925975120303346
+    },
+    "mass": 0.9994514841227111,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer focuses on the nail potentially falling due to the weight of the brass ring, which is not directly addressed in the reference answer. The reference answer correctly explains that the brass ring would not stick to the nail because it is not made of iron, and thus does not become magnetized. The student answer misses this scientific explanation and instead provides a more general, non-scientific reason. There is no contradiction, but the student answer lacks the scientific accuracy present in the reference answer."
+  },
+  {
+    "task_id": "SE.22c.401.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 4.053785571053814e-05,
+      "contradictory": 0.00011647772317505519,
+      "partially_correct_incomplete": 0.9998099277821673,
+      "irrelevant": 3.3056638947126514e-05
+    },
+    "mass": 0.9960422121992603,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the main issue of having different conditions (uncovered vs. covered) but incorrectly includes the color difference as a factor, which is not relevant to the core issue. It is missing the explanation that both variables are being changed, making it impossible to determine the effect of each variable separately. There is no contradiction, but the answer could be more precise by focusing solely on the change in variables."
+  },
+  {
+    "task_id": "ME.6b.107.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.615986133331959e-05,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999738401386666,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9968335986185598,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is similar in that it correctly identifies that the motor will not run due to the lack of a complete circuit. However, it lacks the technical detail about the electrical pathway being broken, which is provided in the reference answer. The student answer does not explicitly mention the concept of an electrical pathway, which is a key element in understanding why the circuit is incomplete. There is no contradiction, but the reference answer offers a more precise explanation."
+  },
+  {
+    "task_id": "EM.16b.645.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9895421512893421,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the key point that topaz is harder than minerals X, Y, and Z because no tools could scratch topaz. However, it is missing the detail that at least one tool could scratch each of the other minerals. The student answer does not explicitly mention the scratch-test data for minerals X, Y, and Z, which is implied in the reference answer. There is no contradiction with the reference answer; the student answer just omits some of the supporting details."
+  },
+  {
+    "task_id": "PS.45b.457.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9904334778843201,
+      "partially_correct_incomplete": 0.009154688607847716,
+      "irrelevant": 0.0004118335078321204
+    },
+    "mass": 0.9992054683346335,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the idea that different materials produce different sounds, which aligns with the reference answer. However, it incorrectly states that metal vibrates more than wood and plastic, which is not mentioned in the reference answer and could be misleading. The student answer also omits the point that wooden blocks of different sizes and shapes would make very similar sounds, which contradicts the reference answer's statement."
+  },
+  {
+    "task_id": "SE.51b.497.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0021571789844327216,
+      "contradictory": 0.00011019767375114213,
+      "partially_correct_incomplete": 0.9977326233418161,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9928287080926493,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the key points that the size and position of the collectors are the same, which are important factors in determining the temperature change. However, it does not explicitly mention the amount of water in the containers or the fact that the collectors themselves are the same size, which are also crucial for the comparison. There is no contradiction with the reference answer; both correctly conclude that the temperature change would be the same."
+  },
+  {
+    "task_id": "MS.14b.571.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.002217624712029727,
+      "partially_correct_incomplete": 0.9967926945734521,
+      "irrelevant": 0.000989680714518098
+    },
+    "mass": 0.9957714774894226,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer correctly identifies that the ball cannot weigh 30 grams because the reference shows 30 grams in the right cup. However, it lacks the reasoning that the balance being tipped to the side with the ball indicates the ball's weight is greater than 30 grams. The student answer also incorrectly states that 40 grams is the only option, whereas the reference answer correctly identifies 40 grams as one of the possible options but does not rule out other weights heavier than 30 grams."
+  },
+  {
+    "task_id": "VB.15a.407.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.24351587260027716,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.7564841273997228,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9836085739340806,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer effectively captures the essence of the reference answer by mentioning the same spot to throw the ball, which aligns with the idea of the launch position being controlled. However, it could be slightly more precise by explicitly stating \"the line on the playground\" as the reference answer does. There is no contradiction, but the student answer could benefit from a bit more specificity to fully match the reference answer's exact wording."
+  },
+  {
+    "task_id": "FN.24b.425.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.8012856878450583e-05,
+      "contradictory": 7.2936175753100715e-06,
+      "partially_correct_incomplete": 0.9999723842337065,
+      "irrelevant": 2.309291839708847e-06
+    },
+    "mass": 0.9996916696305327,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the main point that Fruity Cream cookies are not pure sugar because the picture shows less sugar being produced. However, it lacks the specific detail about the amount of gas produced, which is crucial evidence according to the reference answer. There is no contradiction, but the explanation could be more precise and aligned with the reference answer by mentioning the gas production directly."
+  },
+  {
+    "task_id": "II.38.151.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 6.120462015419738e-06,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999938795379846,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9995481606590796,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is concise and captures the essence of the reference answer by stating that you would see the whole shape. However, it lacks the detail provided in the reference answer, which specifies that the mirror would complete the image and make the object appear whole. The student answer does not mention the role of the mirror in completing the image, which is a key element of the reference answer. There is no contradiction between the two answers."
+  },
+  {
+    "task_id": "LF.31b.827.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 4.5404835571195345e-06,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999954595164429,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9992680044340876,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer focuses on erosion and the movement of water, which is partially correct but incomplete. It does not mention deposition, which is crucial for delta formation. The student answer also does not explain that the water flow typically slows down or stops at the river mouth, leading to the deposition of sediments. While the idea of erosion is present, the answer lacks the key elements of sediment deposition and the specific conditions under which deltas form, as described in the reference answer. There is no direct contradiction, but the explanation is significantly incomplete."
+  },
+  {
+    "task_id": "SE.16b2.506.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.5561466406404281,
+      "partially_correct_incomplete": 0.3882707433359754,
+      "irrelevant": 0.05558261602359658
+    },
+    "mass": 0.9955634419774232,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is overly simplistic, focusing only on the highest temperature change observed in Container C. It does not consider the proportional relationship between the length of the container and the temperature change, which is a key aspect of the reference answer. The reference answer correctly identifies that the temperature change for a 20 cm container would be between those of the 10 cm and 30 cm containers, and specifically mentions that 6 degrees Celsius is halfway, indicating an understanding of proportionality. The student answer, however, does not address this proportional reasoning and instead makes a general statement that does not align with the detailed explanation provided in the reference answer."
+  },
+  {
+    "task_id": "PS.26.152.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.00014633256679821163,
+      "contradictory": 6.283762385042809e-06,
+      "partially_correct_incomplete": 0.9998473836708167,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9996640905258232,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is concise and aligns with the core idea presented in the reference answer, acknowledging that objects must shake to produce sound. However, it lacks the scientific explanation provided in the reference answer, which links vibrations directly to movements and explicitly states that vibrations are what produce sound. There is no contradiction, but the student answer is more general and less detailed."
+  },
+  {
+    "task_id": "MX.11e.304.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 9.528370256619773e-05,
+      "contradictory": 3.0794364182807904e-05,
+      "partially_correct_incomplete": 0.9998391358310311,
+      "irrelevant": 3.4786102219846264e-05
+    },
+    "mass": 0.999107799514665,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the basic idea of using a filter to separate the solid and the water, which is a valid method for mixture one. However, it lacks the detail about what happens to the water (evaporation) and the solid (crystallization) after separation. The reference answer provides a more comprehensive explanation of the process, including the specific outcomes for both the water and the solid. There is no contradiction between the two answers; the student answer is more general, while the reference answer is more specific about the end results."
+  },
+  {
+    "task_id": "LP.15c.145.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0083872525760201,
+      "partially_correct_incomplete": 0.9915562926218673,
+      "irrelevant": 5.645480211256936e-05
+    },
+    "mass": 0.9940800586733893,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer does not accurately reflect the relationship described in the reference answer. Both the reference and student answers mention \"effort,\" but the student's response is vague and does not explain the inverse relationship between the distance from the fulcrum and the effort required. The reference answer correctly states that increasing the distance from the fulcrum decreases the effort needed to lift the load, which is missing from the student's response. There is no contradiction, but the student's answer lacks the necessary detail to convey the correct relationship."
+  },
+  {
+    "task_id": "SE.25a.502.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 9.543437684014232e-05,
+      "contradictory": 0.001396894529529732,
+      "partially_correct_incomplete": 0.9969168508070874,
+      "irrelevant": 0.0015908202865428313
+    },
+    "mass": 0.9925484390360704,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the concept that water acts as a heat sink, which is a valid point. However, it misses the key observation that dry soil heats up and cools down more quickly than water, as indicated by the graph. The student answer does not directly reference the heating and cooling rates shown in the graph, which are crucial for determining which container held the dry soil. There is no contradiction with the reference answer, but the explanation is less precise in terms of the specific evidence from the graph."
+  },
+  {
+    "task_id": "II.13b.601.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.98834777135651,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer captures that the loops are going in different directions, which is a valid observation. However, it does not address the specific detail that the loops begin at opposite sides of the print, which is the key difference highlighted in the reference answer. There is no contradiction, but the student answer is more general and misses the precise location aspect of the reference answer."
+  },
+  {
+    "task_id": "II.24b.430.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.0014674760137312233,
+      "irrelevant": 0.9985325239862688
+    },
+    "mass": 0.999518931732917,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is overly simplistic and does not address the task at hand. It mentions the size difference between dogs but does not provide any method for comparing paw patterns using carbon printing. The reference answer, on the other hand, correctly suggests a method for comparison. The student answer misses the entire point of using carbon printing and comparing the patterns, which is to determine if the two Labrador retrievers have the same paw patterns. There is no contradiction, but the student answer lacks the necessary details and relevance to the question."
+  },
+  {
+    "task_id": "SE.10.519.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.00020317694245908507,
+      "partially_correct_incomplete": 0.9997968230575409,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9993173506516265,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the idea that the Earth's rotation causes the change in shadows, which aligns with the reference answer. However, it lacks the specific demonstration suggested in the reference, which is moving the flashlight to represent the Sun. The student answer also includes an additional point about feeling the sun's beam, which is not directly related to the concept of shadows changing due to Earth's rotation. This extra information does not contradict the reference answer but adds unnecessary detail."
+  },
+  {
+    "task_id": "PS.51a.116.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9982601854716973,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is more focused on the action of tightening the string rather than describing the resulting sound. It covers the physical act of tightening but does not explain the change in pitch. The reference answer correctly states that a tighter string results in a higher pitch. The student answer is missing the crucial information about the pitch change. There is no contradiction, but the explanation is incomplete."
+  },
+  {
+    "task_id": "VB.15b.634.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9846205313963844,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the variables of the girls' positions (running, standing, or stepping) and the types of balls used, which aligns with parts of the reference answer. However, it misses the variable of the girls' launch techniques, which is mentioned in the reference answer. The student answer does not explicitly mention the difference in the girls themselves, which is another important variable in the reference answer. There is no contradiction with the reference answer, but the student answer is less comprehensive."
+  },
+  {
+    "task_id": "FN.27b.117.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.993279818446193,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer succinctly states that Fruitsnap contains no vitamin C, which aligns with the core idea presented in the reference answer. However, it lacks the detail that Fruitsnap contains \"little or no\" vitamin C, which provides a more precise description of the situation. The student answer does not mention the specific result of the test (the indophenol not changing color), which is an important part of the explanation. There is no contradiction between the two answers, but the reference answer offers a more comprehensive explanation."
+  },
+  {
+    "task_id": "MX.11f.560.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0002840257407730551,
+      "contradictory": 2.9316564576043856e-05,
+      "partially_correct_incomplete": 0.9996866576946509,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9969756681730949,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer correctly identifies that Mixture 2 would be clear with nothing on the bottom, drawing a logical conclusion from the observation of Mixture 3. However, it does not explicitly state that the solution would be clear, which is a key part of the reference answer. Additionally, the student answer does not mention the dissolution of the solid, which is a supporting detail in the reference answer. There is no contradiction between the student and reference answers."
+  },
+  {
+    "task_id": "LF.13a.493.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.764901854246766,
+      "partially_correct_incomplete": 0.23482063869971492,
+      "irrelevant": 0.0002775070535191067
+    },
+    "mass": 0.9966252518450163,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the idea that earth materials are not preserved but rather worn away, which contrasts with the reference answer that states earth materials settle out during deposition. The reference answer includes the concept of settling, which is missing from the student's response. There is no contradiction, but the student's answer does not align with the process described in the reference answer."
+  },
+  {
+    "task_id": "PS.12.510.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9994385643360507,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is overly simplistic, stating only that the fork moved around, which is true but does not fully explain the mechanism of sound production. The reference answer provides a more comprehensive explanation by linking the vibration of the tuning fork to the production of sound and the splash in the water, which is a visual representation of those vibrations. The student answer lacks the connection between the fork's vibration and the creation of sound, which is a key point in the reference answer. There is no contradiction, but the student answer is incomplete in explaining the relationship between the tuning fork's vibration and the sound it produces."
+  },
+  {
+    "task_id": "MX.49.488.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0004697699355176634,
+      "partially_correct_incomplete": 0.9993607189031385,
+      "irrelevant": 0.0001695111613437852
+    },
+    "mass": 0.9936708964720953,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the idea that cup X has more mass, which is correct. However, it lacks the specific detail that equal volumes of the solutions were compared, which is crucial for the conclusion. The student also introduces an unnecessary element about cup Y potentially holding more, which is not relevant to the comparison of concentration based on the given information. Overall, while the student's answer is close, it misses the key point about equal volumes and includes an irrelevant detail."
+  },
+  {
+    "task_id": "FN.20b.171.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9995317846675975,
+      "partially_correct_incomplete": 0.0,
+      "irrelevant": 0.0004682153324024621
+    },
+    "mass": 0.9915058127975279,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer focuses on comparing the scale readings, which would indicate the mass of the samples, rather than the size of the grease spots. This approach does not align with the reference answer, which correctly suggests comparing the size of the grease spots to determine which sample has more fat. The student answer is missing the key step of observing the grease spots, and it incorrectly implies that the lower scale reading corresponds to more fat, which is not a valid method for this experiment."
+  },
+  {
+    "task_id": "ME.65a.292.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0010577384306385445,
+      "partially_correct_incomplete": 0.9984289269665609,
+      "irrelevant": 0.0005133346028005811
+    },
+    "mass": 0.9670336095953698,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is overly simplistic, suggesting that a single bulb will go off, whereas the reference answer indicates that all other bulbs will remain lit. This discrepancy shows that the student's understanding is incomplete, as it does not account for the behavior of the other bulbs in the circuit. The student answer also does not provide the specific information that the other two bulbs will stay lit, which is a key detail in the reference answer. There is no contradiction, but the student's response lacks the necessary context and detail."
+  },
+  {
+    "task_id": "ME.78b.254.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.003998330973629839,
+      "partially_correct_incomplete": 0.9959215142584347,
+      "irrelevant": 8.015476793547456e-05
+    },
+    "mass": 0.9936669737951406,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer focuses on the circuit configuration, suggesting that the motor will stop because it is in a series. This is a common misconception, as the motor will likely continue to function if the light bulb burns out, assuming the motor and light bulb are in parallel or the circuit is designed such that the motor has an alternative path to the power source. The student answer does not consider the actual circuit configuration shown in the picture, which is crucial for determining the motor's behavior. There is no direct contradiction, but the answer is incomplete and based on a common but incorrect assumption about series circuits."
+  },
+  {
+    "task_id": "MS.14b.116.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.010155905762474004,
+      "partially_correct_incomplete": 0.9888042467055932,
+      "irrelevant": 0.001039847531932871
+    },
+    "mass": 0.9912860687760434,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer correctly identifies that the total mass on the right side is 30 grams, but it does not explain why the balance is tipped towards the side with the ball. It misses the crucial point that the ball must weigh more than 30 grams to tip the balance. Additionally, the student answer does not address why 40 grams is the correct choice among the given options."
+  },
+  {
+    "task_id": "FN.17c.399.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.7294963641449626e-05,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999791304699817,
+      "irrelevant": 3.574566376813905e-06
+    },
+    "mass": 0.9993285366294627,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer captures the essence of the reference answer by mentioning that bubbling indicates the presence of acid. However, it does not explicitly mention the need for a syringe to measure the gas production, which is implied in the reference answer's use of \"the mixture began to fizz and bubble.\" The student answer also does not address the test for sugar, which is part of the original question. There is no contradiction, but the student answer is less comprehensive in covering all aspects of the test results."
+  },
+  {
+    "task_id": "PS.12.641.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9996266680139131,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is brief and lacks detail, only mentioning that the fork moves and vibrates, which is partially correct but does not fully explain the relationship between the vibrations and the production of sound. The reference answer provides a more comprehensive explanation by linking the vibrations directly to the splashing of water and the creation of sound. The student answer does not cover the specific observation of the water splashing, which helps illustrate the concept of vibrations making sounds. There is no contradiction, but the student answer is less informative and lacks the depth provided by the reference answer."
+  },
+  {
+    "task_id": "MX.19.381.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.9673500523110167e-05,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999703264994769,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9996609227076406,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer captures the essence that gas production leads to bubbling, which is a key observation in the reaction. However, it does not explicitly state that the production of a new material is evidence of a chemical reaction, which is a more comprehensive explanation provided in the reference answer. There is no contradiction, but the student answer could be more aligned with the reference by including the concept of a new material being produced."
+  },
+  {
+    "task_id": "SE.24a.600.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.521226681540905e-05,
+      "contradictory": 4.827323555125197e-05,
+      "partially_correct_incomplete": 0.9998788184932007,
+      "irrelevant": 4.769600443265543e-05
+    },
+    "mass": 0.9999116273716087,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer succinctly states that west is always opposite, which is correct but lacks the specific context provided in the reference answer. The reference answer explains the reasoning based on the position of the Sun in the afternoon, which helps in understanding the concept more comprehensively. The student answer does not mention the role of shadows or the Sun's position, which are key elements in the reference answer. There is no contradiction, but the student answer is more general and less detailed."
+  },
+  {
+    "task_id": "PS.46b.141.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.9813512419667957e-05,
+      "contradictory": 1.4381251749669363e-05,
+      "partially_correct_incomplete": 0.9999542101250996,
+      "irrelevant": 1.5951107310696994e-06
+    },
+    "mass": 0.9997009822762352,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer focuses on a specific outcome of the siren's design\u2014to get cars out of the way. This is a valid and common reason for the design of sirens. However, it is more narrow in scope compared to the reference answer, which states that the siren's sound is designed to ensure people notice it. The reference answer encompasses a broader purpose, including not just cars but all people, whereas the student answer is more specific to vehicles. There is no direct contradiction, but the student answer misses the broader context of the siren's function."
+  },
+  {
+    "task_id": "EM.46.401.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "irrelevant",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.0,
+      "irrelevant": 1.0
+    },
+    "mass": 0.9892337819814805,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer does not accurately describe the differences in crystal shapes between calcite and salt crystals, which is the main point of the reference answer. Instead, it mentions a comparison to flour, which is not relevant to the question. This information is missing from the student answer, and there is no contradiction, but the answer is off-topic."
+  },
+  {
+    "task_id": "MX.41.462.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0001829760320313007,
+      "contradictory": 7.037216443569924e-06,
+      "partially_correct_incomplete": 0.9998056317218957,
+      "irrelevant": 4.35502962942248e-06
+    },
+    "mass": 0.9998702994040602,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is concise and directly states \"Yes,\" which aligns with the reference answer. However, it lacks the explanation provided in the reference answer that solubility varies among different materials. The student answer does not elaborate on why both solubilities could be correct, which is a key component of the reference answer. There is no contradiction, but the response is more brief and less informative."
+  },
+  {
+    "task_id": "II.38.473.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9962682431329349,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer correctly identifies that only half of the flat object would be visible, which aligns with the concept that a mirror placed along a line of symmetry would reflect only one half of the object. However, the student answer lacks the detail that the mirror would complete the image, making the object appear whole. This omission means the student answer does not fully capture the complete transformation the mirror would create. There is no contradiction, but the answer is incomplete in describing the full effect of the mirror."
+  },
+  {
+    "task_id": "PS.4b.332.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 1.0,
+      "partially_correct_incomplete": 0.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9882543838298535,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer suggests that the pitch would remain the same, which does not align with the reference answer. The reference answer correctly states that the pitch would be lower with a longer string. The student answer misses the relationship between string length and pitch, as well as the expected change in pitch when the string is lengthened. There is a contradiction in the student's response as it contradicts the physics of string vibration that the reference answer accurately reflects."
+  },
+  {
+    "task_id": "II.38.485.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.999985801125126,
+      "irrelevant": 1.4198874874029266e-05
+    },
+    "mass": 0.9983248822706823,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is more general and does not fully capture the concept of the mirror completing the image. It mentions what the mirror is reflecting but does not explain that the reflection would make the object appear whole. The reference answer provides a more detailed explanation of the outcome, describing the mirror's role in completing the image. The student answer is missing the specific outcome of the mirror making the object appear whole, which is a key point in the reference answer. There is no contradiction, but the student answer lacks the depth and specificity of the reference answer."
+  },
+  {
+    "task_id": "LF.18a.912.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 1.0,
+      "partially_correct_incomplete": 0.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9827529065713823,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer contrasts with the reference answer in that it suggests the water flows slower during a flood, whereas the reference answer states that the water flows faster. The student answer misses the point that there is more water during a flood, which is a key factor in the increased flow rate. There is a contradiction in the student's statement regarding the speed of the water flow compared to the reference answer."
+  },
+  {
+    "task_id": "ME.66a.329.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9997489395177422,
+      "partially_correct_incomplete": 0.0,
+      "irrelevant": 0.00025106048225775906
+    },
+    "mass": 0.9797195588507649,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the idea that the motor might run if the string is connected, but it does not address the key concept of why the string would not complete the circuit. It misses explaining that string is an insulator, which prevents the flow of electricity. Additionally, the student answer contradicts the reference answer by suggesting that the motor would work, whereas the reference answer correctly states that the motor would not work due to the insulating properties of the string."
+  },
+  {
+    "task_id": "SE.3c.134.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9942382103086564,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer correctly identifies that light is involved in creating a shadow but does not specify the role of the tree. It lacks the detail that the tree blocks the sunlight, which is the key explanation provided in the reference answer. There is no contradiction, but the student answer is incomplete in explaining the mechanism by which the shadow is formed."
+  },
+  {
+    "task_id": "LF.27a.461.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9877997226426902,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is incomplete and lacks the necessary numerical reasoning. It correctly identifies that the change in elevation is between contour line A and C, but it does not provide the correct numerical value of 40 meters. The student answer also does not explain the reasoning behind the calculation, which is present in the reference answer. There is no contradiction, but the explanation is insufficient."
+  },
+  {
+    "task_id": "FN.27b.267.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.05919131512694986,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9408086848730501,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9942791124223631,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the essential idea that Fruitsnap likely contains little to no vitamin C, which prevents the color change in the indophenol test. However, it could benefit from using more precise language, such as \"little or no vitamin C,\" to match the reference answer. The student answer does not mention the specific number of drops used, which the reference answer provides for context. There is no contradiction between the two answers, but the reference answer offers a bit more detail and precision."
+  },
+  {
+    "task_id": "LF.39.394.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.049371029234943395,
+      "partially_correct_incomplete": 0.9165713791999959,
+      "irrelevant": 0.03405759156506083
+    },
+    "mass": 0.937348049004232,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer omits the use of an overlay grid and instead suggests placing tape on the side of the photograph, which does not align with the method described in the reference answer. The student answer also does not mention the tracing of features onto the overlay grid or the transfer of those features to the smaller grid in the notebook. While the student answer does include the idea of tracing, it lacks the structured approach of using an overlay grid and the step of transferring features to the smaller grid."
+  },
+  {
+    "task_id": "ME.65a.207.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 4.4507407266069155e-05,
+      "partially_correct_incomplete": 0.9996572927654364,
+      "irrelevant": 0.00029819982729767586
+    },
+    "mass": 0.9907177490415866,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is overly simplistic and does not accurately reflect the reference answer. It suggests that all bulbs will stop working, whereas the reference answer indicates that only the middle bulb will not work, leaving the other two bulbs lit. The student answer misses the specific detail about the other two bulbs staying lit, which is crucial to the correct understanding of the circuit described in the schematic diagram. There is no contradiction, but the answer is incomplete and inaccurate in this context."
+  },
+  {
+    "task_id": "EM.46.171.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9999825290321208,
+      "partially_correct_incomplete": 1.747096787927232e-05,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9995343885525114,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer correctly notes that salt crystals are square, which aligns with the reference answer. However, it incorrectly states that calcite crystals are flaky, whereas the reference answer describes them as needle-shaped. The student answer omits the detail about the distinctive X-shape of salt crystals and the needle-like appearance of calcite crystals."
+  },
+  {
+    "task_id": "SE.24a.404.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9891600744044947,
+      "partially_correct_incomplete": 0.008322589430550299,
+      "irrelevant": 0.0025173361649549926
+    },
+    "mass": 0.9983978814249882,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the concept that shadows point east in the afternoon, which aligns with the reference answer. However, it does not explicitly state that the west side is opposite the shadows, as the reference answer does. The student answer also mentions that the north side has the longest shadow, which is not directly relevant to determining the west side. Additionally, the student answer incorrectly states that the fountain and the tree have west shadows, which contradicts the reference answer's correct indication that the west side is opposite the shadows."
+  },
+  {
+    "task_id": "LF.31b.526.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0005222810384649635,
+      "contradictory": 8.450900404415378e-06,
+      "partially_correct_incomplete": 0.9994674114534605,
+      "irrelevant": 1.856607670132359e-06
+    },
+    "mass": 0.9998239305257639,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer correctly identifies that deltas are formed by erosion and deposition, which aligns with the reference answer's explanation of how earth materials erode and are carried by flowing water and then deposited at the river mouth. However, the student answer is somewhat incomplete as it does not specify that the water flow stops at the river mouth, which is a crucial part of the delta formation process described in the reference answer. There is no contradiction with the reference answer, but the student answer lacks the detail about the cessation of water flow."
+  },
+  {
+    "task_id": "ME.38a.152.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.0512197063509918e-05,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999894878029365,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9987322190025448,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer correctly identifies that the circuit is not complete, which aligns with the reference answer. However, it does not specify the reason why the circuit is incomplete (lack of both contact points on the bulb holder), which is a key detail in the reference answer. There is no contradiction, but the student answer is more general and lacks the specific explanation provided in the reference answer."
+  },
+  {
+    "task_id": "MX.11e.637.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.7336636496537192,
+      "partially_correct_incomplete": 0.24889212506569666,
+      "irrelevant": 0.017444225280584095
+    },
+    "mass": 0.9862255376549048,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer suggests using a filter to separate the solid from the water, which is a different method from the one described in the reference answer, which involves evaporation. The student's method would work for Mixture 3 or 4, but not for Mixture 1, as the solid is already dissolved. The reference answer correctly identifies the process for Mixture 1, explaining that the water will evaporate, leaving the solid behind. The student answer does not address the initial state of the solid in Mixture 1 and incorrectly assumes the solid is not dissolved."
+  },
+  {
+    "task_id": "SE.51b.398.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0019960945994346017,
+      "contradictory": 0.00017713675687873392,
+      "partially_correct_incomplete": 0.9978267686436866,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9979636548096058,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the key points that the size, shape, and color of the collectors are the same, which are relevant to the temperature change. However, it does not explicitly mention the placement of the collectors within the containers, which is a minor detail. The student also does not explain why the placement would not impact the temperature change, which could be seen as a slight omission. Overall, the student answer aligns well with the reference answer but lacks some of the detailed reasoning provided."
+  },
+  {
+    "task_id": "ME.17d.111.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.0707458174907334e-05,
+      "contradictory": 1.6186570399682572e-05,
+      "partially_correct_incomplete": 0.9999731059714254,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9978284297425629,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is more general and does not specify the importance of the switch's position or the completion of the circuit. It correctly identifies that the battery is connected to the switch, but it does not explain that the switch's position is crucial for completing the circuit and allowing the motor to run. The reference answer provides a more detailed explanation by emphasizing the need for a complete circuit. There is no contradiction, but the student answer lacks the specific detail about the switch's position."
+  },
+  {
+    "task_id": "MX.53.473.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9993968511301151,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer suggests that comparing the crystals to other solutions will help identify the material, which is a broader and less specific approach compared to the reference answer. The reference answer focuses on the unique shapes of crystals as a key identifying feature, whereas the student answer does not specify a method of comparison or mention the importance of crystal shapes. There is no contradiction, but the student answer lacks the specific detail provided in the reference answer regarding the role of crystal shapes in identification."
+  },
+  {
+    "task_id": "PS.15b.602.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9930928225349206,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer captures part of the reason why the saxophone makes the lowest sounds, noting that the sound waves have to travel a long distance due to the saxophone's tube length. However, it misses the specific detail about the saxophone having the longest and fattest tube, which is crucial for understanding the relationship between the tube's dimensions and the pitch of the sound produced. There is no contradiction, but the explanation is incomplete without mentioning the tube's diameter as well."
+  },
+  {
+    "task_id": "ME.27b.148.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.00790290868518611,
+      "contradictory": 0.0011662046236328427,
+      "partially_correct_incomplete": 0.9909308866911811,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9984496256881064,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer accurately covers the key points of the reference answer, correctly stating that iron keys will stick to a magnet while aluminum keys will not. However, it does not explicitly mention the scenario of testing the key, which the reference answer implies by using the phrase \"If the key sticks, the key is iron; if the key does not stick the key is aluminum.\" There is no contradiction, but the student answer could be clearer by explicitly stating the action of testing the key with a magnet."
+  },
+  {
+    "task_id": "VB.15c.628.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.580223673666183e-05,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999841977632633,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9982964586194744,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the need for the girls to use the same kind of ball, which aligns with the reference answer. However, it misses the requirement for using the same launch technique, which is an important aspect of making the contest a controlled experiment. The student answer does not mention the ball's weight, which is not directly addressed in the reference answer but is relevant to ensuring a fair test. There is no contradiction with the reference answer in the student's response."
+  },
+  {
+    "task_id": "LP.15c.425.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9970427184062324,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer captures the inverse relationship between the distance of effort from the fulcrum and the required effort, which aligns with the reference answer. However, it omits the mention of the load's distance from the fulcrum, which is a crucial component of the principle being described. There is no contradiction, but the explanation is incomplete without including the load's position."
+  },
+  {
+    "task_id": "PS.44.255.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 3.0286171926372716e-05,
+      "contradictory": 3.349738579546125e-06,
+      "partially_correct_incomplete": 0.999966364089494,
+      "irrelevant": 0.0
+    },
+    "mass": 0.999541221084947,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer correctly identifies that a shorter string produces a higher pitch compared to a longer string. However, it lacks the information about the pitch of the longer string, which should be mentioned to complete the comparison. The student answer does not explicitly state that the longer string produces a lower pitch, which is an important detail to include for a full understanding. There is no contradiction with the reference answer; rather, the student answer could be more comprehensive by including both aspects of the comparison."
+  },
+  {
+    "task_id": "ME.27b.115.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.13272276328197669,
+      "contradictory": 4.2480376628470876e-05,
+      "partially_correct_incomplete": 0.8672347563413949,
+      "irrelevant": 0.0
+    },
+    "mass": 0.997287696726767,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer accurately captures the key points of the reference answer, correctly stating that attraction to the magnet indicates an iron key, while no attraction indicates an aluminum key. However, it omits the specific mention of the key \"sticking\" to the magnet, which is used in the reference answer. There is no contradiction between the two answers; both convey the same basic principle of using a magnet to distinguish between iron and aluminum keys."
+  },
+  {
+    "task_id": "VB.15b.626.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.17474814685043e-05,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999782525185315,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9972107280794271,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the key points of who got a running start and the fact that different balls were used. However, it does not explicitly mention the different launch techniques used by the girls, which is one of the variables highlighted in the reference answer. Additionally, the student answer does not address the fact that the girls themselves are different, which is another variable mentioned in the reference answer. There is no contradiction with the reference answer in the student's response."
+  },
+  {
+    "task_id": "MS.50a.496.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 1.4631546329818266e-05,
+      "partially_correct_incomplete": 0.65323027641427,
+      "irrelevant": 0.34675509203940025
+    },
+    "mass": 0.998495040073438,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer \"Thermometer\" is a tool used to measure temperature, which does not directly address the question of the unit Uncle Bill used to report the temperature. The reference answer correctly identifies that Bill was likely using degrees Celsius, as 28 degrees Celsius would be considered warm. The student answer misses the point of identifying the correct temperature unit and does not provide the specific information requested in the question. There is no contradiction, but the answer is incomplete and off-topic."
+  },
+  {
+    "task_id": "FN.27a.456.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9928467497310343,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is partially correct but lacks specificity and clarity. It correctly identifies that fewer drops indicate a higher concentration of vitamin C, but it does not clearly state which beverage has the higher concentration. The reference answer provides this information by explicitly mentioning Overly Orange. Additionally, the student answer does not reference the actual data from the experiment, such as the number of drops used for each beverage, which is crucial for a complete explanation. There is no contradiction, but the answer could be more precise and detailed."
+  },
+  {
+    "task_id": "EM.45c.645.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9987680908230452,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is brief and lacks specific details about the crystal's shape and surface markings, which are key elements in the reference answer. It mentions using a chart, but does not explain how the chart was used to identify the crystals as salt. This omission means the student answer does not fully cover the information provided in the reference answer, which explicitly states the crystals were square with Xs on the surface. There is no contradiction, but the student answer is incomplete in comparison."
+  },
+  {
+    "task_id": "SE.22b.494.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.9640735330995016e-05,
+      "contradictory": 4.720067470854058e-05,
+      "partially_correct_incomplete": 0.9998216915626781,
+      "irrelevant": 0.00011146702728235293
+    },
+    "mass": 0.9984304166330329,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer correctly identifies that blue collectors heat up faster than red ones, aligning with the reference answer. However, it oversimplifies the explanation by focusing solely on the color's darkness, which is not the primary factor according to the reference answer. The reference answer implies that the graph provides more detailed information about the heating rates of the collectors, suggesting that the color itself is a significant variable. The student answer does not mention the specific data from the graph and could be seen as too general, as it doesn't account for the uncovered versus covered variable that the reference answer implies is also part of the analysis. There is no direct contradiction, but the student answer lacks the depth and detail provided in the reference answer."
+  },
+  {
+    "task_id": "II.26.395.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.000996865336819936,
+      "partially_correct_incomplete": 0.9989425325173762,
+      "irrelevant": 6.0602145803896666e-05
+    },
+    "mass": 0.9968060571251504,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the general texture of both fabrics as rough, which aligns with the reference answer's description of Fabric B. However, it does not specify the differences between the two fabrics, as the reference answer does. Additionally, the student answer mentions that both fabrics have \"bumpy dots and lines,\" which is not consistent with the reference answer that describes Fabric A as smoother and finer."
+  },
+  {
+    "task_id": "SE.31b.530.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.7373292269963597,
+      "partially_correct_incomplete": 0.25323002028993075,
+      "irrelevant": 0.009440752713709503
+    },
+    "mass": 0.9188840222091298,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the idea that the water in box B would hold more heat due to its longer shape, but it does not directly address the key evidence provided in the reference answer, which is the greater surface area of the collector in box A leading to faster heating. The student answer also contains a minor contradiction, as it suggests that the longer shape of box B would result in holding more heat, which is not necessarily the case compared to the surface area argument for box A."
+  },
+  {
+    "task_id": "VB.15b.545.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9756582091288234,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers only one variable, which is the distance the ball went, but it does not address the other two variables mentioned in the reference answer: the different types of balls and the different launch techniques used by the girls. It also does not mention that different girls are throwing the balls, which is another variable not controlled in the contest. The student answer does not contradict the reference answer but is incomplete in covering all the aspects of the variables not controlled in the contest."
+  },
+  {
+    "task_id": "ME.65a.217.1",
+    "gold_label": "contradictory",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 1.0,
+      "partially_correct_incomplete": 0.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9166161447505959,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer suggests that all bulbs will burn out, which is broader than the reference answer that specifies only the middle bulb burning out and the other two remaining lit. The reference answer correctly identifies that the other two bulbs will stay lit, while the student answer incorrectly states that all bulbs will go out. This discrepancy means the student answer contradicts the reference answer by overgeneralizing the outcome."
+  },
+  {
+    "task_id": "VB.5a.634.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.002787439739328376,
+      "contradictory": 6.627812348827701e-05,
+      "partially_correct_incomplete": 0.9969831215404447,
+      "irrelevant": 0.00016316059673858766
+    },
+    "mass": 0.9879283930521073,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is more concise but lacks the specific details present in the reference answer. While it conveys the general idea that the number of tree rings increases with time, it does not explicitly state the relationship between the variables as clearly as the reference answer does. The reference answer provides a more precise and complete explanation of the trend observed in the graph. There is no contradiction, but the student answer is less informative and detailed."
+  },
+  {
+    "task_id": "II.24b.527.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999238602202263,
+      "irrelevant": 7.613977977370338e-05
+    },
+    "mass": 0.9993526440111675,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer provides information about the types of patterns that can be found on a dog's paw, such as arches, whorls, and loops. However, it does not describe the process of comparing the prints to determine if the two Labrador retrievers have the same paw patterns, which is the core of the reference answer. There is no contradiction, but the student answer lacks the procedural aspect of the comparison."
+  },
+  {
+    "task_id": "SE.4a.327.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "contradictory",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.9997905404522542,
+      "partially_correct_incomplete": 9.507488332017976e-05,
+      "irrelevant": 0.00011438466442557713
+    },
+    "mass": 0.997975088372931,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is less precise and does not fully capture the essence of a heat sink as described in the reference answer. The reference answer correctly states that a heat sink absorbs a lot of heat, which is accurate. In contrast, the student answer mentions that the material goes slowly and energy goes slowly, which does not accurately describe the function of a heat sink. This description seems to confuse the concept of thermal conductivity with a general notion of slowness, which is not relevant to the definition of a heat sink."
+  },
+  {
+    "task_id": "EM.21b.401.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.00032948420800909997,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9996705157919908,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9951021677033323,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer succinctly captures the essence of the reference answer by mentioning that the harder mineral will leave a scratch on the less hard mineral. However, it lacks the specific detail about which mineral will be scratched (the brown mineral in this case). There is no contradiction, but the student answer is less comprehensive in providing the full context of the test."
+  },
+  {
+    "task_id": "ST.25b2.576.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 8.735412129110427e-05,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999126458787089,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9916591524428715,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer \"Store food\" is a concise way to describe the function of the cotyledon, which aligns with the reference answer that states the cotyledon provides food for the plant until it can make its own. However, the student answer lacks the detail that the cotyledon serves as a source of nutrients for the seedling immediately after germination. There is no contradiction, but the reference answer provides a more comprehensive explanation of the cotyledon's role."
+  },
+  {
+    "task_id": "MS.43b.417.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9795189648498548,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer focuses on the procedure of \"zeroing out\" the scale before weighing the apple, which is a correct step in ensuring accurate measurements. However, it does not address the need to use a standard unit of mass like grams, which is the key point of the reference answer. There is no contradiction, but the student answer is incomplete as it misses the broader context of using a standard unit for comparison and consistency."
+  },
+  {
+    "task_id": "ME.5b.318.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9991656184766572,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the idea that the outcome depends on the material of the brass ring, which is a relevant point. However, it lacks specificity about the material properties, such as the absence of iron in brass. The student answer also introduces the factor of the ring's weight, which is not relevant to the magnetic interaction described. There is no direct contradiction, but the answer is less precise and comprehensive compared to the reference answer."
+  },
+  {
+    "task_id": "EM.26.388.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0034993335578618946,
+      "contradictory": 0.00013121887769787873,
+      "partially_correct_incomplete": 0.9963694475644402,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9989975887762585,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is similar to the reference answer in describing the salt crystals as square, but it mentions \"Xs in the middle\" instead of \"Xs on top.\" This small difference in positioning does not significantly contradict the reference answer, as both indicate a distinctive marking on the crystals. However, the reference answer provides a bit more detail by specifying the exact location of the Xs, which the student answer omits."
+  },
+  {
+    "task_id": "MX.11c.304.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 6.064496378458269e-05,
+      "partially_correct_incomplete": 0.9999393550362154,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9941112511031817,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the observation that Mixture 5 contains more solid than Mixture 4, which is correct. However, it misses the key concept that both mixtures are actually saturated, meaning they cannot dissolve any more solid at that temperature and pressure. The student answer also does not explain why the concentrations are the same, which is the core of the reference answer. There is no contradiction, but the student's explanation lacks the necessary scientific reasoning provided in the reference answer."
+  },
+  {
+    "task_id": "FN.17c.410.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9983460360798562,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the detection of acid through the movement of a syringe but does not address the detection of sugar, which is a significant omission. Additionally, the student's statement that \"if it has a lot of volume it has sugar\" is not accurate; the presence of sugar would not necessarily result in a large volume. The part about the syringe going all the way up to indicate acid is somewhat related to the reference answer but lacks the specific detail that gas production (carbon dioxide) is the key indicator. There is no direct contradiction, but the student answer is incomplete and somewhat misleading."
+  },
+  {
+    "task_id": "PS.15b.393.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9986606583968859,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is partially correct but lacks the necessary detail to fully explain why the saxophone makes the lowest sounds. It mentions a hole, which is not the key factor, but does not address the length and diameter of the saxophone's tube, which are crucial. The reference answer correctly states that the saxophone's long and fat tube is the primary reason for producing lower sounds. The student answer does not contradict the reference answer but is missing the essential information about the tube's dimensions."
+  },
+  {
+    "task_id": "ME.66b.143.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 1.0,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9929079537015079,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer is concise but lacks detail. It correctly identifies that aluminum foil can be used because it is a metal, which conducts electricity. However, it does not explain that aluminum foil would complete the circuit by connecting the gap between the D-cell and the switch, as stated in the reference answer. There is no contradiction, but the explanation is incomplete."
+  },
+  {
+    "task_id": "ME.30.247.1",
+    "gold_label": "irrelevant",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.6446674467826096e-05,
+      "contradictory": 0.49827096508149654,
+      "partially_correct_incomplete": 0.500876427470976,
+      "irrelevant": 0.0008261607730595631
+    },
+    "mass": 0.9964896372397506,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the idea that a magnet is involved in changing the signal light's color, which is a key element of the reference answer. However, it does not explain the specific mechanism by which the car triggers the magnet, such as the car being made of iron or steel. Additionally, the student answer incorrectly suggests that the magnet itself changes the color of the light, whereas the reference answer correctly states that the magnet under the road triggers the light to change color."
+  },
+  {
+    "task_id": "ME.17e.147.1",
+    "gold_label": "contradictory",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.999869771021982,
+      "irrelevant": 0.00013022897801790665
+    },
+    "mass": 0.9790422818071219,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student's answer suggests that Denise can run both the light and the motor simultaneously if the circuit forms a circle, which implies a parallel circuit. This idea is not fully aligned with the reference answer, which states that only one circuit can be complete at a time. The student's answer is missing the key concept that in Denise's specific circuit, the switch inside the dotted box limits the ability to have both the light and the motor operational simultaneously. There is no contradiction, but the student's answer lacks the specific detail about the switch's role in the circuit."
+  },
+  {
+    "task_id": "ME.66a.146.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.0,
+      "contradictory": 2.42272548286113e-05,
+      "partially_correct_incomplete": 0.9994140359544003,
+      "irrelevant": 0.0005617367907711505
+    },
+    "mass": 0.9963261774854606,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the idea that the string would not work because it does not contain iron, which is not relevant to the question. It misses the key point that string is an insulator, which is why it would not complete the circuit. There is no contradiction, but the explanation is incomplete and off-topic regarding the material's conductivity."
+  },
+  {
+    "task_id": "ME.30.227.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 6.133714004632824e-05,
+      "contradictory": 0.0,
+      "partially_correct_incomplete": 0.9999386628599537,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9995735336028987,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer covers the key point that a car is made of metal, which can be attracted by a magnet, thus triggering the signal. However, it does not explicitly mention the specific type of metal (iron or steel) that the reference answer specifies. Additionally, the student answer does not explain the mechanism of how the metal in the car interacts with the magnet to send a signal to the light, which is a crucial detail provided in the reference answer. There is no contradiction between the two answers."
+  },
+  {
+    "task_id": "PS.46b.603.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 0.00030637110094644375,
+      "contradictory": 2.7729273252818706e-05,
+      "partially_correct_incomplete": 0.9996658996258008,
+      "irrelevant": 0.0
+    },
+    "mass": 0.9992754117898598,
+    "model": "qwen2.5:7b",
+    "prefill": "Label: ",
+    "reasoning": "The student answer elaborates on the purpose of the siren's sound by explaining that it alerts people to potential hazards such as a fire or a vehicle in distress, which is a more specific explanation than the reference answer. However, the reference answer is more concise and focuses solely on the siren's primary function of drawing attention. The student answer does not explicitly mention the general alert function for the fire engine's passage, which is implied in the reference answer. There is no contradiction between the two answers, but the student answer provides a more detailed scenario."
+  }
+]

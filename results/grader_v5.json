@@ -1,0 +1,578 @@
+[
+  {
+    "task_id": "II.13b.543.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.0113480306506666e-07,
+      "partially_correct_incomplete": 0.9999992819906737,
+      "incorrect": 6.168745232585005e-07
+    },
+    "mass": 1.000000002753816,
+    "reasoning": "The student's answer, \"On his A arch,\" does not address the core idea that the loops begin at opposite sides of the print. It mentions a part of the fingerprint (the A arch) but does not relate it to the difference described in the reference answer. Therefore, it is missing the necessary part of the explanation.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "PS.46b.141.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.423063700078188e-05,
+      "partially_correct_incomplete": 0.9999857665236566,
+      "incorrect": 2.8393426591269374e-09
+    },
+    "mass": 1.0000000475718438,
+    "reasoning": "The student's answer, \"To get cars out of the way,\" is a specific application of the broader principle that the siren's sound is designed to get people's attention. While this is a valid and common use of sirens, it does not fully capture the core idea that the primary purpose is to ensure that people notice the sound, which can then lead to various actions, including getting out of the way. Therefore, the student's answer is on the right track but is missing the broader context of the siren's primary function.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "MX.36a.572b.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.6264399385020157e-08,
+      "partially_correct_incomplete": 0.9999999718138738,
+      "incorrect": 1.9217267912016007e-09
+    },
+    "mass": 1.0000000281863273,
+    "reasoning": "The student answer is on the right track but lacks the necessary detail to fully capture the core explanation. It mentions the key elements (eggshells and vinegar) and the observable effect (bubbling), but it does not explain the outcome (the eggshells disappearing and the liquid becoming clear) which is essential to understanding why a solution was created. Therefore, the label that fits best is:\n\nB) partially_correct_incomplete"
+  },
+  {
+    "task_id": "ME.78b.159.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.7873873829302204e-07,
+      "partially_correct_incomplete": 0.9999997210953837,
+      "incorrect": 1.658781220554986e-10
+    },
+    "mass": 1.0000000404865965,
+    "reasoning": "The student's answer succinctly states that the motor will keep running, which captures the core idea that the motor will continue to function even if the light bulb burns out. However, it does not provide the reasoning behind this conclusion, which is that the motor still has a pathway to the D-cell. Therefore, the student's answer is on the right track but is missing the necessary reasoning.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "ME.5b.311.1",
+    "gold_label": "incorrect",
+    "predicted_label": "incorrect",
+    "probabilities": {
+      "correct": 3.671899366058338e-07,
+      "partially_correct_incomplete": 6.6782561879418e-08,
+      "incorrect": 0.9999995660275015
+    },
+    "mass": 0.9999999571358891,
+    "reasoning": "The student's answer does not address the scientific reasoning behind the phenomenon and instead focuses on a physical action that is not relevant to the question. It misses the key point about the material properties of the objects involved. Therefore, it fits best under the label:\n\nC) incorrect"
+  },
+  {
+    "task_id": "SE.45.418.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "incorrect",
+    "probabilities": {
+      "correct": 0.0001629529914019764,
+      "partially_correct_incomplete": 4.158613270308936e-05,
+      "incorrect": 0.9997954608758949
+    },
+    "mass": 1.0000000355981686,
+    "reasoning": "The student's answer does not correctly explain why the shadow changes direction. It incorrectly suggests that the bus sign itself is facing east, which is not relevant to the explanation of shadow direction. The correct explanation is about the position of the Sun, not the orientation of the bus sign.\n\nLabel: C) incorrect"
+  },
+  {
+    "task_id": "SE.24a.505.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 7.776046539188814e-08,
+      "partially_correct_incomplete": 0.9999999099039916,
+      "incorrect": 1.2335542982196873e-08
+    },
+    "mass": 0.9999999708868869,
+    "reasoning": "The student's answer is on the right track but does not fully capture the key idea in the reference answer. It mentions the compass rose, which is a correct reference, but it doesn't explain the reasoning behind why west is on the left side in the afternoon. Therefore, the label that fits best is:\n\nB) partially_correct_incomplete"
+  },
+  {
+    "task_id": "II.13b.531.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "incorrect",
+    "probabilities": {
+      "correct": 8.763340927307046e-07,
+      "partially_correct_incomplete": 1.62968586474343e-07,
+      "incorrect": 0.9999989606973209
+    },
+    "mass": 1.0000000856289368,
+    "reasoning": "The student's answer does not capture the key idea that the loops begin at opposite sides of the print. Instead, it simply states that the loops are different, which is too vague and does not convey the specific detail provided in the reference answer. Therefore, the label that fits best is:\n\nC) incorrect"
+  },
+  {
+    "task_id": "ME.78b.254.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 9.086369474365795e-08,
+      "partially_correct_incomplete": 0.9999999019605357,
+      "incorrect": 7.175769555010877e-09
+    },
+    "mass": 0.999999978830389,
+    "reasoning": "The student's answer is missing the key detail that the motor will continue to run because the circuit is not broken by the light bulb burning out. The answer is on the right track by suggesting the motor is in a series circuit, but it does not explain why the motor would still function. Therefore, the label that fits best is:\n\nB) partially_correct_incomplete"
+  },
+  {
+    "task_id": "SE.25a.319.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.3156745265997012e-07,
+      "partially_correct_incomplete": 0.9999996588185982,
+      "incorrect": 2.0961394911245256e-07
+    },
+    "mass": 0.9999999835541404,
+    "reasoning": "The student's answer is missing the reasoning behind why container A has a higher temperature than water, which is crucial to fully explain the observation. Therefore, the student's answer is missing a necessary part of the reference answer.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "ME.17b.311.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 3.3083847975668387e-07,
+      "partially_correct_incomplete": 0.9999995936752321,
+      "incorrect": 7.548628824310771e-08
+    },
+    "mass": 0.9999999294879897,
+    "reasoning": "The student's answer is too vague and lacks the necessary detail to fully explain why the bulb lights up. It does not mention the concept of a complete circuit, which is a key part of the reference answer. Therefore, it is missing a necessary part of the explanation.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "FN.27b.267.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 7.735893376447059e-07,
+      "partially_correct_incomplete": 0.9999992260714574,
+      "incorrect": 3.3920491736479807e-10
+    },
+    "mass": 1.0000000586736335,
+    "reasoning": "The student's answer correctly identifies that Fruitsnap likely contains little to no vitamin C, which explains why the indophenol did not change color. However, it does not explicitly state that the lack of vitamin C is the reason for the color change, which is a key part of the reference answer. Therefore, the student's answer is on the right track but is missing the reasoning behind the conclusion.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "II.13a.612.1",
+    "gold_label": "incorrect",
+    "predicted_label": "incorrect",
+    "probabilities": {
+      "correct": 2.4268011503929025e-07,
+      "partially_correct_incomplete": 4.912810379960294e-08,
+      "incorrect": 0.9999997081917812
+    },
+    "mass": 1.000000053390152,
+    "reasoning": "The student's answer is incorrect because it states that the finger patterns are arches, which contradicts the reference answer that states both patterns are loops. Therefore, the appropriate label is:\n\nC) incorrect."
+  },
+  {
+    "task_id": "SE.10.519.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.8366081005317043e-06,
+      "partially_correct_incomplete": 0.9999900976147148,
+      "incorrect": 8.06577718461436e-06
+    },
+    "mass": 1.0000000080143736,
+    "reasoning": "The student's answer does not fully capture the key idea that the Earth's rotation is what causes shadows to change during the day. While it mentions that the Earth moves and the Sun stays in one place, it does not explain how this movement affects shadows. Therefore, it is missing the core explanation of how the Earth's rotation leads to the changing positions of shadows.\n\nLabel: partially_correct_incomplete"
+  },
+  {
+    "task_id": "EM.48b.521.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 6.473923721424145e-08,
+      "partially_correct_incomplete": 0.9999997977516668,
+      "incorrect": 1.375090959733848e-07
+    },
+    "mass": 0.9999999638299982,
+    "reasoning": "The student's answer is missing the key reasoning that led to the conclusion about the crystals. They simply listed the options and chose one without explaining why it was the correct choice based on the crystal shape. Therefore, the label that fits best is:\n\nB) partially_correct_incomplete"
+  },
+  {
+    "task_id": "LF.27a.407.1",
+    "gold_label": "incorrect",
+    "predicted_label": "incorrect",
+    "probabilities": {
+      "correct": 2.1861102741227935e-07,
+      "partially_correct_incomplete": 4.388895248734331e-09,
+      "incorrect": 0.9999997770000774
+    },
+    "mass": 0.9999999845820757,
+    "reasoning": "The student's answer does not address the core explanation of the elevation changes between the contour lines. It instead makes an unrelated statement about the size of a circle, which is not relevant to the question. Therefore, the label that fits best is:\n\nC) incorrect."
+  },
+  {
+    "task_id": "ME.27b.115.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.2899410747513757e-06,
+      "partially_correct_incomplete": 0.9999987091890497,
+      "incorrect": 8.698756218012753e-10
+    },
+    "mass": 0.9999999795094767,
+    "reasoning": "The student's answer correctly identifies the relationship between the magnet's attraction and the material of the key, but it does not explicitly state the conclusion for each scenario. Therefore, it is missing a necessary part of the reference answer.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "EM.45c.340.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.836785097594356e-07,
+      "partially_correct_incomplete": 0.9999997080383142,
+      "incorrect": 8.283176058247078e-09
+    },
+    "mass": 1.000000053543456,
+    "reasoning": "The student's answer does not provide any reasoning or explanation for why the crystals were identified as salt. It simply states that they broke the crystals apart, which is not sufficient to determine that the crystals are salt. Therefore, the student's answer is missing the core explanation of how the identification was made.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "MX.52b.459.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.7849362938846306e-08,
+      "partially_correct_incomplete": 0.9999935819070027,
+      "incorrect": 6.390243634356354e-06
+    },
+    "mass": 0.9999999807914832,
+    "reasoning": "The student's answer is missing the key point that the crystals match the shape of alum crystals as shown in the key. The student incorrectly identified Epsom salt and sodium hyposulfite, which are not mentioned in the options. Therefore, the label that fits best is:\n\nB) partially_correct_incomplete"
+  },
+  {
+    "task_id": "FN.17a.495.1",
+    "gold_label": "incorrect",
+    "predicted_label": "incorrect",
+    "probabilities": {
+      "correct": 1.3819205129820581e-05,
+      "partially_correct_incomplete": 3.7361134759381765e-05,
+      "incorrect": 0.999948819660111
+    },
+    "mass": 1.000000039559429,
+    "reasoning": "The student's answer is incorrect because it states that the chemical reaction creates acid, which is not supported by the given information. The description of the reaction indicates the presence of sugar, as the fizzing and bubbling are consistent with the fermentation of sugar by yeast. Therefore, the correct label is:\n\nC) incorrect"
+  },
+  {
+    "task_id": "VB.42.495.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 4.4079647621817694e-05,
+      "partially_correct_incomplete": 0.9999559107474998,
+      "incorrect": 9.604878386586479e-09
+    },
+    "mass": 0.9999999818164572,
+    "reasoning": "The student's answer correctly identifies that adding more blocks makes the truck travel a shorter distance in 10 seconds, which aligns with the reference answer. However, it does not explicitly state the relationship between the weight and the speed, which is implied but not directly stated. Therefore, the student's answer is on the right track but lacks the explicit reasoning behind the relationship.\n\nLabel: partially_correct_incomplete"
+  },
+  {
+    "task_id": "ME.5b.318.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.4592155021536537e-06,
+      "partially_correct_incomplete": 0.9999954559941042,
+      "incorrect": 3.084790393628629e-06
+    },
+    "mass": 1.0000000140530703,
+    "reasoning": "The student's answer is on the right track but lacks the necessary reasoning behind the conclusion. It mentions that the outcome depends on the weight and material of the brass ring, but it does not address the key point about the material composition. Therefore, it is missing a crucial part of the reference answer.\n\nLabel: partially_correct_incomplete"
+  },
+  {
+    "task_id": "II.20b.457.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.7834617703336998e-07,
+      "partially_correct_incomplete": 0.9999997381758627,
+      "incorrect": 8.347796017673765e-08
+    },
+    "mass": 1.000000023405812,
+    "reasoning": "The student's answer is too broad and does not specifically address how Sarah would know if vinegar separated the permanent ink. It lacks the key idea that multiple colors would appear, indicating separation. Therefore, it is missing a necessary part of the reference answer.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "SE.51b.398.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 3.4275400982821477e-06,
+      "partially_correct_incomplete": 0.9999965714677811,
+      "incorrect": 9.92120694892778e-10
+    },
+    "mass": 0.9999999714631947,
+    "reasoning": "The student's answer correctly identifies that the temperature change would be the same due to the similar size, shape, and color of the solar collectors. However, it does not explicitly state that the placement within the container does not affect the heat absorption, which is a key point in the reference answer. Therefore, the student's answer is on the right track but is missing a necessary part of the explanation.\n\nLabel: partially_correct_incomplete"
+  },
+  {
+    "task_id": "LF.28a2.810.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.2692506323907269e-07,
+      "partially_correct_incomplete": 0.9999995045132346,
+      "incorrect": 2.6856170223708473e-07
+    },
+    "mass": 1.0000000186498952,
+    "reasoning": "The student answer \"Water flows faster\" does not capture the key idea that the logs provide information about the time taken for earth materials to move, which is a core part of the reference answer. Therefore, the student's answer is missing the essential information about the time taken for material movement.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "SE.51b.497.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.768724745370264e-08,
+      "partially_correct_incomplete": 0.9999999656370521,
+      "incorrect": 1.6675700512741452e-08
+    },
+    "mass": 1.0000000343632054,
+    "reasoning": "The student's answer is on the right track and correctly concludes that the temperature changes would be the same, but it lacks the reasoning behind this conclusion. Therefore, it is missing a necessary part of the reference answer.\n\nLabel: partially_correct_incomplete"
+  },
+  {
+    "task_id": "MS.50a.101.1",
+    "gold_label": "incorrect",
+    "predicted_label": "incorrect",
+    "probabilities": {
+      "correct": 3.5292532642044256e-06,
+      "partially_correct_incomplete": 1.0418443100406261e-08,
+      "incorrect": 0.9999964603282927
+    },
+    "mass": 0.9999999633935468,
+    "reasoning": "The student's answer \"A mass\" is not related to the question about the temperature unit. It does not address the core idea that 28 degrees corresponds to a warm temperature in Canada, which would indicate the use of Celsius. Therefore, the label that fits best is:\n\nC) incorrect"
+  },
+  {
+    "task_id": "PS.15b.644.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "incorrect",
+    "probabilities": {
+      "correct": 3.8410885732251907e-07,
+      "partially_correct_incomplete": 2.329969066165516e-07,
+      "incorrect": 0.9999993828942361
+    },
+    "mass": 1.0000000210597446,
+    "reasoning": "The student's answer does not capture the key idea that the saxophone produces lower sounds due to its longer and fatter tube. Instead, it provides an incomplete explanation that the sound travels a long distance, which is not relevant to the physics of sound production in wind instruments. Therefore, the label that fits best is:\n\nC) incorrect"
+  },
+  {
+    "task_id": "MS.39.598.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.0751748797905602e-07,
+      "partially_correct_incomplete": 0.9999998922618772,
+      "incorrect": 2.2063478948300687e-10
+    },
+    "mass": 0.9999999885294492,
+    "reasoning": "The student's answer is on the right track but is missing a crucial part of the explanation. It correctly identifies the importance of using a standard unit to avoid measurement errors, but it does not explain why this is necessary for ensuring that everyone gets the same measurement. This missing part is essential to fully capture the core idea of the reference answer.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "FN.27b.117.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 6.945055978804771e-08,
+      "partially_correct_incomplete": 0.9999999301519122,
+      "incorrect": 3.9752801017734483e-10
+    },
+    "mass": 0.9999999506395434,
+    "reasoning": "The student's answer is on the right track but lacks the necessary context and reasoning provided in the reference answer. It correctly identifies that the lack of color change is due to the absence of vitamin C, but it does not explicitly state that Fruitsnap contains little or no vitamin C, which is a key part of the explanation. Therefore, the student's answer is missing a necessary part of the core explanation.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "MX.53.473.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.7340548954205066e-06,
+      "partially_correct_incomplete": 0.9999975017954736,
+      "incorrect": 7.641496309224779e-07
+    },
+    "mass": 0.9999999948098076,
+    "reasoning": "The student's answer does not capture the key idea that the shape of the crystals can help identify the material. Instead, it suggests comparing the crystals to other solutions, which does not address how the crystal shape aids in identification. Therefore, the student's answer is missing the core explanation.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "MX.11c.304.1",
+    "gold_label": "incorrect",
+    "predicted_label": "incorrect",
+    "probabilities": {
+      "correct": 1.4285851136620817e-06,
+      "partially_correct_incomplete": 9.057974056066e-08,
+      "incorrect": 0.9999984808351458
+    },
+    "mass": 0.9999999694444921,
+    "reasoning": "The student's answer is incorrect because it reverses the relationship between the amount of solid and the concentration of the mixture. The reference answer correctly states that both mixtures are saturated, meaning they have the same concentration despite having different amounts of solid. Therefore, the label that fits best is:\n\nC) incorrect."
+  },
+  {
+    "task_id": "MX.53.425.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 5.260214010113285e-07,
+      "partially_correct_incomplete": 0.9999994736202316,
+      "incorrect": 3.583674793991239e-10
+    },
+    "mass": 1.0000000495428887,
+    "reasoning": "The student's answer is on the right track but lacks the reasoning behind the conclusion. It states that the crystals can help identify the material, but it doesn't explain why, which is a key part of the reference answer. Therefore, the label that fits best is:\n\nB) partially_correct_incomplete"
+  },
+  {
+    "task_id": "ME.7a.178.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 3.176404767048775e-08,
+      "partially_correct_incomplete": 0.9999999619541727,
+      "incorrect": 6.2817795684309485e-09
+    },
+    "mass": 1.0000000380459897,
+    "reasoning": "The student's answer is on the right track but lacks the necessary detail to fully capture the core idea of the reference answer. It does not specify that the object should be tested to see if it completes the circuit, which is a crucial part of the explanation. Therefore, the label that fits best is:\n\nB) partially_correct_incomplete"
+  },
+  {
+    "task_id": "MX.16a.636.1",
+    "gold_label": "incorrect",
+    "predicted_label": "incorrect",
+    "probabilities": {
+      "correct": 7.597255383194901e-06,
+      "partially_correct_incomplete": 1.197741107714016e-07,
+      "incorrect": 0.999992282970506
+    },
+    "mass": 0.999999968426879,
+    "reasoning": "The student's answer incorrectly states that the solutions have different concentrations due to the different volumes of water used. This contradicts the reference answer, which correctly states that saturated solutions at the same temperature will have the same concentration regardless of the volume of solvent. Therefore, the label that fits best is:\n\nC) incorrect"
+  },
+  {
+    "task_id": "SE.25a.600.1",
+    "gold_label": "incorrect",
+    "predicted_label": "incorrect",
+    "probabilities": {
+      "correct": 2.867584079751078e-07,
+      "partially_correct_incomplete": 2.097713245923179e-07,
+      "incorrect": 0.9999995034702674
+    },
+    "mass": 1.0000000196935346,
+    "reasoning": "The student's answer does not address the key points about how dry soil heats and cools compared to water, and instead provides an unrelated statement about plant growth. Therefore, it does not capture the core explanation required by the reference answer.\n\nLabel: C) incorrect"
+  },
+  {
+    "task_id": "VB.40a.249.1",
+    "gold_label": "incorrect",
+    "predicted_label": "incorrect",
+    "probabilities": {
+      "correct": 1.9578409524036557e-06,
+      "partially_correct_incomplete": 4.551491502922042e-06,
+      "incorrect": 0.9999934906675446
+    },
+    "mass": 1.000000072031806,
+    "reasoning": "The student's answer does not capture the core idea of the reference answer, which is identifying the standard in the experiment. Instead, the student provided specific data points from the experiment without addressing the standard. Therefore, the label that fits best is:\n\nC) incorrect"
+  },
+  {
+    "task_id": "VB.22c.452.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.8100069652371873e-07,
+      "partially_correct_incomplete": 0.9999998187396419,
+      "incorrect": 2.596616016286276e-10
+    },
+    "mass": 0.9999999428422127,
+    "reasoning": "The student's answer captures the idea that there is an initial increase in bean mass with more fertilizer, but then a decrease after a certain point. However, it does not specify the exact point where the relationship changes, nor does it use the context of scoops of fertilizer. Therefore, it conveys the core idea but lacks the specific detail about the number of scoops.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "ME.6b.107.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.5941843275134952e-07,
+      "partially_correct_incomplete": 0.9999998402923471,
+      "incorrect": 2.892201665961496e-10
+    },
+    "mass": 1.0000000404986862,
+    "reasoning": "The student's answer is on the right track but lacks the reasoning behind the conclusion. It correctly states that the motor will not run because the wires are not connecting, which is the key idea in the reference answer. However, it does not explicitly mention that the circuit is incomplete and that the electrical pathway is broken, which are crucial parts of the reasoning.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "MX.18.176.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 5.7711104571915005e-08,
+      "partially_correct_incomplete": 0.9999999337464338,
+      "incorrect": 8.542461669469716e-09
+    },
+    "mass": 1.0000000662537516,
+    "reasoning": "The student's answer is missing the key idea that a chemical reaction occurred and that the white solid is a result of this reaction. It only mentions the presence of a precipitate on the sides but does not explain its significance. Therefore, the label that fits best is:\n\nB) partially_correct_incomplete"
+  },
+  {
+    "task_id": "II.38.151.1",
+    "gold_label": "correct",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 3.180868814361114e-07,
+      "partially_correct_incomplete": 0.9999996776512641,
+      "incorrect": 4.261854501586168e-09
+    },
+    "mass": 0.9999999647213451,
+    "reasoning": "The student's answer captures the essence of the reference answer by indicating that the mirror would show the whole shape. However, it lacks the detail that the mirror completes the image by reflecting the part of the object that is not visible, making the object appear whole. Therefore, the student's answer is on the right track but is missing a necessary part of the explanation.\n\nB) partially_correct_incomplete"
+  },
+  {
+    "task_id": "LF.31b.827.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.172062040888637e-07,
+      "partially_correct_incomplete": 0.9999996276771745,
+      "incorrect": 1.5511662133511082e-07
+    },
+    "mass": 1.000000014695231,
+    "reasoning": "The student's answer is missing the key process of deposition and the stopping of water flow that leads to the formation of a delta. It only mentions erosion and the dragging down of the river mouth, which is not the full explanation.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "MX.46b.385.1",
+    "gold_label": "partially_correct_incomplete",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.6223753410476254e-08,
+      "partially_correct_incomplete": 0.9999999710198171,
+      "incorrect": 2.7564295552785237e-09
+    },
+    "mass": 1.0000000289804285,
+    "reasoning": "The student answer correctly identifies that both solutions are equally concentrated and both contain water, which are key points. However, it does not explicitly state that the mass would be the same due to the equal concentration, which is the core reasoning behind the reference answer. Therefore, the label that fits best is:\n\nB) partially_correct_incomplete"
+  },
+  {
+    "task_id": "EM.21b.645.1",
+    "gold_label": "correct",
+    "predicted_label": "correct",
+    "probabilities": {
+      "correct": 0.9999998825271902,
+      "partially_correct_incomplete": 1.1212039078732918e-07,
+      "incorrect": 5.3524189520964505e-09
+    },
+    "mass": 0.9999999982645889,
+    "reasoning": "The student's answer captures the key idea that the harder mineral will scratch the less hard mineral. However, it uses the term \"scratch mineral\" instead of \"harder mineral,\" which is a minor detail that does not detract from the core explanation. Therefore, the student's answer is essentially correct.\n\nLabel: A) correct"
+  },
+  {
+    "task_id": "FN.20b.171.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 1.1821268707367835e-06,
+      "partially_correct_incomplete": 0.9999976926560749,
+      "incorrect": 1.1252170545666895e-06
+    },
+    "mass": 1.0000000423680773,
+    "reasoning": "The student's answer does not address the core idea of comparing the size of the grease spots, which is essential to determine which sample has more fat. Therefore, it is missing a necessary part of the reference answer.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "SE.22c.527.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 5.379409934393553e-08,
+      "partially_correct_incomplete": 0.9999999058130293,
+      "incorrect": 4.0392871282802535e-08
+    },
+    "mass": 1.0000000941872076,
+    "reasoning": "The student's answer does not fully capture the core idea of the reference answer. While it mentions that the data is difficult to interpret due to the high and low values, it does not explain why this is the case or relate it to the concept of multiple variables. Therefore, it is missing the reasoning behind the difficulty in drawing conclusions.\n\nLabel: partially_correct_incomplete"
+  },
+  {
+    "task_id": "FN.17c.331.1",
+    "gold_label": "incorrect",
+    "predicted_label": "partially_correct_incomplete",
+    "probabilities": {
+      "correct": 2.34908554523507e-07,
+      "partially_correct_incomplete": 0.9999993137144059,
+      "incorrect": 4.513770395794925e-07
+    },
+    "mass": 0.999999971030119,
+    "reasoning": "The student's answer does not address the specific test results that would tell Paula about the presence of acid in the food. It instead asks about the amount of sugar and acid, which is not what the reference answer is addressing. Therefore, the student's answer is missing the core explanation of the test results.\n\nLabel: B) partially_correct_incomplete"
+  },
+  {
+    "task_id": "MX.11c.592.1",
+    "gold_label": "incorrect",
+    "predicted_label": "incorrect",
+    "probabilities": {
+      "correct": 0.00011870797354927922,
+      "partially_correct_incomplete": 2.503935459414122e-06,
+      "incorrect": 0.9998787880909913
+    },
+    "mass": 0.9999999760612643,
+    "reasoning": "The student's answer is incorrect because it fails to recognize that both mixtures are saturated, and instead incorrectly concludes that Mixture 5 has a higher concentration due to the presence of solid on the bottom. This reasoning is flawed because the amount of solid on the bottom does not indicate a higher concentration but rather that the solution is saturated.\n\nC) incorrect"
+  }
+]
