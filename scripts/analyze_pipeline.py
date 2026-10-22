@@ -10,6 +10,7 @@
 # Usage: python -m scripts.analyze_pipeline                     every folder in results/pipeline
 #        python -m scripts.analyze_pipeline results/pipeline/qwen2.5-7b_limit3
 import glob
+import math
 import os
 import sys
 
@@ -23,6 +24,29 @@ OUT = os.path.join("results", "pipeline_summary.md")
 def pct(x):
     """Format a fraction as a percentage with one decimal place."""
     return f"{100 * x:.1f}%"
+
+
+def mcnemar_p(b, c):
+    """Exact two-sided McNemar test on paired results. b = tasks the fault turned from right to
+    wrong, c = tasks it turned from wrong to right. A small p means the fault really changes
+    how often feedback is right, not just by chance."""
+    n = b + c
+    if n == 0:
+        return 1.0
+    tail = sum(math.comb(n, i) for i in range(min(b, c) + 1)) / 2 ** n
+    return min(1.0, 2 * tail)
+
+
+def holm(pvals):
+    """Holm correction: makes p-values stricter because we test several faults at once."""
+    m = len(pvals)
+    order = sorted(range(m), key=lambda i: pvals[i])
+    adjusted = [1.0] * m
+    running = 0.0
+    for rank, i in enumerate(order):
+        running = max(running, min(1.0, (m - rank) * pvals[i]))
+        adjusted[i] = running
+    return adjusted
 
 
 def is_wrong(r):
@@ -55,6 +79,7 @@ def summarize(records, base_by_id):
         "changed": changed / n,
         "harmed": harmed / n,
         "fixed": fixed / n,
+        "p": mcnemar_p(harmed, fixed),
         "mismatch": sum(r["delivered"] != r["sent_label"] for r in records) / n,
         "unclear": sum(r["delivered"] is None for r in records),
     }
@@ -76,15 +101,21 @@ def model_tables(folder):
         if recs:
             rows.append((fault, summarize(recs, base_by_id)))
 
+    faulty = [s for f, s in rows if f != "none"]
+    for s, p in zip(faulty, holm([s["p"] for s in faulty])):
+        s["p_holm"] = p
+
     model = base[0]["model"]
     lines = [f"## {model} ({len(base)} tasks per fault)", ""]
     lines += ["### Effect of each fault", "",
               "| fault | wrong feedback reached student | changed vs no fault | right became wrong | "
-              "wrong became right | Feedback verdict differs from Grader label | unclear verdicts |",
-              "|---|---|---|---|---|---|---|"]
+              "wrong became right | p (McNemar, Holm-adjusted) | Feedback verdict differs from Grader label | "
+              "unclear verdicts |",
+              "|---|---|---|---|---|---|---|---|"]
     for fault, s in rows:
+        p = f"{s['p_holm']:.3g}" if "p_holm" in s else "-"
         lines.append(f"| {fault} | {pct(s['wrong'])} | {pct(s['changed'])} | {pct(s['harmed'])} | "
-                     f"{pct(s['fixed'])} | {pct(s['mismatch'])} | {s['unclear']} |")
+                     f"{pct(s['fixed'])} | {p} | {pct(s['mismatch'])} | {s['unclear']} |")
     lines += ["", "### Safety checks (wrong feedback that still reached the student / share held back for a human)", "",
               "| fault | no check | confidence < 0.7 | confidence < 0.9 | two graders must agree |",
               "|---|---|---|---|---|"]
