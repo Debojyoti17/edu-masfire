@@ -17,6 +17,8 @@ from sklearn.model_selection import StratifiedKFold, cross_val_predict
 LABELS = ["correct", "contradictory", "partially_correct_incomplete", "irrelevant"]
 SPLITS = ["test_ua", "test_uq", "test_ud"]
 C_VALUES = [1.0, 3.0, 10.0, 30.0, 100.0]
+TASK_SETS = [("120", "data/tasks.json"), ("test_ua", "data/eval_test_ua.json"),
+             ("test_uq", "data/eval_test_uq.json"), ("test_ud_600", "data/eval_test_ud_600.json")]
 
 
 def load_split(split):
@@ -94,13 +96,36 @@ def main():
     for split in SPLITS:
         rows = load_split(split)
         pred = list(model.predict(build_features(vs, vr, rows)))
-        report["splits"][split] = metrics([r["label_name"] for r in rows], pred)
+        report["splits"][split + "_full"] = metrics([r["label_name"] for r in rows], pred)
 
-    tasks = json.load(open("data/tasks.json", encoding="utf-8"))
+    # The exact task sets the LLM graders are run on, with per-task predictions saved so the
+    # two can be compared answer by answer.
+    for name, path in TASK_SETS:
+        if not os.path.exists(path):
+            continue
+        tasks = json.load(open(path, encoding="utf-8"))
+        records = predict_tasks(model, vs, vr, tasks)
+        report["splits"][name] = metrics([r["gold_label"] for r in records],
+                                         [r["predicted_label"] for r in records])
+        with open(os.path.join("results", f"baseline_tfidf_{name}.json"), "w", encoding="utf-8") as f:
+            json.dump(records, f, indent=2)
+
+    with open(os.path.join("results", "baseline_tfidf.json"), "w", encoding="utf-8") as f:
+        json.dump(report, f, indent=2)
+
+    print()
+    for split, m in report["splits"].items():
+        print(f"{split:14} n={m['n']:5}  accuracy={m['accuracy']:.3f}  macro-F1={m['macro_f1']:.3f}  "
+              + "  ".join(f"{k[:7]}={v:.2f}" for k, v in m["per_label_accuracy"].items()))
+    print("\nSaved results/baseline_tfidf.json and results/baseline_tfidf_<set>.json")
+
+
+def predict_tasks(model, vs, vr, tasks):
+    """Grade a list of tasks with the trained model and return one record per task, in the
+    same format as the LLM grader results."""
     rows = [{"question": t["question"], "reference_answer": t["reference_answer"],
              "student_answer": t["student_answer"]} for t in tasks]
-    X = build_features(vs, vr, rows)
-    probs = model.predict_proba(X)
+    probs = model.predict_proba(build_features(vs, vr, rows))
     order = list(model.classes_)
     records = []
     for t, p in zip(tasks, probs):
@@ -108,19 +133,7 @@ def main():
         records.append({"task_id": t["task_id"], "gold_label": t["gold_label"],
                         "predicted_label": max(pr, key=pr.get), "probabilities": pr, "mass": 1.0,
                         "model": "tfidf_logreg"})
-    report["splits"]["our_120_tasks"] = metrics([r["gold_label"] for r in records],
-                                                [r["predicted_label"] for r in records])
-
-    with open(os.path.join("results", "baseline_tfidf.json"), "w", encoding="utf-8") as f:
-        json.dump(report, f, indent=2)
-    with open(os.path.join("results", "baseline_tfidf_120.json"), "w", encoding="utf-8") as f:
-        json.dump(records, f, indent=2)
-
-    print()
-    for split, m in report["splits"].items():
-        print(f"{split:14} n={m['n']:5}  accuracy={m['accuracy']:.3f}  macro-F1={m['macro_f1']:.3f}  "
-              + "  ".join(f"{k[:7]}={v:.2f}" for k, v in m["per_label_accuracy"].items()))
-    print("\nSaved results/baseline_tfidf.json and results/baseline_tfidf_120.json")
+    return records
 
 
 if __name__ == "__main__":
