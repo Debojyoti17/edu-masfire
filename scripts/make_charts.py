@@ -110,12 +110,22 @@ def chart_accuracy():
         k = sum(r["predicted_label"] == r["gold_label"] for r in recs)
         lo, hi = wilson(k, len(recs))
         rows.append((name, k / len(recs), lo, hi))
+    if os.path.exists("results/baseline_tfidf_120.json"):
+        recs = load("results/baseline_tfidf_120.json")
+        k = sum(r["predicted_label"] == r["gold_label"] for r in recs)
+        rows.append(("Trained TF-IDF baseline (non-LLM)",) + (k / len(recs),) + wilson(k, len(recs)))
+    for model in ["qwen2.5:7b", "llama3.1:8b"]:
+        recs = load_jsonl(os.path.join("results", "pipeline", model.replace(":", "-"), "none.jsonl"))
+        if len(recs) == 120:
+            k = sum(r["delivered"] == r["gold_label"] for r in recs)
+            rows.append((f"Full pipeline, {model}, no faults",) + (k / len(recs),) + wilson(k, len(recs)))
     rows.sort(key=lambda r: r[1])
 
-    fig, ax = plt.subplots(figsize=(9, 4.6))
-    fig.subplots_adjust(left=0.30, right=0.95, top=0.80, bottom=0.13)
+    fig, ax = plt.subplots(figsize=(9, 2.2 + 0.42 * len(rows)))
+    fig.subplots_adjust(left=0.36, right=0.95, top=1 - 1.0 / (2.2 + 0.42 * len(rows)),
+                        bottom=0.55 / (2.2 + 0.42 * len(rows)))
     y = range(len(rows))
-    colors = [SERIES[0] if "main" in r[0] else DEEMPH for r in rows]
+    colors = [SERIES[0] if "main" in r[0] else SERIES[1] if "baseline" in r[0] else DEEMPH for r in rows]
     ax.barh(y, [r[1] for r in rows], height=0.5, color=colors)
     ax.errorbar([r[1] for r in rows], y, xerr=[[r[1] - r[2] for r in rows], [r[3] - r[1] for r in rows]],
                 fmt="none", ecolor=INK2, elinewidth=1, capsize=3)
@@ -125,10 +135,10 @@ def chart_accuracy():
     ax.text(0.252, len(rows) - 0.45, "chance (4 labels)", fontsize=9, color=MUTED)
     ax.set_yticks(list(y), [r[0] for r in rows])
     ax.set_xlim(0, 0.75)
-    ax.set_xlabel("Accuracy (120 tasks, prefilled answers); bars show 95% Wilson intervals")
+    ax.set_xlabel("Accuracy on the 120 tasks; bars show 95% Wilson intervals")
     ax.grid(axis="y", visible=False)
-    titles(fig, "Grader accuracy by prompt and model",
-           "Best: v2 prompt on qwen2.5:7b. Most intervals overlap, so small differences are not reliable.")
+    titles(fig, "Grading accuracy on the 120-task set",
+           "Blue: main LLM Grader. Orange: trained non-LLM baseline. Most intervals overlap.")
     save(fig, "01_grader_accuracy.png")
 
 
