@@ -1,4 +1,4 @@
-# Grade all 48 tasks using a chosen prompt version, save results to
+# Grade every task in data/tasks.json using a chosen prompt version, save results to
 # results/grader_{version}.json.
 #
 # Versions:

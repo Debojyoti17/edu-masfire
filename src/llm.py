@@ -11,7 +11,7 @@ DEFAULT_MODEL = "qwen2.5:7b"
 BASE_OPTIONS = {"temperature": 0, "seed": 42, "num_ctx": 4096}
 
 
-def generate(prompt, model=DEFAULT_MODEL, max_tokens=None, temperature=None, seed=None):
+def generate(prompt, model=DEFAULT_MODEL, max_tokens=None, temperature=None, seed=None, prefill=None):
     """Send a prompt to an Ollama model and return its text reply as a string.
 
     max_tokens: if given, caps how many tokens the model is allowed to
@@ -21,6 +21,9 @@ def generate(prompt, model=DEFAULT_MODEL, max_tokens=None, temperature=None, see
     for this call only. Needed for things like self-consistency sampling,
     which requires the model to actually vary its answer across repeated
     calls - impossible under the usual fixed temperature=0/seed=42.
+
+    prefill: if given, planted as the start of the model's reply; the
+    returned text is only what the model wrote after it.
     """
     options = dict(BASE_OPTIONS)
     if max_tokens is not None:
@@ -30,11 +33,11 @@ def generate(prompt, model=DEFAULT_MODEL, max_tokens=None, temperature=None, see
     if seed is not None:
         options["seed"] = seed
 
-    response = ollama.chat(
-        model=model,
-        messages=[{"role": "user", "content": prompt}],
-        options=options,
-    )
+    messages = [{"role": "user", "content": prompt}]
+    if prefill is not None:
+        messages.append({"role": "assistant", "content": prefill})
+
+    response = ollama.chat(model=model, messages=messages, options=options)
     return response.message.content
 
 

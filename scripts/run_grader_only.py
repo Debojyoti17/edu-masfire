@@ -1,4 +1,4 @@
-# Run the Grader step (no Planner/Tutor/Feedback yet) on all 48 tasks.
+# Run the Grader step on its own (no Planner/Tutor/Feedback) on every task in data/tasks.json.
 # For each task, ask qwen2.5:7b to pick a label as a letter A-D, save the
 # probability of every label plus the raw mass, then report accuracy
 # overall and broken down by gold label.
