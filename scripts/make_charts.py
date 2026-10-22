@@ -21,10 +21,10 @@ from src.faults import FAULTS
 OUT_DIR = os.path.join("results", "charts")
 LABELS = ["correct", "contradictory", "partially_correct_incomplete", "irrelevant"]
 
-# Colours from the dataviz skill's validated reference palette (light mode). The first three
-# categorical slots are safe together for colour-blind readers; ink colours are for text only.
+# Colours from the dataviz skill's validated reference palette (light mode), used in fixed
+# order; adjacent slots are checked for colour-blind readers. Ink colours are for text only.
 SURFACE, INK, INK2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
-SERIES = ["#2a78d6", "#eb6834", "#1baf7a"]
+SERIES = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4"]
 DEEMPH = "#c3c2b7"
 BLUE_RAMP = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"]
 
@@ -114,7 +114,7 @@ def chart_accuracy():
         recs = load("results/baseline_tfidf_120.json")
         k = sum(r["predicted_label"] == r["gold_label"] for r in recs)
         rows.append(("Trained TF-IDF baseline (non-LLM)",) + (k / len(recs),) + wilson(k, len(recs)))
-    for model in ["qwen2.5:7b", "llama3.1:8b"]:
+    for model in ["qwen2.5:7b", "llama3.1:8b", "mistral:7b", "gemma2:9b"]:
         recs = load_jsonl(os.path.join("results", "pipeline", model.replace(":", "-"), "none.jsonl"))
         if len(recs) == 120:
             k = sum(r["delivered"] == r["gold_label"] for r in recs)
@@ -125,7 +125,7 @@ def chart_accuracy():
     fig.subplots_adjust(left=0.36, right=0.95, top=1 - 1.0 / (2.2 + 0.42 * len(rows)),
                         bottom=0.55 / (2.2 + 0.42 * len(rows)))
     y = range(len(rows))
-    colors = [SERIES[0] if "main" in r[0] else SERIES[1] if "baseline" in r[0] else DEEMPH for r in rows]
+    colors = [SERIES[0] if "main" in r[0] else SERIES[4] if "baseline" in r[0] else DEEMPH for r in rows]
     ax.barh(y, [r[1] for r in rows], height=0.5, color=colors)
     ax.errorbar([r[1] for r in rows], y, xerr=[[r[1] - r[2] for r in rows], [r[3] - r[1] for r in rows]],
                 fmt="none", ecolor=INK2, elinewidth=1, capsize=3)
@@ -138,7 +138,7 @@ def chart_accuracy():
     ax.set_xlabel("Accuracy on the 120 tasks; bars show 95% Wilson intervals")
     ax.grid(axis="y", visible=False)
     titles(fig, "Grading accuracy on the 120-task set",
-           "Blue: main LLM Grader. Orange: trained non-LLM baseline. Most intervals overlap.")
+           "Blue: main LLM Grader. Pink: trained non-LLM baseline. Most intervals overlap.")
     save(fig, "01_grader_accuracy.png")
 
 
@@ -254,11 +254,11 @@ def chart_pipeline_harm(all_stats):
     faults = [f for f in FAULTS if f != "none" and all(f in all_stats[m] for m in models)]
     if not models or not faults:
         return
-    fig, ax = plt.subplots(figsize=(9, 5.6))
-    fig.subplots_adjust(left=0.27, right=0.95, top=0.82, bottom=0.20)
-    h = 0.32
+    fig, ax = plt.subplots(figsize=(9, 6.4))
+    fig.subplots_adjust(left=0.27, right=0.95, top=0.84, bottom=0.17)
+    h = 0.8 / len(models) - 0.02
     for k, m in enumerate(models):
-        ys = [i + (k - (len(models) - 1) / 2) * (h + 0.03) for i in range(len(faults))]
+        ys = [i + (k - (len(models) - 1) / 2) * (h + 0.02) for i in range(len(faults))]
         ax.barh(ys, [100 * all_stats[m][f]["harmed"] for f in faults], height=h, color=SERIES[k], label=m)
     ax.set_yticks(range(len(faults)), [FAULT_NAMES[f] for f in faults])
     ax.invert_yaxis()
@@ -298,6 +298,44 @@ def chart_pipeline_checks(model, stats):
     save(fig, f"06_pipeline_checks_{model.replace(':', '-')}.png")
 
 
+def chart_eval_sets():
+    """Grouped bars: single-Grader accuracy for each model and the trained baseline on each
+    evaluation set (familiar questions vs new questions vs new topics), with 95% intervals."""
+    from scripts.compare_eval_sets import MODELS, SETS, grader_file
+    graders = [(m, (lambda m: lambda k: grader_file(m, k))(m)) for m in MODELS]
+    graders.append(("Trained TF-IDF baseline", lambda k: os.path.join("results", f"baseline_tfidf_{k}.json")))
+    sets = [(k, d) for k, d in SETS if k != "120"]
+    fig, ax = plt.subplots(figsize=(10, 5.4))
+    fig.subplots_adjust(left=0.08, right=0.98, top=0.80, bottom=0.20)
+    w = 0.8 / len(graders)
+    for g, (name, path_for) in enumerate(graders):
+        xs, accs, errs = [], [], [[], []]
+        for i, (key, _) in enumerate(sets):
+            path = path_for(key)
+            if not os.path.exists(path):
+                continue
+            recs = load(path)
+            k = sum(r["predicted_label"] == r["gold_label"] for r in recs)
+            lo, hi = wilson(k, len(recs))
+            xs.append(i + (g - (len(graders) - 1) / 2) * w)
+            accs.append(k / len(recs))
+            errs[0].append(k / len(recs) - lo)
+            errs[1].append(hi - k / len(recs))
+        ax.bar(xs, accs, width=w - 0.02, color=SERIES[g], label=name)
+        ax.errorbar(xs, accs, yerr=errs, fmt="none", ecolor=INK2, elinewidth=1, capsize=2)
+    ax.axhline(0.25, color=MUTED, linewidth=1)
+    ax.text(len(sets) - 0.55, 0.255, "chance", fontsize=9, color=MUTED)
+    ax.set_xticks(range(len(sets)), [d + "\n(" + k + ")" for k, d in sets])
+    ax.set_ylim(0, 0.75)
+    ax.set_ylabel("Accuracy")
+    ax.grid(axis="x", visible=False)
+    fig.legend(*ax.get_legend_handles_labels(), loc="lower center", ncol=len(graders), fontsize=9.5,
+               bbox_to_anchor=(0.53, 0.0))
+    titles(fig, "Trained baseline wins on familiar questions; LLMs generalise better",
+           "Single Grader (v2 prompt), zero-shot. Bars show 95% Wilson intervals.")
+    save(fig, "07_eval_sets.png")
+
+
 def main():
     """Make every chart whose data exists."""
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -308,7 +346,7 @@ def main():
     chart_mass_capture()
     chart_confusion()
     all_stats = {}
-    for model in ["qwen2.5:7b", "llama3.1:8b"]:
+    for model in ["qwen2.5:7b", "llama3.1:8b", "mistral:7b", "gemma2:9b"]:
         stats = pipeline_stats(model.replace(":", "-"))
         if stats:
             all_stats[model] = stats
@@ -316,6 +354,7 @@ def main():
         else:
             print(f"(pipeline charts for {model} skipped - run not finished yet)")
     chart_pipeline_harm(all_stats)
+    chart_eval_sets()
 
 
 if __name__ == "__main__":

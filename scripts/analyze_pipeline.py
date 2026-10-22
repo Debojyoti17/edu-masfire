@@ -106,7 +106,8 @@ def model_tables(folder):
         s["p_holm"] = p
 
     model = base[0]["model"]
-    lines = [f"## {model} ({len(base)} tasks per fault)", ""]
+    task_set = os.path.basename(folder).split("_", 1)[1] if "_" in os.path.basename(folder) else "120 tasks"
+    lines = [f"## {model}, {task_set} ({len(base)} tasks per fault)", ""]
     lines += ["### Effect of each fault", "",
               "| fault | wrong feedback reached student | changed vs no fault | right became wrong | "
               "wrong became right | p (McNemar, Holm-adjusted) | Feedback verdict differs from Grader label | "
