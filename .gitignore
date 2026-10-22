@@ -1,4 +1,5 @@
 .venv/
 __pycache__/
 data/asap/
-results/
+results/data/raw/
+data/eval_*.json
