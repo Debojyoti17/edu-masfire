@@ -20,6 +20,19 @@ PLANNER_MAX_TOKENS = 120
 TUTOR_MAX_TOKENS = 160
 FEEDBACK_MAX_TOKENS = 120
 
+# Text planted at the start of the Grader's reply so its next token is the answer letter.
+# Rule: keep the default unless it captures less than 0.9 of the first-token probability on the
+# answer letters (measured on the 8 worked examples plus 2 tasks, without looking at labels);
+# then use whichever option captures the most. Only gemma2:9b needed a change (default captured
+# 0.002, no prefill captured 0.997).
+DEFAULT_PREFILL = "Label: "
+MODEL_PREFILLS = {"gemma2:9b": None}
+
+
+def grader_prefill(model):
+    """The prefill to use for this model's Grader calls (None means no prefill)."""
+    return MODEL_PREFILLS.get(model, DEFAULT_PREFILL)
+
 
 def task_block(task):
     """The question, reference answer and student answer, written the same way for every agent."""
@@ -59,7 +72,7 @@ Do not name or hint at a grading label. Only describe the comparison.
     return generate(prompt, model=model, max_tokens=TUTOR_MAX_TOKENS).strip()
 
 
-def grader(task, plan, notes, model=DEFAULT_MODEL, prefill="Label: "):
+def grader(task, plan, notes, model=DEFAULT_MODEL):
     """Grader: picks one of the four labels using the rubric plus the Planner's and Tutor's notes.
     Returns (label, probability of each label, captured mass). Label is None if the model
     gave no usable letter."""
@@ -75,7 +88,7 @@ Rubric:
 
 Based on all of the above, answer with one letter only: A, B, C, or D.
 """
-    result = choice_probabilities(prompt, LETTERS, model=model, prefill=prefill)
+    result = choice_probabilities(prompt, LETTERS, model=model, prefill=grader_prefill(model))
     if result["probs"] is None:
         return None, None, result["mass"]
     probs = {LETTER_TO_LABEL[letter]: p for letter, p in result["probs"].items()}

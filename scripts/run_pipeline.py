@@ -17,10 +17,10 @@ import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from src.agents import LETTER_TO_LABEL, LETTERS, feedback, grader, parse_verdict, planner, tutor
+from src.agents import LETTER_TO_LABEL, LETTERS, feedback, grader, grader_prefill, parse_verdict, planner, tutor
 from src.faults import FAULTS, OVERCLAIM_TEXT, corrupt_task, donor_index, flip_label
 from src.llm import DEFAULT_MODEL, choice_probabilities
-from scripts.run_grader import PREFILL_TEXT, build_prompt, model_slug
+from scripts.run_grader import build_prompt, model_slug
 
 INPUT_FAULTS = {"reference_swap", "student_truncate"}
 PLANNER_FAULTS = {"planner_omit", "planner_wrong_task"}
@@ -29,7 +29,7 @@ PLANNER_FAULTS = {"planner_omit", "planner_wrong_task"}
 def independent_check(task, model):
     """A second, separate grader: the v2 prompt on its own, without any pipeline notes.
     Used later to test a 'two graders must agree' safety check."""
-    result = choice_probabilities(build_prompt(task, "v2"), LETTERS, model=model, prefill=PREFILL_TEXT)
+    result = choice_probabilities(build_prompt(task, "v2"), LETTERS, model=model, prefill=grader_prefill(model))
     if result["probs"] is None:
         return None, None
     probs = {LETTER_TO_LABEL[letter]: p for letter, p in result["probs"].items()}
@@ -94,6 +94,7 @@ def run_one(task, fault, model, base, donor_task, donor_base):
         "grader_probs": probs,
         "grader_conf": max(probs.values()) if probs else None,
         "grader_mass": mass,
+        "grader_prefill": grader_prefill(model),
         "sent_label": sent,
         "feedback": fb,
         "delivered": parse_verdict(fb),

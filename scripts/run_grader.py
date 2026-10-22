@@ -30,6 +30,7 @@ import json
 import os
 import sys
 
+from src.agents import grader_prefill
 from src.llm import DEFAULT_MODEL, choice_probabilities, generate
 from src.rubric import RUBRIC
 
@@ -38,7 +39,6 @@ LABELS = ["correct", "contradictory", "partially_correct_incomplete", "irrelevan
 LETTER_TO_LABEL = dict(zip(LETTERS, LABELS))
 VERSIONS = ["v1", "v2", "v3", "v4", "v5", "v6"]
 REASONING_MAX_TOKENS = 200
-PREFILL_TEXT = "Label: "
 
 # v5's 3-label scheme: "contradictory" and "irrelevant" merged into "incorrect".
 V5_LETTERS = ["A", "B", "C"]
@@ -290,7 +290,8 @@ def main():
 
     version = args[0]
     model = args[1] if len(args) == 2 else DEFAULT_MODEL
-    prefill = PREFILL_TEXT if use_prefill else None
+    # --prefill uses the model's chosen prefill (src/agents.py); for gemma2:9b that is none.
+    prefill = grader_prefill(model) if use_prefill else None
     tasks = json.load(open(tasks_path, encoding="utf-8"))
 
     results = []
