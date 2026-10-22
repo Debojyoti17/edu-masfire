@@ -27,6 +27,7 @@
 # the probability mass on non-option tokens:
 #   python -m scripts.run_grader v6 llama3.1:8b --prefill
 import json
+import os
 import sys
 
 from src.llm import DEFAULT_MODEL, choice_probabilities, generate
@@ -271,33 +272,43 @@ def model_slug(model):
 
 
 def main():
+    """Read the command-line options, grade every task, save and print the accuracy.
+    --tasks FILE grades a different task file (e.g. data/eval_test_uq.json)."""
     args = sys.argv[1:]
     use_prefill = "--prefill" in args
     if use_prefill:
         args = [a for a in args if a != "--prefill"]
+    tasks_path = "data/tasks.json"
+    if "--tasks" in args:
+        at = args.index("--tasks")
+        tasks_path = args[at + 1]
+        args = args[:at] + args[at + 2:]
 
     if len(args) not in (1, 2) or args[0] not in VERSIONS:
-        print(f"Usage: python -m scripts.run_grader <{'|'.join(VERSIONS)}> [model] [--prefill]")
+        print(f"Usage: python -m scripts.run_grader <{'|'.join(VERSIONS)}> [model] [--prefill] [--tasks FILE]")
         sys.exit(1)
 
     version = args[0]
     model = args[1] if len(args) == 2 else DEFAULT_MODEL
     prefill = PREFILL_TEXT if use_prefill else None
-    tasks = json.load(open("data/tasks.json", encoding="utf-8"))
+    tasks = json.load(open(tasks_path, encoding="utf-8"))
 
     results = []
     for i, task in enumerate(tasks, start=1):
-        print(f"[{i}/{len(tasks)}] grading {task['task_id']} ({version}, {model}{', prefill' if use_prefill else ''})...")
+        if i % 50 == 0 or i == len(tasks):
+            print(f"[{i}/{len(tasks)}] graded ({version}, {model}{', prefill' if use_prefill else ''})", flush=True)
         results.append(grade_task(task, version, model, prefill=prefill))
 
-    # Keep the original filename for the default model with no prefill, so
-    # existing results stay where earlier scripts expect them. Non-default
-    # model and/or prefill each add a piece to the filename.
+    # Keep the original filename for the default model with no prefill and the default task
+    # file, so existing results stay where earlier scripts expect them. Non-default model,
+    # prefill and task file each add a piece to the filename.
     name_parts = [f"grader_{version}"]
     if use_prefill:
         name_parts.append("prefill")
     if model != DEFAULT_MODEL:
         name_parts.append(model_slug(model))
+    if tasks_path != "data/tasks.json":
+        name_parts.append(os.path.splitext(os.path.basename(tasks_path))[0].replace("eval_", ""))
     out_path = f"results/{'_'.join(name_parts)}.json"
 
     with open(out_path, "w", encoding="utf-8") as f:

@@ -7,10 +7,15 @@
 #   python -m scripts.run_pipeline all llama3.1:8b            same on llama3.1:8b
 #   python -m scripts.run_pipeline tutor_overclaim            one fault (baseline must exist)
 #   python -m scripts.run_pipeline all qwen2.5:7b --limit 3   quick test on the first 3 tasks
+#   python -m scripts.run_pipeline all qwen2.5:7b --tasks data/eval_test_ua.json --workers 2
+#       --tasks picks another task file; --workers sends that many tasks to Ollama at once
+#       (only use more than 1 when Ollama runs with OLLAMA_NUM_PARALLEL set at least that high)
 import json
 import os
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from src.agents import LETTER_TO_LABEL, LETTERS, feedback, grader, parse_verdict, planner, tutor
 from src.faults import FAULTS, OVERCLAIM_TEXT, corrupt_task, donor_index, flip_label
@@ -98,9 +103,9 @@ def run_one(task, fault, model, base, donor_task, donor_base):
     }
 
 
-def run_fault(tasks, fault, model, folder, step, steps):
+def run_fault(tasks, fault, model, folder, step, steps, workers=1):
     """Run one fault over every task, skipping tasks already saved, and print progress with
-    a rough time-left estimate."""
+    a rough time-left estimate. With workers > 1, that many tasks are in flight at once."""
     path = os.path.join(folder, f"{fault}.jsonl")
     done = {r["task_id"] for r in load_jsonl(path)}
     base = {}
@@ -112,43 +117,62 @@ def run_fault(tasks, fault, model, folder, step, steps):
 
     todo = [i for i, t in enumerate(tasks) if t["task_id"] not in done]
     print(f"\n[{step}/{steps}] {fault}: {FAULTS[fault]} - {len(todo)} of {len(tasks)} tasks to run", flush=True)
-    times = []
-    with open(path, "a", encoding="utf-8") as f:
-        for k, i in enumerate(todo, start=1):
-            task = tasks[i]
-            d = donor_index(tasks, i)
-            rec = run_one(task, fault, model, base.get(task["task_id"]), tasks[d], base.get(tasks[d]["task_id"]))
-            f.write(json.dumps(rec) + "\n")
-            f.flush()
-            times.append(rec["seconds"])
+    start = time.time()
+    lock = threading.Lock()
+
+    def one(i):
+        """Run a single task (used by the worker threads)."""
+        task = tasks[i]
+        d = donor_index(tasks, i)
+        return run_one(task, fault, model, base.get(task["task_id"]), tasks[d], base.get(tasks[d]["task_id"]))
+
+    with open(path, "a", encoding="utf-8") as f, ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = [pool.submit(one, i) for i in todo]
+        for k, fut in enumerate(as_completed(futures), start=1):
+            rec = fut.result()
+            with lock:
+                f.write(json.dumps(rec) + "\n")
+                f.flush()
             if k % 10 == 0 or k == len(todo):
-                left = (len(todo) - k) * sum(times) / len(times) / 60
+                left = (len(todo) - k) * (time.time() - start) / k / 60
                 print(f"  {fault}: {k}/{len(todo)} done, about {left:.0f} min left for this fault", flush=True)
 
 
 def main():
     """Read the command-line options, then run the requested fault(s) in order (baseline first)."""
     args = sys.argv[1:]
-    limit = None
-    if "--limit" in args:
-        at = args.index("--limit")
-        limit = int(args[at + 1])
-        args = args[:at] + args[at + 2:]
+    options = {"--limit": None, "--tasks": "data/tasks.json", "--workers": "1"}
+    for name in options:
+        if name in args:
+            at = args.index(name)
+            options[name] = args[at + 1]
+            args = args[:at] + args[at + 2:]
     if not args or (args[0] != "all" and args[0] not in FAULTS):
-        sys.exit(f"Usage: python -m scripts.run_pipeline <all|{'|'.join(FAULTS)}> [model] [--limit N]")
+        sys.exit(f"Usage: python -m scripts.run_pipeline <all|{'|'.join(FAULTS)}> [model] "
+                 "[--tasks FILE] [--workers N] [--limit N]")
 
     which = list(FAULTS) if args[0] == "all" else [args[0]]
     model = args[1] if len(args) > 1 else DEFAULT_MODEL
-    tasks = json.load(open("data/tasks.json", encoding="utf-8"))
+    limit = int(options["--limit"]) if options["--limit"] else None
+    workers = int(options["--workers"])
+    tasks = json.load(open(options["--tasks"], encoding="utf-8"))
     if limit:
         tasks = tasks[:limit]
 
-    folder = os.path.join("results", "pipeline", model_slug(model) + (f"_limit{limit}" if limit else ""))
+    # Default task file keeps the original folder name; other task files add their name.
+    set_name = os.path.splitext(os.path.basename(options["--tasks"]))[0].replace("eval_", "")
+    folder_name = model_slug(model)
+    if options["--tasks"] != "data/tasks.json":
+        folder_name += "_" + set_name
+    if limit:
+        folder_name += f"_limit{limit}"
+    folder = os.path.join("results", "pipeline", folder_name)
     os.makedirs(folder, exist_ok=True)
-    print(f"Model {model}, {len(tasks)} tasks, saving to {folder}", flush=True)
+    print(f"Model {model}, {len(tasks)} tasks from {options['--tasks']}, {workers} at a time, "
+          f"saving to {folder}", flush=True)
 
     for step, fault in enumerate(which, start=1):
-        run_fault(tasks, fault, model, folder, step, len(which))
+        run_fault(tasks, fault, model, folder, step, len(which), workers)
     print("\nAll requested runs finished.", flush=True)
 
 
