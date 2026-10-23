@@ -79,6 +79,11 @@ def choice_probabilities(prompt, options, model=DEFAULT_MODEL, top_logprobs=20, 
         options={**BASE_OPTIONS, "num_predict": 1},  # only need the first token
     )
 
+    # If the model's first token is "stop", Ollama returns no probabilities at all.
+    # Treat that as "no option chosen" rather than crashing.
+    if not response.logprobs:
+        return {"probs": None, "mass": 0.0}
+
     # A token like " A", "A" or "a" should all count as the option "A".
     # Build a lookup from the normalized (stripped, lowercased) form of each
     # option back to the option's original spelling, so we can match candidate

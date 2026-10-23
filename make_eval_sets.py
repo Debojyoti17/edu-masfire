@@ -29,12 +29,14 @@ def save(tasks, path):
 
 
 def main():
-    """Build and save the three evaluation sets."""
+    """Build and save the three evaluation sets, plus a 2000-answer train sample used to train
+    the judge model of the redesigned pipeline."""
     save(to_tasks("test_ua"), "data/eval_test_ua.json")
     save(to_tasks("test_uq"), "data/eval_test_uq.json")
     ud = to_tasks("test_ud")
     random.seed(42)
     save(random.sample(ud, 600), "data/eval_test_ud_600.json")
+    save(random.Random(42).sample(to_tasks("train"), 2000), "data/eval_train_sample_2000.json")
 
 
 if __name__ == "__main__":
