@@ -381,6 +381,74 @@ def chart_test_ua():
     save(fig, "08_test_ua_fault_effects.png")
 
 
+def chart_v2(set_name="120"):
+    """Two charts for the redesigned pipeline on one task set:
+    09: wrong feedback reaching the student - old pipeline vs new pipeline (safety layer off / on).
+    10: per fault, wrong feedback reaching the student with the safety layer off and on, plus the
+        share of answers held back for a teacher (its cost)."""
+    from scripts.analyze_pipeline_v2 import reached_wrong
+    from scripts.run_pipeline_v2 import FAULTS_V2
+    folder = os.path.join("results", "pipeline_v2", set_name)
+    runs = {}
+    for fault in FAULTS_V2:
+        for ft in ["off", "on"]:
+            recs = load_jsonl(os.path.join(folder, f"{fault}_{ft}.jsonl"))
+            if recs:
+                runs[(fault, ft)] = recs
+    if ("none", "off") not in runs or ("none", "on") not in runs:
+        return
+    n = len(runs[("none", "off")])
+
+    old = load_jsonl(os.path.join("results", "pipeline", "qwen2.5-7b", "none.jsonl"))
+    rows = [("Old pipeline (qwen2.5:7b)", sum(r["delivered"] != r["gold_label"] for r in old) / len(old), DEEMPH)]
+    rows.append(("New pipeline, safety layer off",
+                 sum(reached_wrong(r) for r in runs[("none", "off")]) / n, SERIES[0]))
+    on = runs[("none", "on")]
+    held = sum(r["escalated"] for r in on) / n
+    rows.append((f"New pipeline, safety layer on\n({held:.0%} of answers held back for a teacher)",
+                 sum(reached_wrong(r) for r in on) / n, SERIES[2]))
+    fig, ax = plt.subplots(figsize=(9, 3.9))
+    fig.subplots_adjust(left=0.38, right=0.93, top=0.74, bottom=0.17)
+    for i, (name, value, color) in enumerate(rows):
+        ax.barh(i, 100 * value, height=0.5, color=color)
+        ax.text(100 * value + 1, i, f"{100 * value:.1f}%", va="center", fontsize=10, color=INK)
+    ax.set_yticks(range(len(rows)), [r[0] for r in rows])
+    ax.invert_yaxis()
+    ax.set_xlim(0, 75)
+    ax.set_xlabel(f"Wrong feedback reaching the student, no faults ({n} answers)")
+    ax.grid(axis="y", visible=False)
+    titles(fig, "The redesigned pipeline cuts wrong feedback by two thirds",
+           "Retrieval + three LLM graders + trained classifier, combined by a judge; low-confidence grades go to a teacher.")
+    save(fig, f"09_v2_old_vs_new_{set_name}.png")
+
+    faults = [f for f in FAULTS_V2 if (f, "off") in runs and (f, "on") in runs]
+    fig, axes = plt.subplots(1, 2, figsize=(11, 5.6), sharey=True)
+    fig.subplots_adjust(left=0.20, right=0.97, top=0.80, bottom=0.17, wspace=0.08)
+    h = 0.38
+    for k, (ft, name) in enumerate([("off", "Safety layer off"), ("on", "Safety layer on")]):
+        ys = [i + (k - 0.5) * (h + 0.02) for i in range(len(faults))]
+        axes[0].barh(ys, [100 * sum(reached_wrong(r) for r in runs[(f, ft)]) / n for f in faults],
+                     height=h, color=SERIES[0] if ft == "off" else SERIES[2], label=name)
+        if ft == "on":
+            axes[1].barh(ys, [100 * sum(r["escalated"] for r in runs[(f, ft)]) / n for f in faults],
+                         height=h, color=SERIES[2])
+    names = {"none": "No fault", "plan_lost": "Planner message lost", "plan_misrouted": "Planner message misrouted",
+             "grader_crash": "One grader crashes", "grader_lying": "One grader lies",
+             "label_corrupted": "Label corrupted in transit", "reference_swap": "Wrong reference answer",
+             "student_truncate": "Student answer truncated", "tutor_overclaim": "Tutor overclaims"}
+    axes[0].set_yticks(range(len(faults)), [names[f] for f in faults])
+    axes[0].invert_yaxis()
+    axes[0].set_xlabel("Wrong feedback reaching the student (%)")
+    axes[1].set_xlabel("Held back for a teacher, safety layer on (%)")
+    for ax in axes:
+        ax.set_xlim(0, 100)
+        ax.grid(axis="y", visible=False)
+    fig.legend(*axes[0].get_legend_handles_labels(), loc="lower center", ncol=2, bbox_to_anchor=(0.6, 0.0))
+    titles(fig, "Safety layer: faults it repairs and faults it escalates",
+           f"Redesigned pipeline, {n} answers per fault. Lower on the left is better; the right panel is the cost.")
+    save(fig, f"10_v2_faults_{set_name}.png")
+
+
 def main():
     """Make every chart whose data exists."""
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -401,6 +469,7 @@ def main():
     chart_pipeline_harm(all_stats)
     chart_eval_sets()
     chart_test_ua()
+    chart_v2("120")
 
 
 if __name__ == "__main__":
