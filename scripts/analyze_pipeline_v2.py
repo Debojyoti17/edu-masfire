@@ -3,7 +3,7 @@
 #   - accuracy of the judge's final label
 #   - wrong feedback reaching the student (with ft on, grades the judge is unsure of are held back
 #     for a teacher, so they do not reach the student)
-#   - share held back for a teacher, share where a check fired, feedback verdict rewrites
+#   - share held back for a teacher, share where a check fired, unreadable feedback verdicts
 #   - whether the fault changes how often feedback is right (paired McNemar test, Holm-corrected)
 # Writes results/pipeline_v2_summary.md.
 #
@@ -37,7 +37,7 @@ def summarize(records, base_by_id):
         "wrong_reaching": sum(reached_wrong(r) for r in records) / n,
         "held": sum(r["escalated"] for r in records) / n,
         "detected": sum(any("->" in d for d in r["detections"]) for r in records) / n,
-        "rewritten": sum(any(d.startswith("feedback") for d in r["detections"]) for r in records) / n,
+        "verdict_unreadable": sum(any(d.startswith("feedback") for d in r["detections"]) for r in records) / n,
         "p": mcnemar_p(harmed, fixed),
     }
 
@@ -64,13 +64,13 @@ def set_table(folder):
         return None
     lines = [f"## {os.path.basename(folder)} ({rows[0][2]['n']} answers)", "",
              "| fault | safety layer | judge accuracy | wrong verdict written | wrong feedback reaching student | "
-             "held back for teacher | a check fired | feedback rewritten | p (vs no fault, Holm) |",
+             "held back for teacher | a check fired | feedback verdict unreadable | p (vs no fault, Holm) |",
              "|---|---|---|---|---|---|---|---|---|"]
     for fault, ft, s in sorted(rows, key=lambda r: (list(FAULTS_V2).index(r[0]), r[1])):
         p = f"{s['p_holm']:.3g}" if "p_holm" in s else "-"
         lines.append(f"| {fault} | {ft} | {s['judge_acc']:.3f} | {pct(s['wrong_delivered'])} | "
                      f"{pct(s['wrong_reaching'])} | {pct(s['held'])} | {pct(s['detected'])} | "
-                     f"{pct(s['rewritten'])} | {p} |")
+                     f"{pct(s['verdict_unreadable'])} | {p} |")
     return "\n".join(lines) + "\n"
 
 

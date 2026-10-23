@@ -3,12 +3,28 @@
 # confidence in a multiple-choice answer (read from logprobs).
 
 import math
+import time
+
 import ollama
 
 DEFAULT_MODEL = "qwen2.5:7b"
 
 # Options we always pass to Ollama so every call is deterministic and repeatable.
 BASE_OPTIONS = {"temperature": 0, "seed": 42, "num_ctx": 4096}
+RETRIES = 5
+RETRY_WAIT_SECONDS = 15
+
+
+def chat(**kwargs):
+    """ollama.chat, but if Ollama reports a temporary GPU out-of-memory error (it then clears the
+    model and reloads it), wait and try again a few times before giving up."""
+    for attempt in range(RETRIES):
+        try:
+            return ollama.chat(**kwargs)
+        except ollama.ResponseError as e:
+            if "out of memory" not in str(e) or attempt == RETRIES - 1:
+                raise
+            time.sleep(RETRY_WAIT_SECONDS)
 
 
 def generate(prompt, model=DEFAULT_MODEL, max_tokens=None, temperature=None, seed=None, prefill=None):
@@ -37,7 +53,7 @@ def generate(prompt, model=DEFAULT_MODEL, max_tokens=None, temperature=None, see
     if prefill is not None:
         messages.append({"role": "assistant", "content": prefill})
 
-    response = ollama.chat(model=model, messages=messages, options=options)
+    response = chat(model=model, messages=messages, options=options)
     return response.message.content
 
 
@@ -71,7 +87,7 @@ def choice_probabilities(prompt, options, model=DEFAULT_MODEL, top_logprobs=20, 
     if prefill is not None:
         messages.append({"role": "assistant", "content": prefill})
 
-    response = ollama.chat(
+    response = chat(
         model=model,
         messages=messages,
         logprobs=True,

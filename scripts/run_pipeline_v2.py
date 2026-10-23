@@ -1,8 +1,8 @@
 # Run the redesigned pipeline on a task file, fault-free and with each injected fault, with the
 # fault-tolerance layer switched off and on:
-#   Planner (retrieval) -> 3 LLM graders + TF-IDF -> judge -> Tutor -> Feedback (verdict check)
+#   Planner (retrieval) -> 3 LLM graders + TF-IDF -> judge -> Tutor -> Feedback (verdict fixed to the label)
 # Fault-tolerance layer (ft=on): message checks with re-request, reference-answer check against
-# the question bank, Feedback verdict check, and escalation of low-confidence grades to a teacher.
+# the question bank, and escalation of low-confidence grades to a teacher.
 #
 # Work is done stage by stage (all qwen grading, then mistral, then gemma2, then judge, then
 # Tutor + Feedback) so the GPU never swaps models per answer. Every model answer is cached by
@@ -21,7 +21,7 @@ from src.agents import parse_verdict
 from src.faults import OVERCLAIM_TEXT, corrupt_task, donor_index, flip_label
 from src.graders import grade_with_prompt, rag_prompt
 from src.judge import LABELS, MODELS, REGIME_MODES, judge_predict, train_judge, choose_threshold
-from src.pipeline_v2 import (check_message, check_reference, feedback_with_check, make_message,
+from src.pipeline_v2 import (check_message, check_reference, make_message, write_feedback,
                              tfidf_probs, tutor)
 from src.retrieval import has_same_question_examples, retrieve
 from scripts.run_grader import build_prompt
@@ -151,14 +151,13 @@ def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges
         save_to_cache("text", tutor_key, tutor(task, FEEDBACK_MODEL), text_cache)
     tutor_notes = OVERCLAIM_TEXT if fault == "tutor_overclaim" else text_cache[tutor_key]
 
-    fb_key = key_of("feedback", FEEDBACK_MODEL, task["question"], task["reference_answer"], task["student_answer"],
-                    str(sent), tutor_notes, ft)
+    fb_key = key_of("feedback-fixed-verdict", FEEDBACK_MODEL, task["question"], task["reference_answer"],
+                    task["student_answer"], str(sent), tutor_notes)
     if fb_key not in text_cache:
-        text, stepped_in = feedback_with_check(task, sent, tutor_notes, FEEDBACK_MODEL, check=(ft == "on"))
-        save_to_cache("text", fb_key, [text, stepped_in], text_cache)
-    feedback_text, stepped_in = text_cache[fb_key]
-    if stepped_in:
-        notes.append("feedback verdict differed from the judge label -> rewritten")
+        save_to_cache("text", fb_key, list(write_feedback(task, sent, tutor_notes, FEEDBACK_MODEL)), text_cache)
+    feedback_text, verdict_matches = text_cache[fb_key]
+    if not verdict_matches:
+        notes.append("feedback verdict could not be read back as the label it was given")
     delivered = parse_verdict(feedback_text)
     escalated = ft == "on" and confidence < threshold[regime]
     return {"task_id": original["task_id"], "gold_label": original["gold_label"], "fault": fault, "ft": ft,

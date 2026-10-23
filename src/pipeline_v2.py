@@ -2,7 +2,7 @@
 #   - message envelopes, so a receiving agent can tell a lost, misrouted or corrupted message
 #   - a reference-answer check against the question bank (train split)
 #   - the Tutor (explains what the answer covers / misses; used only for feedback)
-#   - the Feedback agent with a verdict check (its verdict must match the judge's label)
+#   - the Feedback agent, whose verdict line is fixed to the judge's label
 #   - the TF-IDF classifier as a live grader, so corrupted inputs reach it too
 import hashlib
 import json
@@ -10,7 +10,7 @@ import json
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 
-from src.agents import LABEL_WORDS, feedback, parse_verdict
+from src.agents import LABEL_WORDS, parse_verdict
 from src.llm import DEFAULT_MODEL, generate
 from src.retrieval import load_train
 from scripts.run_tfidf_baseline import build_features, load_split
@@ -75,13 +75,10 @@ anything in it contradicts the reference answer. Do not give a grade.
     return generate(prompt, model=model, max_tokens=TUTOR_MAX_TOKENS).strip()
 
 
-def feedback_with_check(task, label, notes, model=DEFAULT_MODEL, check=True):
-    """Feedback agent. Writes the student's message; with check=True, if the verdict it wrote
-    differs from the label it was given, the message is rewritten with the verdict fixed.
-    Returns (feedback text, whether the check had to step in)."""
-    text = feedback(task, label, notes, model=model)
-    if not check or parse_verdict(text) == label:
-        return text, False
+def write_feedback(task, label, notes, model=DEFAULT_MODEL):
+    """Feedback agent. The verdict line is fixed to the label it was handed, so the agent can
+    only write the advice; it cannot change the grade. Returns (feedback text, whether the
+    verdict read back from the text matches the label - it always should)."""
     fixed = f"Verdict: {LABEL_WORDS.get(label, label)}\n\n"
     prompt = f"""Question: {task['question']}
 Reference answer: {task['reference_answer']}
@@ -95,7 +92,8 @@ Write 2-3 short, encouraging sentences for the student that are consistent with 
 explaining what was good and what to improve.
 """
     rest = generate(prompt, model=model, max_tokens=FEEDBACK_MAX_TOKENS, prefill=fixed)
-    return fixed + rest.strip(), True
+    text = fixed + rest.strip()
+    return text, parse_verdict(text) == label
 
 
 def tfidf_grader():
