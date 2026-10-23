@@ -174,6 +174,7 @@ def main():
           rows, 1.2, 1.6, [3.0, 3.6, 4.6], size=16, row_h=0.6)
 
     for title, file in [("Harm done by each fault", "05_pipeline_harm.png"),
+                        ("Larger test set: fault effects on 537 answers", "08_test_ua_fault_effects.png"),
                         ("Safety checks in the pipeline (qwen2.5:7b)", "06_pipeline_checks_qwen2.5-7b.png"),
                         ("Confidence methods (v2 + qwen2.5:7b)", "02_confidence_auroc.png"),
                         ("Measurement finding: prefilling the answer", "03_mass_capture.png"),
@@ -185,14 +186,34 @@ def main():
     # Scope
     n += 1
     slide = new_slide("Scope of the current results", n)
+    test_ua_done = os.path.exists(os.path.join(CHARTS, "08_test_ua_fault_effects.png"))
     scope = [
-        "Pipeline + fault results: 120 tasks per model and fault; larger test sets are still running.",
+        ("Pipeline + fault results: 120 answers per model and fault, plus 537 answers (test_ua) per model."
+         if test_ua_done else
+         "Pipeline + fault results: 120 tasks per model and fault; larger test sets are still running."),
         "One dataset (SciEntsBank); deterministic decoding (temperature 0), so no run-to-run variance.",
         "Faults chosen by the team, not yet mapped to a published fault taxonomy.",
         "Feedback quality is scored only by the verdict it states; no human rating yet.",
         "Statistics: 95% Wilson / bootstrap intervals; paired McNemar tests with Holm correction.",
     ]
     text_box(slide, 0.7, 1.4, 12.0, 4.5, "\n".join("•  " + s for s in scope), size=18)
+
+    # Paper plan
+    n += 1
+    slide = new_slide("Plan to a paper-ready version", n)
+    plan = [
+        ["Final runs, tables and figures", "Code / experiments", "1 day"],
+        ["Map the 7 faults to a published fault taxonomy (MAS-FIRE); add missing types and rerun",
+         "Team reads, code implements", "2-3 days"],
+        ["Improve agent prompts using the training split (pipeline currently below single Grader)",
+         "Code / experiments", "1-2 days"],
+        ["Stronger safety check (full verdict, not first word) with trade-off curves", "Code / experiments", "1-2 days"],
+        ["Human check: 2 team members label about 150 feedback messages", "Team", "8-10 hours"],
+        ["Related work (25-30 papers) and paper writing in the ACL template", "Team", "25-35 hours"],
+    ]
+    table(slide, ["Step", "Who", "Estimated effort"], plan, 0.7, 1.4, [7.6, 2.6, 1.7], size=14, row_h=0.65)
+    text_box(slide, 0.7, 6.25, 12.0, 0.5, "Target: a workshop paper (e.g. BEA, educational NLP at ACL venues); "
+             "total about 1.5-2 weeks of combined work.", size=14, color=GREY)
 
     # AI disclosure
     n += 1

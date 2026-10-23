@@ -336,6 +336,51 @@ def chart_eval_sets():
     save(fig, "07_eval_sets.png")
 
 
+def chart_test_ua():
+    """Diverging bars for the 537-answer test_ua runs: how much each fault changed the share of
+    wrong feedback compared with no fault (percentage points; right = worse), one bar per model.
+    A star marks changes that are significant after Holm correction (McNemar test)."""
+    from scripts.analyze_pipeline import holm
+    models = []
+    for model in ["qwen2.5:7b", "llama3.1:8b", "mistral:7b", "gemma2:9b"]:
+        folder = os.path.join("results", "pipeline", model.replace(":", "-") + "_test_ua")
+        base = load_jsonl(os.path.join(folder, "none.jsonl"))
+        if len(base) < 537:
+            continue
+        base_by_id = {r["task_id"]: r for r in base}
+        stats = {}
+        for fault in FAULTS:
+            recs = load_jsonl(os.path.join(folder, f"{fault}.jsonl"))
+            if len(recs) == len(base):
+                stats[fault] = summarize(recs, base_by_id)
+        if len(stats) == len(FAULTS):
+            models.append((model, stats))
+    if not models:
+        return
+    faults = [f for f in FAULTS if f != "none"]
+    fig, ax = plt.subplots(figsize=(10, 6.6))
+    fig.subplots_adjust(left=0.25, right=0.95, top=0.84, bottom=0.17)
+    h = 0.8 / len(models) - 0.02
+    for k, (model, stats) in enumerate(models):
+        adjusted = dict(zip(faults, holm([stats[f]["p"] for f in faults])))
+        ys = [i + (k - (len(models) - 1) / 2) * (h + 0.02) for i in range(len(faults))]
+        deltas = [100 * (stats[f]["wrong"] - stats["none"]["wrong"]) for f in faults]
+        ax.barh(ys, deltas, height=h, color=SERIES[k], label=model)
+        for y, d, f in zip(ys, deltas, faults):
+            if adjusted[f] < 0.05:
+                ax.text(d + (0.3 if d >= 0 else -0.3), y, "*", va="center", ha="left" if d >= 0 else "right",
+                        fontsize=12, color=INK)
+    ax.axvline(0, color=AXIS, linewidth=1)
+    ax.set_yticks(range(len(faults)), [FAULT_NAMES[f] for f in faults])
+    ax.invert_yaxis()
+    ax.set_xlabel("Change in wrong feedback vs no fault (percentage points; right = worse, left = better)")
+    ax.grid(axis="y", visible=False)
+    fig.legend(*ax.get_legend_handles_labels(), loc="lower center", ncol=len(models), bbox_to_anchor=(0.6, 0.0))
+    titles(fig, "Fault effects on the larger test set (537 answers)",
+           "* = significant after Holm correction (paired McNemar test). Faults can push a biased pipeline either way.")
+    save(fig, "08_test_ua_fault_effects.png")
+
+
 def main():
     """Make every chart whose data exists."""
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -355,6 +400,7 @@ def main():
             print(f"(pipeline charts for {model} skipped - run not finished yet)")
     chart_pipeline_harm(all_stats)
     chart_eval_sets()
+    chart_test_ua()
 
 
 if __name__ == "__main__":
