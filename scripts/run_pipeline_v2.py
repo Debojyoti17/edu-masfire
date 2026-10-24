@@ -11,6 +11,9 @@
 # Usage:
 #   python -m scripts.run_pipeline_v2 data/tasks.json                    all faults, ft off and on
 #   python -m scripts.run_pipeline_v2 data/tasks.json --faults none,plan_lost --ft on --limit 5
+#   --judge plain uses a judge trained without fault-aware copies (saved in <set>/, for comparison);
+#   the default robust judge saves in <set>_robust/.
+#   --verdict-only skips writing the advice text (the verdict is fixed to the label anyway).
 import hashlib
 import json
 import os
@@ -112,8 +115,11 @@ def grader_prompts(task, regime, plans):
     return out
 
 
-def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges, threshold, text_cache, notes):
-    """Judge, Tutor and Feedback for one task, using cached grader answers. Returns the record."""
+def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges, threshold, text_cache, notes,
+                verdict_only=False):
+    """Judge, Tutor and Feedback for one task, using cached grader answers. Returns the record.
+    verdict_only=True skips writing the advice text: the Feedback verdict line is fixed to the label
+    it is handed (0 mismatches in over 25,000 generated cases), so the delivered verdict is that label."""
     start = time.time()
     columns, grader_labels = [], {}
     for model, mode, prompt in prompts:
@@ -145,6 +151,13 @@ def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges
         notes.append(f"judge label message {status} -> re-sent")
         label_message = make_message(task, "judge", {"label": final, "confidence": confidence})
     sent = label_message["payload"]["label"]
+
+    if verdict_only:
+        escalated = ft == "on" and confidence < threshold[regime]
+        return {"task_id": original["task_id"], "gold_label": original["gold_label"], "fault": fault, "ft": ft,
+                "regime": regime, "grader_labels": grader_labels, "final_label": final, "confidence": confidence,
+                "label_sent": sent, "feedback": None, "feedback_generated": False, "delivered": sent,
+                "escalated": escalated, "detections": list(notes), "seconds": round(time.time() - start, 2)}
 
     tutor_key = key_of("tutor", FEEDBACK_MODEL, task["question"], task["reference_answer"], task["student_answer"])
     if tutor_key not in text_cache:
@@ -187,7 +200,8 @@ def main():
     finish every task and save results/pipeline_v2/<set>/<fault>_<ft>.jsonl."""
     args = sys.argv[1:]
     if not args:
-        sys.exit("Usage: python -m scripts.run_pipeline_v2 <task file> [--faults a,b] [--ft on|off|both] [--limit N]")
+        sys.exit("Usage: python -m scripts.run_pipeline_v2 <task file> [--faults a,b] [--ft on|off|both] "
+                 "[--judge robust|plain] [--limit N]")
 
     def option(name, default):
         """Value after a command-line flag, or the default."""
@@ -203,15 +217,17 @@ def main():
     set_name = os.path.splitext(os.path.basename(tasks_path))[0].replace("eval_", "")
     if tasks_path == "data/tasks.json":
         set_name = "120"
-    out_dir = os.path.join("results", "pipeline_v2", set_name + (f"_limit{limit}" if limit else ""))
+    robust = option("--judge", "robust") == "robust"
+    verdict_only = "--verdict-only" in args
+    out_dir = os.path.join("results", "pipeline_v2", set_name + ("_robust" if robust else "") + (f"_limit{limit}" if limit else ""))
     os.makedirs(out_dir, exist_ok=True)
     os.makedirs(CACHE_DIR, exist_ok=True)
 
-    print("Training judges on the train sample ...", flush=True)
+    print(f"Training {'robust' if robust else 'plain'} judges on the train sample ...", flush=True)
     judges, threshold = {}, {}
     for regime in ["seen", "unseen"]:
-        judges[regime], cv_acc, c = train_judge(regime)
-        threshold[regime] = choose_threshold(regime, c)
+        judges[regime], cv_acc, c = train_judge(regime, robust)
+        threshold[regime] = choose_threshold(regime, c, robust)
         print(f"  {regime}: cross-validated accuracy {cv_acc:.3f} (C={c}), escalation threshold {threshold[regime]:.3f}", flush=True)
 
     grader_cache = {}
@@ -250,7 +266,8 @@ def main():
     # 3. Judge, Tutor and Feedback for every task-condition.
     start = time.time()
     for k, (fault, ft, path, task, seen_task, regime, prompts, notes) in enumerate(jobs, start=1):
-        rec = finish_task(seen_task, task, fault, ft, regime, prompts, grader_cache, judges, threshold, text_cache, notes)
+        rec = finish_task(seen_task, task, fault, ft, regime, prompts, grader_cache, judges, threshold, text_cache, notes,
+                          verdict_only)
         with open(path, "a", encoding="utf-8") as f:
             f.write(json.dumps(rec) + "\n")
         if k % 50 == 0 or k == len(jobs):

@@ -1,6 +1,8 @@
 # Judge model for the redesigned pipeline: combines the label probabilities of the three LLM
 # graders and the trained TF-IDF classifier into one final label with a confidence.
 # It is a logistic regression trained only on the 2000-answer train sample, never on test data.
+# By default it is trained fault-aware (with copies where one grader lies or crashes), which
+# makes it far less vulnerable to a single faulty grader at almost no cost on clean answers.
 #
 # Two regimes:
 #   seen   - the question has teacher-graded answers in the train split (test_ua):
@@ -24,7 +26,7 @@ MODELS = ["qwen2.5:7b", "mistral:7b", "gemma2:9b"]
 REGIME_MODES = {"seen": ["same"], "unseen": ["similar", "zeroshot"]}
 TRAIN_SET = "train_sample_2000"
 TFIDF_C = 3.0
-C_VALUES = [0.03, 0.1, 0.3, 1.0, 3.0]
+C_VALUES = [0.003, 0.01, 0.03, 0.1, 0.3, 1.0, 3.0]
 TARGET_ACCURACY = 0.80
 RAG_DIR = os.path.join("results", "rag")
 
@@ -101,21 +103,66 @@ def train_data(regime):
     return X, y, splits
 
 
-def train_judge(regime):
-    """Train the judge for one regime on the train sample, choosing its regularisation by
-    5-fold cross-validation. Returns (model, cross-validated accuracy, chosen C)."""
+def grader_columns(regime):
+    """Which feature columns belong to each LLM grader (all of its modes), as (start, end)."""
+    per = 4 * len(REGIME_MODES[regime])
+    return {m: (k * per, (k + 1) * per) for k, m in enumerate(MODELS)}
+
+
+def with_faulty_graders(X, y, regime, seed=42):
+    """Fault-aware training data: the original rows, plus for each LLM grader one copy where it
+    gives a random wrong label (any of the other three) at a random confidence 0.5-0.99, and one
+    copy where it crashes (all 0.25). This is a generic fault model, not any specific test fault,
+    so the judge learns not to trust a single grader blindly."""
+    rng = np.random.default_rng(seed)
+    rows, labels = [X], [y]
+    for model in MODELS:
+        a, b = grader_columns(regime)[model]
+        lying = X.copy()
+        for row in lying:
+            for s in range(a, b, 4):
+                own = int(np.argmax(row[s:s + 4]))
+                wrong = rng.choice([i for i in range(4) if i != own])
+                conf = rng.uniform(0.5, 0.99)
+                row[s:s + 4] = (1 - conf) / 3
+                row[s + wrong] = conf
+        crashed = X.copy()
+        crashed[:, a:b] = 0.25
+        rows += [lying, crashed]
+        labels += [y, y]
+    return np.vstack(rows), np.concatenate(labels)
+
+
+def fit(X, y, regime, c, robust):
+    """Fit one judge; robust=True trains on the fault-aware data."""
+    if robust:
+        X, y = with_faulty_graders(X, y, regime)
+    return LogisticRegression(C=c, max_iter=5000).fit(X, y)
+
+
+def cv_predictions(regime, c, robust):
+    """Cross-validated judge probabilities on the clean train sample (fault-aware copies are only
+    ever added to the training folds, never to the fold being predicted)."""
     X, y, splits = train_data(regime)
+    probs = np.zeros((len(y), len(LABELS)))
+    for tr, va in splits:
+        model = fit(X[tr], y[tr], regime, c, robust)
+        order = list(model.classes_)
+        probs[va] = model.predict_proba(X[va])[:, [order.index(label) for label in LABELS]]
+    return probs, y
+
+
+def train_judge(regime, robust=True):
+    """Train the judge for one regime on the train sample, choosing its regularisation by
+    5-fold cross-validated accuracy on clean answers. Returns (model, cv accuracy, chosen C)."""
+    X, y, _ = train_data(regime)
     best = None
     for c in C_VALUES:
-        correct = 0
-        for tr, va in splits:
-            model = LogisticRegression(C=c, max_iter=5000).fit(X[tr], y[tr])
-            correct += (model.predict(X[va]) == y[va]).sum()
-        acc = correct / len(y)
+        probs, _ = cv_predictions(regime, c, robust)
+        acc = (np.array(LABELS)[probs.argmax(axis=1)] == y).mean()
         if best is None or acc > best[1]:
             best = (c, acc)
-    model = LogisticRegression(C=best[0], max_iter=5000).fit(X, y)
-    return model, best[1], best[0]
+    return fit(X, y, regime, best[0], robust), best[1], best[0]
 
 
 def judge_predict(model, X):
@@ -126,17 +173,12 @@ def judge_predict(model, X):
     return [LABELS[i] for i in probs.argmax(axis=1)], probs
 
 
-def choose_threshold(regime, c):
+def choose_threshold(regime, c, robust=True):
     """Escalation threshold: the lowest judge confidence at which cross-validated accuracy on the
     train sample reaches TARGET_ACCURACY. Grades less confident than this go to a teacher."""
-    X, y, splits = train_data(regime)
-    confidence = np.zeros(len(y))
-    right = np.zeros(len(y), dtype=bool)
-    for tr, va in splits:
-        model = LogisticRegression(C=c, max_iter=5000).fit(X[tr], y[tr])
-        p = model.predict_proba(X[va])
-        confidence[va] = p.max(axis=1)
-        right[va] = model.classes_[p.argmax(axis=1)] == y[va]
+    probs, y = cv_predictions(regime, c, robust)
+    confidence = probs.max(axis=1)
+    right = np.array(LABELS)[probs.argmax(axis=1)] == y
     for t in sorted(set(confidence)):
         keep = confidence >= t
         if right[keep].mean() >= TARGET_ACCURACY:
