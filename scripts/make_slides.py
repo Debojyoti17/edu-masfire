@@ -90,6 +90,22 @@ def accuracy(recs, field="predicted_label"):
     return sum(r[field] == r["gold_label"] for r in recs) / len(recs)
 
 
+def judge_numbers():
+    """Judge accuracy and confidence AUROC on full test_ua (familiar questions), and judge
+    accuracy on test_uq (new questions), computed from the saved grader runs."""
+    from scripts.compare_confidence import auroc
+    from src.judge import features, judge_predict, train_judge
+    out = []
+    for regime, set_name in [("seen", "test_ua"), ("unseen", "test_uq")]:
+        model, _, _ = train_judge(regime)
+        tasks = json.load(open(f"data/eval_{set_name}.json", encoding="utf-8"))
+        X, _ = features(tasks, set_name, regime)
+        labels, probs = judge_predict(model, X)
+        right = [l == t["gold_label"] for l, t in zip(labels, tasks)]
+        out.append((sum(right) / len(right), auroc(list(zip(probs.max(axis=1), right)))))
+    return out[0][0], out[0][1], out[1][0]
+
+
 def main():
     """Build every slide in order and save the deck."""
     n = 0
@@ -197,6 +213,47 @@ def main():
         "Statistics: 95% Wilson / bootstrap intervals; paired McNemar tests with Holm correction.",
     ]
     text_box(slide, 0.7, 1.4, 12.0, 4.5, "\n".join("•  " + s for s in scope), size=18)
+
+    # Redesigned pipeline (only once its charts exist)
+    if os.path.exists(os.path.join(CHARTS, "09_v2_old_vs_new_120.png")):
+        n += 1
+        slide = new_slide("Redesigned pipeline (in progress, for the final report)", n)
+        boxes = [("Planner", "retrieves teacher-graded\nexamples"), ("3 LLM graders", "+ trained classifier"),
+                 ("Judge", "combines grades,\ngives confidence"), ("Feedback", "verdict fixed to\nthe judge's label")]
+        for i, (name, job) in enumerate(boxes):
+            x = 0.7 + i * 3.15
+            box = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x), Inches(1.4), Inches(2.5), Inches(1.3))
+            box.fill.solid()
+            box.fill.fore_color.rgb = HEADER_FILL
+            box.line.color.rgb = NAVY
+            tf = box.text_frame
+            tf.text = name
+            tf.paragraphs[0].font.size, tf.paragraphs[0].font.bold = Pt(18), True
+            tf.paragraphs[0].font.color.rgb = NAVY
+            p = tf.add_paragraph()
+            p.text = job
+            p.font.size = Pt(12)
+            p.font.color.rgb = INK
+            if i < 3:
+                arrow = slide.shapes.add_shape(MSO_SHAPE.RIGHT_ARROW, Inches(x + 2.6), Inches(1.85), Inches(0.45), Inches(0.4))
+                arrow.fill.solid()
+                arrow.fill.fore_color.rgb = GREY
+                arrow.line.fill.background()
+        seen_acc, seen_auc, unseen_acc = judge_numbers()
+        points = [
+            "Safety layer: every message carries a task ID, question fingerprint and checksum (lost, misrouted "
+            "or corrupted messages are re-requested); the reference answer is checked against the question bank; "
+            "low-confidence grades go to a teacher.",
+            f"Judge accuracy {seen_acc:.3f} on 537 familiar-question answers (old main setup 0.490), "
+            f"{unseen_acc:.3f} on 733 new-question answers.",
+            f"Judge confidence separates right from wrong grades: AUROC {seen_auc:.3f} (earlier confidence methods 0.55-0.61).",
+            "Status: fault experiments done on the 120-task set; the 537 / 733 / 600-answer runs are in progress.",
+        ]
+        text_box(slide, 0.7, 3.1, 12.0, 3.6, "\n".join("•  " + s for s in points), size=16)
+        for title, file in [("Redesigned pipeline: wrong feedback reaching the student", "09_v2_old_vs_new_120.png"),
+                            ("Redesigned pipeline: faults with the safety layer off and on", "10_v2_faults_120.png")]:
+            n += 1
+            picture(new_slide(title, n), os.path.join(CHARTS, file))
 
     # Paper plan
     n += 1
