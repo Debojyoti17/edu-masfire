@@ -57,7 +57,7 @@ def generate(prompt, model=DEFAULT_MODEL, max_tokens=None, temperature=None, see
     return response.message.content
 
 
-def choice_probabilities(prompt, options, model=DEFAULT_MODEL, top_logprobs=20, prefill=None):
+def choice_probabilities(prompt, options, model=DEFAULT_MODEL, top_logprobs=20, prefill=None, cpu_only=False):
     """
     Ask a multiple-choice question (e.g. prompt tells the model to answer
     with one letter like "A") and return how confident the model was in
@@ -73,6 +73,9 @@ def choice_probabilities(prompt, options, model=DEFAULT_MODEL, top_logprobs=20, 
              be the answer, instead of the model wanting to open with a
              whole sentence - which otherwise leaves most of the
              probability mass on non-option tokens and makes "mass" low.
+
+    cpu_only: if True, run the model on the processor only (no graphics card), to measure
+              speed on a laptop without a GPU.
 
     Returns a dict with two parts:
       "probs": dict of option -> probability, renormalized so the values
@@ -92,7 +95,7 @@ def choice_probabilities(prompt, options, model=DEFAULT_MODEL, top_logprobs=20, 
         messages=messages,
         logprobs=True,
         top_logprobs=top_logprobs,
-        options={**BASE_OPTIONS, "num_predict": 1},  # only need the first token
+        options={**BASE_OPTIONS, "num_predict": 1, **({"num_gpu": 0} if cpu_only else {})},  # only need the first token
     )
 
     # If the model's first token is "stop", Ollama returns no probabilities at all.

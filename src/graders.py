@@ -35,10 +35,11 @@ Answer with one letter only: A, B, C, or D.
 """
 
 
-def grade_with_prompt(prompt, model):
+def grade_with_prompt(prompt, model, cpu_only=False):
     """Send a grading prompt and return (label, probability of each label, captured mass).
-    Label and probabilities are None if the model gave no usable letter."""
-    result = choice_probabilities(prompt, LETTERS, model=model, prefill=grader_prefill(model))
+    Label and probabilities are None if the model gave no usable letter.
+    cpu_only=True runs the model without the graphics card (for laptop speed tests)."""
+    result = choice_probabilities(prompt, LETTERS, model=model, prefill=grader_prefill(model), cpu_only=cpu_only)
     if result["probs"] is None:
         return None, None, result["mass"]
     probs = {LETTER_TO_LABEL[letter]: p for letter, p in result["probs"].items()}

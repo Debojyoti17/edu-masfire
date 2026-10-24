@@ -16,14 +16,25 @@ LABELS = ["correct", "contradictory", "partially_correct_incomplete", "irrelevan
 K = 8
 
 _cache = {}
+_bank = []  # extra teacher-graded answers (see use_answer_bank)
+
+
+def use_answer_bank(rows):
+    """Add teacher-graded answers to the examples the Planner can retrieve, for example the first
+    few answers a teacher graded to a new question. Rows look like train rows (id, question,
+    reference_answer, student_answer, label_name). Pass [] to go back to the train split only."""
+    global _bank
+    _bank = list(rows)
+    _cache.clear()
 
 
 def load_train():
-    """Load the teacher-graded train answers once (rare non_domain label dropped), grouped by
-    question, plus a word index over 'question + answer' for finding similar answers."""
+    """Load the teacher-graded train answers once (rare non_domain label dropped) plus any
+    answer-bank rows, grouped by question, plus a word index over 'question + answer' for
+    finding similar answers."""
     if "train" not in _cache:
         with open(TRAIN_PATH, encoding="utf-8") as f:
-            rows = [r for r in json.load(f) if r["label_name"] in LABELS]
+            rows = [r for r in json.load(f) if r["label_name"] in LABELS] + _bank
         by_question = defaultdict(list)
         for r in rows:
             by_question[r["question"]].append(r)

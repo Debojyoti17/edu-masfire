@@ -26,7 +26,8 @@ from src.agents import parse_verdict
 from src.faults import OVERCLAIM_TEXT, corrupt_task, donor_index, flip_label
 from src.graders import grade_with_prompt, rag_prompt
 from src.health import benched, canary_set, check_input, expected_canary_accuracy
-from src.judge import LABELS, MODELS, REGIME_MODES, judge_predict, train_judge, choose_threshold
+from src.judge import EXTRA_GRADERS, LABELS, MODELS, REGIME_MODES, judge_predict, train_judge, choose_threshold
+from src.finetuned import finetuned_probs
 from src.pipeline_v2 import (check_message, check_reference, make_message, write_feedback,
                              tfidf_probs, tutor)
 from src.retrieval import has_same_question_examples, retrieve
@@ -153,6 +154,8 @@ def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges
         columns += [p[l] for l in LABELS] if p else [0.25] * 4
         grader_labels[f"{model}|{mode}"] = payload["label"]
     columns += tfidf_probs(task)
+    for name in EXTRA_GRADERS:
+        columns += finetuned_probs(task, name)
     labels, probs = judge_predict(judges[regime], [columns])
     final, confidence = labels[0], float(max(probs[0]))
 

@@ -25,8 +25,12 @@ FEEDBACK_MAX_TOKENS = 120
 # answer letters (measured on the 8 worked examples plus 2 tasks, without looking at labels);
 # then use whichever option captures the most. Only gemma2:9b needed a change (default captured
 # 0.002, no prefill captured 0.997).
+# Budget-laptop models (checked on the first 8 test_ua answers, labels not looked at):
+#   qwen2.5:3b  default 0.905 on average but as low as 0.345 on one answer; no prefill 1.000 -> no prefill
+#   gemma2:2b   default 0.000; no prefill 0.768 -> no prefill
+#   llama3.2:3b default 0.988 -> keep the default
 DEFAULT_PREFILL = "Label: "
-MODEL_PREFILLS = {"gemma2:9b": None}
+MODEL_PREFILLS = {"gemma2:9b": None, "qwen2.5:3b": None, "gemma2:2b": None}
 
 
 def grader_prefill(model):

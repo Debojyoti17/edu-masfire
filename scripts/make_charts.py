@@ -417,7 +417,7 @@ def chart_v2(set_name="120"):
     ax.set_xlim(0, 75)
     ax.set_xlabel(f"Wrong feedback reaching the student, no faults ({n} answers)")
     ax.grid(axis="y", visible=False)
-    titles(fig, "The redesigned pipeline cuts wrong feedback by two thirds",
+    titles(fig, f"The redesigned pipeline cuts wrong feedback from {rows[0][1]:.0%} to {rows[2][1]:.0%}",
            "Retrieval + three LLM graders + trained classifier, combined by a judge; low-confidence grades go to a teacher.")
     save(fig, f"09_v2_old_vs_new_{set_name}.png")
 
@@ -470,6 +470,7 @@ def main():
     chart_eval_sets()
     chart_test_ua()
     chart_v2("120")
+    chart_v2("120_robust_full")
 
 
 if __name__ == "__main__":

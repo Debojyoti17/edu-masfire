@@ -29,6 +29,9 @@ TFIDF_C = 3.0
 C_VALUES = [0.003, 0.01, 0.03, 0.1, 0.3, 1.0, 3.0]
 TARGET_ACCURACY = 0.80
 RAG_DIR = os.path.join("results", "rag")
+# Extra graders whose probabilities the judge also uses (fine-tuned models from
+# scripts/train_finetuned_grader.py). Added only if they improve cross-validated accuracy.
+EXTRA_GRADERS = []
 
 
 def grader_probs(set_name, mode, model):
@@ -75,9 +78,17 @@ def tfidf_test_probs(set_name):
     return {r["task_id"]: [r["probabilities"][label] for label in LABELS] for r in recs}
 
 
-def features(tasks, set_name, regime):
+def finetuned_saved_probs(name, set_name, regime):
+    """Saved fine-tuned grader probabilities: out-of-fold for the train sample, final model otherwise."""
+    file = f"train_oof_{regime}.json" if set_name == TRAIN_SET else f"{set_name}.json"
+    with open(os.path.join("results", "finetuned", name, file), encoding="utf-8") as f:
+        return json.load(f)
+
+
+def features(tasks, set_name, regime, extras=None):
     """One row of numbers per task: every grader run's four probabilities, then the TF-IDF
-    probabilities. Returns (matrix, list of the feature names)."""
+    probabilities, then any extra (fine-tuned) graders. Returns (matrix, list of the feature names)."""
+    extras = EXTRA_GRADERS if extras is None else extras
     columns, names = [], []
     for model in MODELS:
         for mode in REGIME_MODES[regime]:
@@ -87,14 +98,18 @@ def features(tasks, set_name, regime):
     tfidf = tfidf_train_oof(regime) if set_name == TRAIN_SET else tfidf_test_probs(set_name)
     columns.append([tfidf[t["task_id"]] for t in tasks])
     names += [f"tfidf|{label}" for label in LABELS]
+    for name in extras:
+        saved = finetuned_saved_probs(name, set_name, regime)
+        columns.append([saved[t["task_id"]] for t in tasks])
+        names += [f"{name}|{label}" for label in LABELS]
     return np.hstack([np.array(c) for c in columns]), names
 
 
-def train_data(regime):
+def train_data(regime, extras=None):
     """Judge training data for one regime: features, gold labels and the 5 cross-validation
     splits (split by question for 'unseen', to simulate questions the judge has never seen)."""
     tasks = json.load(open(os.path.join("data", f"eval_{TRAIN_SET}.json"), encoding="utf-8"))
-    X, _ = features(tasks, TRAIN_SET, regime)
+    X, _ = features(tasks, TRAIN_SET, regime, extras)
     y = np.array([t["gold_label"] for t in tasks])
     if regime == "seen":
         splits = list(StratifiedKFold(5, shuffle=True, random_state=42).split(X, y))
@@ -140,10 +155,10 @@ def fit(X, y, regime, c, robust):
     return LogisticRegression(C=c, max_iter=5000).fit(X, y)
 
 
-def cv_predictions(regime, c, robust):
+def cv_predictions(regime, c, robust, extras=None):
     """Cross-validated judge probabilities on the clean train sample (fault-aware copies are only
     ever added to the training folds, never to the fold being predicted)."""
-    X, y, splits = train_data(regime)
+    X, y, splits = train_data(regime, extras)
     probs = np.zeros((len(y), len(LABELS)))
     for tr, va in splits:
         model = fit(X[tr], y[tr], regime, c, robust)
@@ -152,13 +167,13 @@ def cv_predictions(regime, c, robust):
     return probs, y
 
 
-def train_judge(regime, robust=True):
+def train_judge(regime, robust=True, extras=None):
     """Train the judge for one regime on the train sample, choosing its regularisation by
     5-fold cross-validated accuracy on clean answers. Returns (model, cv accuracy, chosen C)."""
-    X, y, _ = train_data(regime)
+    X, y, _ = train_data(regime, extras)
     best = None
     for c in C_VALUES:
-        probs, _ = cv_predictions(regime, c, robust)
+        probs, _ = cv_predictions(regime, c, robust, extras)
         acc = (np.array(LABELS)[probs.argmax(axis=1)] == y).mean()
         if best is None or acc > best[1]:
             best = (c, acc)
@@ -173,10 +188,10 @@ def judge_predict(model, X):
     return [LABELS[i] for i in probs.argmax(axis=1)], probs
 
 
-def choose_threshold(regime, c, robust=True):
+def choose_threshold(regime, c, robust=True, extras=None):
     """Escalation threshold: the lowest judge confidence at which cross-validated accuracy on the
     train sample reaches TARGET_ACCURACY. Grades less confident than this go to a teacher."""
-    probs, y = cv_predictions(regime, c, robust)
+    probs, y = cv_predictions(regime, c, robust, extras)
     confidence = probs.max(axis=1)
     right = np.array(LABELS)[probs.argmax(axis=1)] == y
     for t in sorted(set(confidence)):
