@@ -36,7 +36,7 @@ def summarize(records, base_by_id):
         "wrong_delivered": sum(r["delivered"] != r["gold_label"] for r in records) / n,
         "wrong_reaching": sum(reached_wrong(r) for r in records) / n,
         "held": sum(r["escalated"] for r in records) / n,
-        "detected": sum(any("->" in d for d in r["detections"]) for r in records) / n,
+        "detected": sum(any("->" in d or "benched" in d for d in r["detections"]) for r in records) / n,
         "verdict_unreadable": sum(any(d.startswith("feedback") for d in r["detections"]) for r in records) / n,
         "p": mcnemar_p(harmed, fixed),
     }

@@ -13,6 +13,8 @@
 #                judge combines them
 # Reports judge accuracy, how many answers are graded automatically at the usual escalation
 # threshold, how many wrong grades would reach students, and the teacher's total workload.
+# Also tries averaging the two judges (bank judge + new-question judge) for each k.
+# per_answer in the saved file holds each judge's four probabilities (LABELS order) per answer.
 #
 # Usage: python -m scripts.simulate_answer_bank test_uq      (or test_ud_600)
 import json
@@ -102,12 +104,13 @@ def main():
     # k = 0: the question is new; use the saved unseen-question grader runs.
     judge, _, c = train_judge("unseen")
     threshold = choose_threshold("unseen", c)
-    ids = {t["task_id"] for t in scored}
     all_X, _ = features(tasks, set_name, "unseen")
-    X = all_X[[i for i, t in enumerate(tasks) if t["task_id"] in ids]]
+    row_of = {t["task_id"]: i for i, t in enumerate(tasks)}
+    X = all_X[[row_of[t["task_id"]] for t in scored]]  # same order as the scored answers
     labels, probs = judge_predict(judge, X)
     results.append(summarise("k=0 (no bank, new-question judge)", labels, probs, threshold, scored, 0))
-    per_answer["0"] = {t["task_id"]: [l, float(max(p))] for t, l, p in zip(scored, labels, probs)}
+    per_answer["0"] = {t["task_id"]: [float(x) for x in p] for t, p in zip(scored, probs)}
+    probs_new_question = probs
     print(results[-1], flush=True)
 
     # k = 2, 4, 8: the teacher's first k answers become same-question examples.
@@ -137,7 +140,13 @@ def main():
         labels, probs = judge_predict(judge, np.hstack(columns))
         results.append(summarise(f"k={k} (bank, seen-question judge)", labels, probs, threshold, scored,
                                  len(bank)))
-        per_answer[str(k)] = {t["task_id"]: [l, float(max(p))] for t, l, p in zip(scored, labels, probs)}
+        per_answer[str(k)] = {t["task_id"]: [float(x) for x in p] for t, p in zip(scored, probs)}
+        print(results[-1], flush=True)
+        # Both judges together: average the new-question judge and the bank judge.
+        both = (np.array(probs) + np.array(probs_new_question)) / 2
+        results.append(summarise(f"k={k} + new-question judge (average)", list(np.array(LABELS)[both.argmax(axis=1)]),
+                                 both, threshold, scored, len(bank)))
+        per_answer[f"{k}+0"] = {t["task_id"]: [float(x) for x in p] for t, p in zip(scored, both)}
         print(results[-1], flush=True)
     use_answer_bank([])
 
