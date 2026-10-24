@@ -2,7 +2,8 @@
 # fault-tolerance layer switched off and on:
 #   Planner (retrieval) -> 3 LLM graders + TF-IDF -> judge -> Tutor -> Feedback (verdict fixed to the label)
 # Fault-tolerance layer (ft=on): message checks with re-request, reference-answer check against
-# the question bank, and escalation of low-confidence grades to a teacher.
+# the question bank, input check, canary check that benches a misbehaving grader, and escalation
+# of low-confidence or flagged answers to a teacher.
 #
 # Work is done stage by stage (all qwen grading, then mistral, then gemma2, then judge, then
 # Tutor + Feedback) so the GPU never swaps models per answer. Every model answer is cached by
@@ -14,6 +15,7 @@
 #   --judge plain uses a judge trained without fault-aware copies (saved in <set>/, for comparison);
 #   the default robust judge saves in <set>_robust/.
 #   --verdict-only skips writing the advice text (the verdict is fixed to the label anyway).
+#   --checks basic leaves out the input check and canary check (saved without the _full suffix).
 import hashlib
 import json
 import os
@@ -23,6 +25,7 @@ import time
 from src.agents import parse_verdict
 from src.faults import OVERCLAIM_TEXT, corrupt_task, donor_index, flip_label
 from src.graders import grade_with_prompt, rag_prompt
+from src.health import benched, canary_set, check_input, expected_canary_accuracy
 from src.judge import LABELS, MODELS, REGIME_MODES, judge_predict, train_judge, choose_threshold
 from src.pipeline_v2 import (check_message, check_reference, make_message, write_feedback,
                              tfidf_probs, tutor)
@@ -115,11 +118,19 @@ def grader_prompts(task, regime, plans):
     return out
 
 
+def lie(label):
+    """What the 'lying grader' fault sends: a confident wrong label (the next label in a fixed order)."""
+    wrong = flip_label(label)
+    return wrong, {l: (0.97 if l == wrong else 0.01) for l in LABELS}
+
+
 def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges, threshold, text_cache, notes,
-                verdict_only=False):
+                verdict_only=False, benched_graders=frozenset(), input_flagged=False):
     """Judge, Tutor and Feedback for one task, using cached grader answers. Returns the record.
     verdict_only=True skips writing the advice text: the Feedback verdict line is fixed to the label
-    it is handed (0 mismatches in over 25,000 generated cases), so the delivered verdict is that label."""
+    it is handed (0 mismatches in over 25,000 generated cases), so the delivered verdict is that label.
+    benched_graders: (model, mode) pairs the canary check benched; their votes are left out.
+    input_flagged: the input check found a problem, so the answer goes to a teacher."""
     start = time.time()
     columns, grader_labels = [], {}
     for model, mode, prompt in prompts:
@@ -128,14 +139,16 @@ def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges
         if model == "qwen2.5:7b" and fault == "grader_crash":
             message = None
         if model == "qwen2.5:7b" and fault == "grader_lying" and label is not None:
-            wrong = flip_label(label)
-            message = make_message(task, f"grader:{model}:{mode}",
-                                   {"label": wrong, "probs": {l: (0.97 if l == wrong else 0.01) for l in LABELS}})
+            wrong, wrong_probs = lie(label)
+            message = make_message(task, f"grader:{model}:{mode}", {"label": wrong, "probs": wrong_probs})
         status = check_message(message, task) if ft == "on" else "unchecked"
         if status in ("lost", "misrouted", "corrupted"):
             notes.append(f"grader {model}/{mode} message {status} -> re-requested")
             message = make_message(task, f"grader:{model}:{mode}", {"label": label, "probs": probs})
         payload = message["payload"] if message else {"label": None, "probs": None}
+        if (model, mode) in benched_graders:
+            notes.append(f"grader {model}/{mode} benched by canary check")
+            payload = {"label": None, "probs": None}
         p = payload["probs"]
         columns += [p[l] for l in LABELS] if p else [0.25] * 4
         grader_labels[f"{model}|{mode}"] = payload["label"]
@@ -153,7 +166,7 @@ def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges
     sent = label_message["payload"]["label"]
 
     if verdict_only:
-        escalated = ft == "on" and confidence < threshold[regime]
+        escalated = ft == "on" and (confidence < threshold[regime] or input_flagged)
         return {"task_id": original["task_id"], "gold_label": original["gold_label"], "fault": fault, "ft": ft,
                 "regime": regime, "grader_labels": grader_labels, "final_label": final, "confidence": confidence,
                 "label_sent": sent, "feedback": None, "feedback_generated": False, "delivered": sent,
@@ -172,16 +185,16 @@ def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges
     if not verdict_matches:
         notes.append("feedback verdict could not be read back as the label it was given")
     delivered = parse_verdict(feedback_text)
-    escalated = ft == "on" and confidence < threshold[regime]
+    escalated = ft == "on" and (confidence < threshold[regime] or input_flagged)
     return {"task_id": original["task_id"], "gold_label": original["gold_label"], "fault": fault, "ft": ft,
             "regime": regime, "grader_labels": grader_labels, "final_label": final, "confidence": confidence,
             "label_sent": sent, "feedback": feedback_text, "delivered": delivered, "escalated": escalated,
             "detections": list(notes), "seconds": round(time.time() - start, 2)}
 
 
-def prepare(task, tasks, i, fault, ft):
-    """Apply input faults and the reference check, then the Planner stage.
-    Returns (task the agents see, regime, grader prompts, notes)."""
+def prepare(task, tasks, i, fault, ft, full_checks=False):
+    """Apply input faults, the reference check and (full checks) the input check, then the Planner
+    stage. Returns (task the agents see, regime, grader prompts, notes, input flagged)."""
     notes = []
     donor = tasks[donor_index(tasks, i)]
     seen_task = corrupt_task(task, fault, donor) if fault in ("reference_swap", "student_truncate") else dict(task)
@@ -190,8 +203,13 @@ def prepare(task, tasks, i, fault, ft):
         if status == "mismatch":
             notes.append("reference answer did not match the question bank -> restored")
             seen_task["reference_answer"] = bank
+    input_flagged = False
+    if ft == "on" and full_checks:
+        for problem in check_input(seen_task):
+            notes.append(f"input check: {problem} -> sent to a teacher")
+            input_flagged = True
     regime, plans = plan_stage(seen_task, fault, ft, donor, notes)
-    return seen_task, regime, grader_prompts(seen_task, regime, plans), notes
+    return seen_task, regime, grader_prompts(seen_task, regime, plans), notes, input_flagged
 
 
 # ---------------------------------------------------------------- driver
@@ -219,7 +237,9 @@ def main():
         set_name = "120"
     robust = option("--judge", "robust") == "robust"
     verdict_only = "--verdict-only" in args
-    out_dir = os.path.join("results", "pipeline_v2", set_name + ("_robust" if robust else "") + (f"_limit{limit}" if limit else ""))
+    full_checks = option("--checks", "full") == "full"
+    suffix = ("_robust" if robust else "") + ("_full" if full_checks else "") + (f"_limit{limit}" if limit else "")
+    out_dir = os.path.join("results", "pipeline_v2", set_name + suffix)
     os.makedirs(out_dir, exist_ok=True)
     os.makedirs(CACHE_DIR, exist_ok=True)
 
@@ -245,13 +265,26 @@ def main():
             for i, task in enumerate(tasks):
                 if task["task_id"] in done:
                     continue
-                seen_task, regime, prompts, notes = prepare(task, tasks, i, fault, ft)
-                jobs.append((fault, ft, path, task, seen_task, regime, prompts, notes))
+                seen_task, regime, prompts, notes, flagged = prepare(task, tasks, i, fault, ft, full_checks)
+                jobs.append((fault, ft, path, task, seen_task, regime, prompts, notes, flagged))
     print(f"{len(jobs)} task-conditions to run", flush=True)
+
+    # Canary answers (known grades) that each grader/mode grades before the session (full checks).
+    canary_prompts = []
+    if full_checks and "on" in fts:
+        canaries = canary_set()
+        for model in MODELS:
+            for mode in ["same", "similar", "zeroshot"]:
+                for c in canaries:
+                    prompt = build_prompt(c, "v2") if mode == "zeroshot" else rag_prompt(c, retrieve(c, mode), mode)
+                    canary_prompts.append((model, mode, c["gold_label"], prompt))
 
     # 2. Fill the grader cache, one model at a time.
     for model in MODELS:
         needed = {}
+        for m, mode, _, prompt in canary_prompts:
+            if m == model and key_of(m, prompt) not in grader_cache:
+                needed[key_of(m, prompt)] = prompt
         for job in jobs:
             for m, mode, prompt in job[6]:
                 if m == model and key_of(m, prompt) not in grader_cache:
@@ -263,11 +296,27 @@ def main():
             if k % 200 == 0 or k == len(needed):
                 print(f"  {model}: {k}/{len(needed)}, about {(len(needed) - k) * (time.time() - start) / k / 60:.0f} min left", flush=True)
 
+    # Canary check per fault: which grader/modes would be benched this session.
+    benched_by_fault = {}
+    for fault in faults:
+        results = {}
+        for model, mode, gold, prompt in canary_prompts:
+            label = grader_cache[key_of(model, prompt)][0]
+            if model == "qwen2.5:7b" and fault == "grader_lying" and label is not None:
+                label = lie(label)[0]
+            results.setdefault((model, mode), ([], []))
+            results[(model, mode)][0].append(label)
+            results[(model, mode)][1].append(gold)
+        benched_by_fault[fault] = frozenset(k for k, (labels, golds) in results.items()
+                                            if benched(labels, golds, expected_canary_accuracy(*k)))
+        if canary_prompts:
+            print(f"  canary check, {fault}: benched {sorted(benched_by_fault[fault]) or 'none'}", flush=True)
+
     # 3. Judge, Tutor and Feedback for every task-condition.
     start = time.time()
-    for k, (fault, ft, path, task, seen_task, regime, prompts, notes) in enumerate(jobs, start=1):
+    for k, (fault, ft, path, task, seen_task, regime, prompts, notes, flagged) in enumerate(jobs, start=1):
         rec = finish_task(seen_task, task, fault, ft, regime, prompts, grader_cache, judges, threshold, text_cache, notes,
-                          verdict_only)
+                          verdict_only, benched_by_fault[fault] if ft == "on" else frozenset(), flagged)
         with open(path, "a", encoding="utf-8") as f:
             f.write(json.dumps(rec) + "\n")
         if k % 50 == 0 or k == len(jobs):

@@ -4,3 +4,4 @@ data/asap/
 results/
 data/raw/
 data/eval_*.json
+models/

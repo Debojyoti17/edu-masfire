@@ -3,3 +3,7 @@ requests==2.34.2
 matplotlib==3.11.2
 scikit-learn==1.9.1
 python-pptx==1.0.2
+transformers==5.20.2
+sentencepiece==0.2.2
+protobuf==7.36.2
+# PyTorch with GPU support: pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cu128
