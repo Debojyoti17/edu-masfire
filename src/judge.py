@@ -31,7 +31,9 @@ TARGET_ACCURACY = 0.80
 RAG_DIR = os.path.join("results", "rag")
 # Extra graders whose probabilities the judge also uses (fine-tuned models from
 # scripts/train_finetuned_grader.py). Added only if they improve cross-validated accuracy.
-EXTRA_GRADERS = []
+# deberta-v3-base-nli raised cross-validated accuracy from 0.729 to 0.772 (seen questions) and from
+# 0.598 to 0.651 (new questions) - see scripts/benchmark_budget.py, results/budget/benchmark.json.
+EXTRA_GRADERS = ["deberta-v3-base-nli"]
 
 
 def grader_probs(set_name, mode, model):

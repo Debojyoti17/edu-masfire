@@ -16,13 +16,14 @@ RETRY_WAIT_SECONDS = 15
 
 
 def chat(**kwargs):
-    """ollama.chat, but if Ollama reports a temporary GPU out-of-memory error (it then clears the
-    model and reloads it), wait and try again a few times before giving up."""
+    """ollama.chat, but if Ollama reports a temporary GPU error (out of memory, or a CUDA error
+    while running the model; it then reloads the model), wait and try again a few times before giving up."""
     for attempt in range(RETRIES):
         try:
             return ollama.chat(**kwargs)
         except ollama.ResponseError as e:
-            if "out of memory" not in str(e) or attempt == RETRIES - 1:
+            temporary = "out of memory" in str(e) or "CUDA error" in str(e)
+            if not temporary or attempt == RETRIES - 1:
                 raise
             time.sleep(RETRY_WAIT_SECONDS)
 

@@ -16,6 +16,7 @@
 #   the default robust judge saves in <set>_robust/.
 #   --verdict-only skips writing the advice text (the verdict is fixed to the label anyway).
 #   --checks basic leaves out the input check and canary check (saved without the _full suffix).
+#   Extra (fine-tuned) graders used by the judge (src/judge.py EXTRA_GRADERS) are added to the folder name.
 import hashlib
 import json
 import os
@@ -241,7 +242,8 @@ def main():
     robust = option("--judge", "robust") == "robust"
     verdict_only = "--verdict-only" in args
     full_checks = option("--checks", "full") == "full"
-    suffix = ("_robust" if robust else "") + ("_full" if full_checks else "") + (f"_limit{limit}" if limit else "")
+    suffix = (("_robust" if robust else "") + ("_full" if full_checks else "")
+              + ("_" + "_".join(EXTRA_GRADERS) if EXTRA_GRADERS else "") + (f"_limit{limit}" if limit else ""))
     out_dir = os.path.join("results", "pipeline_v2", set_name + suffix)
     os.makedirs(out_dir, exist_ok=True)
     os.makedirs(CACHE_DIR, exist_ok=True)
