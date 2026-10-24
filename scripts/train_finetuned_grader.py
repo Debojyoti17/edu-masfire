@@ -62,8 +62,10 @@ def train_model(name, rows, seed=42):
     torch.manual_seed(seed)
     path = os.path.join("models", name)
     tokenizer = AutoTokenizer.from_pretrained(path)
+    # dtype=float32: transformers 5 otherwise keeps the checkpoint's float16 weights, and training
+    # float16 weights directly loses the small updates (the model then only learns the majority label).
     model = AutoModelForSequenceClassification.from_pretrained(
-        path, num_labels=len(LABELS), ignore_mismatched_sizes=True,
+        path, num_labels=len(LABELS), ignore_mismatched_sizes=True, dtype=torch.float32,
         id2label=dict(enumerate(LABELS)), label2id={l: i for i, l in enumerate(LABELS)})
     device = "cuda"
     model.to(device)

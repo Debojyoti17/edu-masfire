@@ -17,7 +17,7 @@ def load(name):
     if name not in _models:
         path = os.path.join("models", "finetuned", name)
         tokenizer = AutoTokenizer.from_pretrained(path)
-        model = AutoModelForSequenceClassification.from_pretrained(path)
+        model = AutoModelForSequenceClassification.from_pretrained(path, dtype=torch.float32)
         model.eval()
         _models[name] = (model, tokenizer)
     return _models[name]
