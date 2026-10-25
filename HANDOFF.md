@@ -39,7 +39,19 @@ A quick xsmall test after the fix still learned slowly (0.426 on 2000 answers / 
 the debug RESULT and fold-1 accuracy before trusting the full run. If still stuck: try without bf16
 autocast, more epochs, or lr 1e-5/3e-5.
 
-## Next steps
+## Update 2026-10-25
+- Fine-tuning fixed and done: deberta-v3-base-nli alone 0.698 test_ua / 0.610 test_uq / 0.610 test_ud.
+  The judge now uses it (EXTRA_GRADERS in src/judge.py); final runs in
+  `results/pipeline_v2/<set>_robust_full_deberta-v3-base-nli/`. Budget results in results/budget/benchmark.json
+  (TF-IDF + DeBERTa with no LLM: 0.708 / 0.593 / 0.622 at 0.12 s per answer on CPU).
+  Speed trick (fixed example order): 3x faster for qwen/mistral, results/answer_bank/prefix_cache_test_uq.json.
+- The user paused work until their weekly usage resets (Wed 2026-10-28). Remaining before 30 Oct:
+  1. run grade_csv end to end; 2. charts + slides with final numbers (new judge's auto threshold holds
+  back only ~6% on seen questions - compare judges at equal hold-back, see conversation); 3. tables and
+  methods summary for the team's report; 4. optional: photo input (local vision model via Ollama, e.g.
+  qwen2.5vl:3b, needs internet once + user approval) with "misread handwriting" as a new fault.
+
+## Next steps (older list)
 1. If fine-tuning works: set `EXTRA_GRADERS` in `src/judge.py` only if it raises the judge's
    cross-validated accuracy (compare `train_judge(regime, extras=[name])`), then rerun the v2 pipeline.
 2. Run `python -m scripts.grade_csv examples/class_quiz.csv` end to end and fix anything that breaks.
