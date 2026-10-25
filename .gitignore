@@ -5,3 +5,4 @@ results/
 data/raw/
 data/eval_*.json
 models/
+submission/
