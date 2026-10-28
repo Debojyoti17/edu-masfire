@@ -18,6 +18,9 @@ WORDS = ["helpful", "neutral", "harmful"]
 def clean_a(text):
     """Sammo's 'understand' answers: helpful, not helpful, or '' if it is neither."""
     t = text.lower().replace("’", "'")
+    proper = clean_b(t)  # a proper rating word (added later) is kept as it is
+    if proper and "underst" not in t:
+        return "not helpful" if "not" in t.split() else proper
     if "not" in t or "don't" in t or "dont" in t:
         return "not helpful"
     if difflib.get_close_matches("understand", t.split(), n=1, cutoff=0.75):
