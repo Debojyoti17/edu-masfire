@@ -47,11 +47,17 @@ def main():
     sheet = [r for r in read_csv(os.path.join(DIR, "to_write.csv")) if photo_of(r["code"])]
     if not sheet:
         sys.exit(f"No photos found in {DIR}/photos (expected H01.jpg, H02.jpg, ...)")
+    # Where the writer did not copy the answer exactly, the reading is compared with what is really on
+    # the paper (results/handwriting/as_written.csv, typed in by looking at the photo).
+    written = {}
+    if os.path.exists(os.path.join(DIR, "as_written.csv")):
+        written = {r["code"]: r["text_on_paper"] for r in read_csv(os.path.join(DIR, "as_written.csv"))}
     readings = []
     for r in sheet:
         text, confidence = read_photo(os.path.join(DIR, photo_of(r["code"])))
-        cer = character_error_rate(r["student_answer_to_copy"], text)
-        readings.append({"code": r["code"], "truth": r["student_answer_to_copy"], "reading": text,
+        truth = written.get(r["code"], r["student_answer_to_copy"])
+        cer = character_error_rate(truth, text)
+        readings.append({"code": r["code"], "truth": truth, "reading": text,
                          "reading_confidence": "" if confidence is None else round(confidence, 3), "cer": round(cer, 3)})
         print(f"{r['code']}  CER {cer:.2f}  {text[:70]}", flush=True)
     write_csv(os.path.join(DIR, "readings.csv"), readings, ["code", "truth", "reading", "reading_confidence", "cer"])

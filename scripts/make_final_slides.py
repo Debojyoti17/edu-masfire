@@ -241,9 +241,11 @@ def main():
     if os.path.exists(real_csv):
         with open(real_csv, encoding="utf-8-sig", newline="") as f:
             real = list(csv.DictReader(f))
+        with open(os.path.join("results", "handwriting", "class_photos_graded.csv"), encoding="utf-8-sig", newline="") as f:
+            flagged = sum("misread" in r["reason"] for r in csv.DictReader(f))
         rows.append([f"Team's real handwriting ({len(real)} photos)",
                      f"{sum(float(r['cer']) for r in real) / len(real):.1%}",
-                     f"{sum(float(r['cer']) == 0 for r in real)} of {len(real)}", "see report"])
+                     f"{sum(float(r['cer']) == 0 for r in real)} of {len(real)}", f"{flagged} of {len(real)}"])
     else:
         rows.append(["Team's real handwriting (30 photos)", "in progress", "", ""])
     table(slide, ["Test", "Characters read wrongly", "Read perfectly", "Flagged as misread"],
@@ -253,7 +255,8 @@ def main():
     bullets(slide, [f"Simulated misreading (about 7% of characters wrong, 537 answers): wrong grades reaching students "
                     f"{share(off, wrong_reaching):.1%} with the safety layer off, {share(on, wrong_reaching):.1%} with it on; "
                     f"the misread check fired on {caught:.0%}.",
-                    "Fonts are easier than real handwriting: the team's own photos are the honest test."],
+                    "Real handwriting: the reader's mistakes are real words ('Because' read as 'Became'), which the "
+                    "misread check cannot see; a teacher check of photo answers stays necessary."],
             top=5.45, size=13, height=1.4)
 
     # 14-15. Practical charts
