@@ -58,8 +58,11 @@ protection the student gets a wrong grade -> with protection the problem is caug
 ```
 
 1. **Collect answers** in a spreadsheet: one row per answer with student, question, reference
-   answer, student answer. Google Forms, Microsoft Forms and Moodle all export this as CSV. (Paper
-   answer sheets would need a photo-reading step first; that is future work.)
+   answer, student answer. Google Forms, Microsoft Forms and Moodle all export this as CSV. **Paper answer sheets
+   (prototype):** photograph each answer, put the photo's file name in a `photo` column and leave
+   `student_answer` empty. A local vision model (qwen2.5vl:7b) reads the handwriting first, and
+   answers whose reading contains many unknown words go to the teacher instead of being graded
+   automatically.
 2. **Optional:** the teacher grades the first few answers to each new question in the
    `teacher_label` column. Those are kept exactly as given and shown to the graders as examples
    (in our simulation this raised accuracy on new questions, e.g. 0.533 -> 0.660 with 2 per question
@@ -109,6 +112,7 @@ Live (about 5-7 minutes):
 | 3 | `python -m scripts.demo_v2 --task 1 --fault student_truncate` | "The student's answer arrives cut in half. The graders would mark it correct, which is wrong. Our input check notices it does not end like a sentence and sends it to the teacher." | OFF -> WRONG; ON -> HELD BACK |
 | 4 | `python -m scripts.demo_v2 --task 0 --fault label_corrupted` | "The grade is damaged on its way to the student. Every message carries a checksum, so the damage is detected and the grade is sent again." | OFF -> "correct" (wrong); ON -> "corrupted -> re-sent" -> RIGHT |
 | 5 | `python -m scripts.grade_csv examples\class_quiz.csv` | "This is how a teacher would use it: one spreadsheet in, two spreadsheets out." | then open `examples\class_quiz_graded.csv` and `examples\class_quiz_review.csv` in Excel |
+| 5b | `python -m scripts.grade_csv examples\photo_quiz\photo_quiz.csv --no-feedback` | "Schools still use paper. Here the answers are photos of answer sheets: a vision model on the same laptop reads the handwriting, then the same grading and safety checks run. If the reading looks wrong, the answer goes to the teacher." (Say honestly: these 6 sheets use handwriting-style fonts; the real-handwriting test is in the report.) | open `examples\photo_quiz\P01.png`, then `photo_quiz_graded.csv`: the `student_answer` column is what the model read |
 | 6 | (slides) | results: old vs new pipeline, faults, cheap-laptop tiers | slides 8-15 |
 
 Other good examples: `python -m scripts.demo_v2 --suggest` lists them for every fault.

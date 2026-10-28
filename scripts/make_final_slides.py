@@ -6,6 +6,7 @@
 #
 # Needs: python -m scripts.make_charts first.
 # Usage: python -m scripts.make_final_slides
+import csv
 import json
 import os
 
@@ -156,10 +157,11 @@ def main():
         ["Reference-answer check", "wrong reference answer (known questions)", "restored from the question bank"],
         ["Question/reference word match", "wrong reference answer (new questions)", "sent to the teacher"],
         ["Input check", "empty or cut-off student answers", "sent to the teacher"],
+        ["Misread-word check (photos)", "handwriting read wrongly from a photo", "sent to the teacher"],
         ["Canary check (32 known-grade answers)", "a grader that has gone wrong, e.g. lies", "benched for the session"],
         ["Confidence threshold", "grades the judge is unsure about", "sent to the teacher"],
         ["Fixed verdict line", "Feedback contradicting the grade", "cannot happen by design"],
-    ], 0.7, 1.4, [4.4, 4.5, 3.0], size=14, row_h=0.62)
+    ], 0.7, 1.4, [4.4, 4.5, 3.0], size=14, row_h=0.58)
 
     # 8. Results table
     n += 1
@@ -216,6 +218,44 @@ def main():
         "The teacher stays in control: the system never overrides a teacher's grade.",
     ], top=3.5, size=16, height=2.8)
 
+    # 13b. Practical: handwritten answer sheets (photo prototype)
+    n += 1
+    slide = new_slide("Paper answer sheets (prototype)", n)
+    boxes(slide, [("Photo", "phone photo of\nthe answer sheet"),
+                  ("Vision model", "qwen2.5vl:7b reads\nthe handwriting\n(same laptop)"),
+                  ("Misread check", "many unknown words?\n-> teacher"),
+                  ("Same pipeline", "graders, judge,\nsafety layer"),
+                  ("Spreadsheet out", "grade, feedback,\nreview list")], 1.5, 1.6)
+    rows = []
+    stress_csv = os.path.join("results", "handwriting", "stress", "readings.csv")
+    if os.path.exists(stress_csv):
+        with open(stress_csv, encoding="utf-8-sig", newline="") as f:
+            stress = list(csv.DictReader(f))
+        for level, label in [("clean", "Handwriting fonts, clean (150 sheets)"),
+                             ("hard", "Handwriting fonts, blurry/tilted/faded (150)")]:
+            group = [r for r in stress if r["level"] == level]
+            rows.append([label, f"{sum(float(r['cer']) for r in group) / len(group):.1%}",
+                         f"{sum(float(r['cer']) == 0 for r in group)} of {len(group)}",
+                         f"{sum(r['flagged_misread'] == 'True' for r in group)} of {len(group)}"])
+    real_csv = os.path.join("results", "handwriting", "readings.csv")
+    if os.path.exists(real_csv):
+        with open(real_csv, encoding="utf-8-sig", newline="") as f:
+            real = list(csv.DictReader(f))
+        rows.append([f"Team's real handwriting ({len(real)} photos)",
+                     f"{sum(float(r['cer']) for r in real) / len(real):.1%}",
+                     f"{sum(float(r['cer']) == 0 for r in real)} of {len(real)}", "see report"])
+    else:
+        rows.append(["Team's real handwriting (30 photos)", "in progress", "", ""])
+    table(slide, ["Test", "Characters read wrongly", "Read perfectly", "Flagged as misread"],
+          rows, 0.7, 3.35, [5.0, 2.4, 2.2, 2.3], size=14, row_h=0.5)
+    off, on = run("test_ua", "handwriting_misread", "off"), run("test_ua", "handwriting_misread", "on")
+    caught = share(on, lambda r: any("misread" in d for d in r["detections"]))
+    bullets(slide, [f"Simulated misreading (about 7% of characters wrong, 537 answers): wrong grades reaching students "
+                    f"{share(off, wrong_reaching):.1%} with the safety layer off, {share(on, wrong_reaching):.1%} with it on; "
+                    f"the misread check fired on {caught:.0%}.",
+                    "Fonts are easier than real handwriting: the team's own photos are the honest test."],
+            top=5.45, size=13, height=1.4)
+
     # 14-15. Practical charts
     for title, file in [("Cheaper hardware", "12_budget_tiers.png"),
                         ("Teacher answer bank", "13_answer_bank.png")]:
@@ -245,7 +285,8 @@ def main():
     n += 1
     slide = new_slide("Limitations", n)
     bullets(slide, [
-        "One dataset (SciEntsBank, school science, English); typed answers only - no handwriting yet.",
+        "One dataset (SciEntsBank, school science, English); reading handwritten photos is a prototype, tested on "
+        "handwriting fonts and a small set of the team's own photos, not on real classes.",
         "Accuracy is about 0.72 on familiar questions and 0.63-0.64 on new ones: the system needs the teacher "
         "review step; it is a grading assistant, not a replacement.",
         "On new questions a wrong reference answer is only caught by word overlap with the question "
@@ -258,8 +299,7 @@ def main():
     n += 1
     slide = new_slide("Next steps", n)
     bullets(slide, [
-        "Photos of handwritten answer sheets: a small local vision model reads them into the spreadsheet "
-        "(and misreading becomes a new fault to measure).",
+        "Test photo reading on real class answer sheets (many writers, whole pages with several answers).",
         "Simple web page for teachers (upload, review, download) instead of a terminal command.",
         "Human rating of feedback quality; tests on a second dataset.",
         "Write up as a workshop paper (educational NLP).",

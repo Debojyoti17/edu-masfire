@@ -51,6 +51,20 @@ autocast, more epochs, or lr 1e-5/3e-5.
   methods summary for the team's report; 4. optional: photo input (local vision model via Ollama, e.g.
   qwen2.5vl:3b, needs internet once + user approval) with "misread handwriting" as a new fault.
 
+## Update 2026-10-28 (13:30)
+- Final runs are in `results/pipeline_v2/<set>_robust_full_refsim_deberta-v3-base-nli/` (adds the
+  new-question reference check and the handwriting_misread fault). Analysis, charts, the 20-slide
+  `results/slides/final_presentation.pptx` and `results/report_pack.html` (Tables 1-9) are rebuilt from them.
+- Photo prototype (src/ocr.py, qwen2.5vl:7b): stress test on 300 handwriting-font sheets
+  (scripts/stress_test_reader.py) gives 0.2% (clean) / 0.6% (blurry, tilted, faded) of characters
+  wrong, 0 false misread flags. Backup demo: examples/photo_quiz/ (6 font sheets, all read perfectly,
+  5 of 6 graded right). Simulated misreading on test_ua: wrong to student 33.5% off -> 6.1% on.
+- Saved demo transcripts in results/demo/ (tasks 23, 23 grader_lying, 1 student_truncate, 0 label_corrupted).
+- Waiting on the team (sent 28 Oct): Sammo writes H01-H15 + rates rater_A.csv, Prottoy writes H16-H30 +
+  rates rater_B.csv. When back: photos -> results/handwriting/photos/ (any names; rename by the code on
+  the sheet), then `python -m scripts.evaluate_handwriting`; sheets -> results/human_rating/, then
+  `python -m scripts.analyze_rating`; then rebuild slides and report pack.
+
 ## Next steps (older list)
 1. If fine-tuning works: set `EXTRA_GRADERS` in `src/judge.py` only if it raises the judge's
    cross-validated accuracy (compare `train_judge(regime, extras=[name])`), then rerun the v2 pipeline.

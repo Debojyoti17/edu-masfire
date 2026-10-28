@@ -12,7 +12,7 @@ from src.llm import BASE_OPTIONS, chat
 VISION_MODEL = "qwen2.5vl:7b"
 READ_PROMPT = """This photo shows a student's handwritten answer to a school science question.
 Write out exactly what the student wrote, word for word, keeping their spelling mistakes.
-Leave out the code at the top of the page (like H01). Reply with the answer text only."""
+Leave out the code at the top of the page (like H01 or P01). Reply with the answer text only."""
 # Pairs of letters (or letter groups) that handwriting readers often confuse.
 LOOKALIKES = [("rn", "m"), ("m", "rn"), ("cl", "d"), ("d", "cl"), ("l", "1"), ("i", "l"), ("o", "a"), ("a", "o"),
               ("e", "c"), ("c", "e"), ("u", "v"), ("v", "u"), ("n", "h"), ("h", "n"), ("t", "f"), ("g", "q"), ("s", "5")]
@@ -23,7 +23,7 @@ def read_photo(path, model=VISION_MODEL):
     confidence is the average probability the model gave the words it wrote (None if unavailable)."""
     response = chat(model=model, messages=[{"role": "user", "content": READ_PROMPT, "images": [path]}],
                     logprobs=True, options={**BASE_OPTIONS, "num_predict": 200})
-    text = re.sub(r"^\s*H\d{1,3}\b[\s:.\-]*", "", response.message.content.strip())
+    text = re.sub(r"^\s*[HP]\d{1,3}\b[\s:.\-]*", "", response.message.content.strip())  # H01 real, P01 example sheets
     probs = [math.exp(t.logprob) for t in (response.logprobs or [])]
     return text.strip(), (sum(probs) / len(probs) if probs else None)
 

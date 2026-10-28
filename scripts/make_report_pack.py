@@ -4,6 +4,7 @@
 # files. The summary text is reference material - the team writes the report prose in its own words.
 #
 # Usage: python -m scripts.make_report_pack
+import csv
 import html
 import json
 import os
@@ -77,6 +78,11 @@ def main():
         "alarms) sends the answer to a teacher; input check (empty / not ending like a sentence); canary "
         "check (32 known-grade answers, a grader is benched if binomial P(score this low) < 0.01); confidence escalation; "
         "Feedback verdict line fixed to the judge's label by prefilling.",
+        "Photo prototype: a local vision model (qwen2.5vl:7b) reads a photo of a handwritten answer into text; a "
+        "misread-word check sends the answer to a teacher when more than 16.7% of its words are neither English "
+        "dictionary words nor words of the question/reference (threshold set so 5% of genuine train answers are flagged). The handwriting_misread fault "
+        "simulates reading mistakes (look-alike letters swapped, letters dropped, words run together; about 7% of "
+        "characters wrong).",
         "Faults (redesigned pipeline): " + "; ".join(f"{k} = {v}" for k, v in FAULTS_V2.items() if k != "none") + ".",
         "Metrics: accuracy; wrong feedback reaching the student (wrong verdict and not held back); share held back "
         "for a teacher; share where a check fired. Exact McNemar tests with Holm correction compare each fault with "
@@ -170,6 +176,23 @@ def main():
     table("Table 8. Teacher answer bank (simulation)", ["Set", "Answers per question graded first", "Answers scored",
           "Accuracy", "Answers graded by hand for <= 5% wrong"], rows, "results/answer_bank/<set>.json; results/answer_bank_summary.md")
 
+    # Photo reader
+    rows = []
+    for name, path in [("Handwriting fonts (5 fonts x 30 answers, clean and blurry/tilted/faded)",
+                        os.path.join("results", "handwriting", "stress", "readings.csv")),
+                       ("Team's own handwriting (phone photos)", os.path.join("results", "handwriting", "readings.csv"))]:
+        if not os.path.exists(path):
+            rows.append([name, "-", "not yet run", "-", "-"])
+            continue
+        with open(path, encoding="utf-8-sig", newline="") as f:
+            readings = list(csv.DictReader(f))
+        cers = [float(r["cer"]) for r in readings]
+        flagged = sum(r.get("flagged_misread") == "True" for r in readings) if "flagged_misread" in readings[0] else "-"
+        rows.append([name, len(readings), f"{sum(cers) / len(cers):.1%}", f"{sum(c == 0 for c in cers)}", flagged])
+    table("Table 9. Photo reader (qwen2.5vl:7b): characters read wrongly", ["Sheets", "Images", "Average character error rate",
+          "Read perfectly", "Flagged as misread"], rows,
+          "results/handwriting/stress/summary.md, results/handwriting/summary.md")
+
     figures = [("01_grader_accuracy.png", "Single Grader accuracy, prompt versions and models"),
                ("02_confidence_auroc.png", "Confidence methods: AUROC (all 0.55-0.61)"),
                ("03_mass_capture.png", "Measurement finding: prefilling the answer"),
@@ -181,7 +204,8 @@ def main():
                ("13_answer_bank.png", "Teacher answer bank simulation")]
     text("Figures (results/charts/)", [f"{f}: {d}" for f, d in figures if os.path.exists(os.path.join("results", "charts", f))])
     text("Limitations", [
-        "One dataset (SciEntsBank, English school science); typed answers only.",
+        "One dataset (SciEntsBank, English school science). Photo reading is a prototype: tested on handwriting fonts "
+        "(easier than real handwriting) and a small set of the team's own photos, one answer per photo.",
         "Accuracy 0.72 on familiar questions and 0.63-0.64 on new ones: teacher review stays necessary.",
         "On new questions a wrong reference answer is only caught by word overlap with the question (it is sent to the "
         "teacher, not repaired); about 5% of genuine pairs are flagged as false alarms.",
