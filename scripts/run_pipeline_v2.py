@@ -127,14 +127,15 @@ def lie(label):
 
 
 def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges, threshold, text_cache, notes,
-                verdict_only=False, benched_graders=frozenset(), input_flagged=False):
+                verdict_only=False, benched_graders=frozenset(), input_flagged=False, explain=False):
     """Judge, Tutor and Feedback for one task, using cached grader answers. Returns the record.
     verdict_only=True skips writing the advice text: the Feedback verdict line is fixed to the label
     it is handed (0 mismatches in over 25,000 generated cases), so the delivered verdict is that label.
     benched_graders: (model, mode) pairs the canary check benched; their votes are left out.
-    input_flagged: the input check found a problem, so the answer goes to a teacher."""
+    input_flagged: the input check found a problem, so the answer goes to a teacher.
+    explain=True also returns what every grader told the judge and the escalation threshold (for the demo)."""
     start = time.time()
-    columns, grader_labels = [], {}
+    columns, grader_labels, inputs = [], {}, {}
     for model, mode, prompt in prompts:
         label, probs, mass = grader_cache[key_of(model, prompt)]
         message = make_message(task, f"grader:{model}:{mode}", {"label": label, "probs": probs})
@@ -154,9 +155,12 @@ def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges
         p = payload["probs"]
         columns += [p[l] for l in LABELS] if p else [0.25] * 4
         grader_labels[f"{model}|{mode}"] = payload["label"]
-    columns += tfidf_probs(task)
+        inputs[f"{model} ({mode} examples)"] = [p[l] for l in LABELS] if p else None
+    inputs["TF-IDF classifier"] = tfidf_probs(task)
+    columns += inputs["TF-IDF classifier"]
     for name in EXTRA_GRADERS:
-        columns += finetuned_probs(task, name)
+        inputs[f"{name} (fine-tuned)"] = finetuned_probs(task, name)
+        columns += inputs[f"{name} (fine-tuned)"]
     labels, probs = judge_predict(judges[regime], [columns])
     final, confidence = labels[0], float(max(probs[0]))
 
@@ -169,9 +173,10 @@ def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges
         label_message = make_message(task, "judge", {"label": final, "confidence": confidence})
     sent = label_message["payload"]["label"]
 
+    details = {"inputs": inputs, "threshold": threshold[regime]} if explain else {}
     if verdict_only:
         escalated = ft == "on" and (confidence < threshold[regime] or input_flagged)
-        return {"task_id": original["task_id"], "gold_label": original["gold_label"], "fault": fault, "ft": ft,
+        return details | {"task_id": original["task_id"], "gold_label": original["gold_label"], "fault": fault, "ft": ft,
                 "regime": regime, "grader_labels": grader_labels, "final_label": final, "confidence": confidence,
                 "label_sent": sent, "feedback": None, "feedback_generated": False, "delivered": sent,
                 "escalated": escalated, "detections": list(notes), "seconds": round(time.time() - start, 2)}
@@ -190,7 +195,7 @@ def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges
         notes.append("feedback verdict could not be read back as the label it was given")
     delivered = parse_verdict(feedback_text)
     escalated = ft == "on" and (confidence < threshold[regime] or input_flagged)
-    return {"task_id": original["task_id"], "gold_label": original["gold_label"], "fault": fault, "ft": ft,
+    return details | {"task_id": original["task_id"], "gold_label": original["gold_label"], "fault": fault, "ft": ft,
             "regime": regime, "grader_labels": grader_labels, "final_label": final, "confidence": confidence,
             "label_sent": sent, "feedback": feedback_text, "delivered": delivered, "escalated": escalated,
             "detections": list(notes), "seconds": round(time.time() - start, 2)}
