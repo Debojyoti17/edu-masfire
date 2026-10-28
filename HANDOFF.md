@@ -65,6 +65,15 @@ autocast, more epochs, or lr 1e-5/3e-5.
   the sheet), then `python -m scripts.evaluate_handwriting`; sheets -> results/human_rating/, then
   `python -m scripts.analyze_rating`; then rebuild slides and report pack.
 
+## Update 2026-10-29
+- Real handwriting: 15 photos from Sammo (H01-H15; Prottoy sent none, final set). Codes were not written
+  on the sheets: matched by text. results/handwriting/as_written.csv records 3 copying differences.
+  Result: 3.2% characters wrong, 8/15 perfect, same grade as typed 14/15, misread check flagged 0 (reader
+  errors are real words), 6 held because answers lack a final full stop (cut-off check). Not tuned after
+  seeing this (would be tuning on the test); reported as limitations.
+- Rating sheets: first versions unusable (Sammo rated "understand"; Prottoy 22/60 valid). Originals kept as
+  results/human_rating/rater_*_received.xlsx, blanks as rater_*_blank.csv. Team asked to redo on 29 Oct.
+
 ## Next steps (older list)
 1. If fine-tuning works: set `EXTRA_GRADERS` in `src/judge.py` only if it raises the judge's
    cross-validated accuracy (compare `train_judge(regime, extras=[name])`), then rerun the v2 pipeline.

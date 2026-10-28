@@ -243,7 +243,7 @@ def main():
             real = list(csv.DictReader(f))
         with open(os.path.join("results", "handwriting", "class_photos_graded.csv"), encoding="utf-8-sig", newline="") as f:
             flagged = sum("misread" in r["reason"] for r in csv.DictReader(f))
-        rows.append([f"Team's real handwriting ({len(real)} photos)",
+        rows.append([f"Real handwriting ({len(real)} phone photos, 1 writer)",
                      f"{sum(float(r['cer']) for r in real) / len(real):.1%}",
                      f"{sum(float(r['cer']) == 0 for r in real)} of {len(real)}", f"{flagged} of {len(real)}"])
     else:

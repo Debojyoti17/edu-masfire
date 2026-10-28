@@ -180,7 +180,7 @@ def main():
     rows = []
     for name, path in [("Handwriting fonts (5 fonts x 30 answers, clean and blurry/tilted/faded)",
                         os.path.join("results", "handwriting", "stress", "readings.csv")),
-                       ("Team's own handwriting (phone photos)", os.path.join("results", "handwriting", "readings.csv"))]:
+                       ("Real handwriting (phone photos, one team member)", os.path.join("results", "handwriting", "readings.csv"))]:
         if not os.path.exists(path):
             rows.append([name, "-", "not yet run", "-", "-"])
             continue
@@ -205,7 +205,11 @@ def main():
     text("Figures (results/charts/)", [f"{f}: {d}" for f, d in figures if os.path.exists(os.path.join("results", "charts", f))])
     text("Limitations", [
         "One dataset (SciEntsBank, English school science). Photo reading is a prototype: tested on handwriting fonts "
-        "(easier than real handwriting) and a small set of the team's own photos, one answer per photo.",
+        "(easier than real handwriting) and 15 phone photos written by one team member, one answer per photo.",
+        "On real handwriting the reader's mistakes were real words (e.g. 'Because' read as 'Became'), so the "
+        "misread-word check caught none of them (it was built and tested on simulated mistakes that create non-words); "
+        "and answers written without a final full stop were held back by the cut-off check, which was designed for "
+        "typed answers. Both checks need redesigning for photos; photo answers should be checked by a teacher.",
         "Accuracy 0.72 on familiar questions and 0.63-0.64 on new ones: teacher review stays necessary.",
         "On new questions a wrong reference answer is only caught by word overlap with the question (it is sent to the "
         "teacher, not repaired); about 5% of genuine pairs are flagged as false alarms.",
