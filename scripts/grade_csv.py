@@ -10,13 +10,15 @@
 # What happens:
 #   1. canary check: each LLM grader grades 32 answers with known grades; a grader that scores
 #      far below its normal level is left out for this session
-#   2. input check: empty or cut-off answers go straight to the teacher
+#   2. input check: empty or cut-off answers go straight to the teacher; for a question the system
+#      does not know, a reference answer that shares almost no words with its question is reported
 #   3. three LLM graders + TF-IDF (+ the fine-tuned grader if the judge uses it) -> judge
 #   4. grades the judge is not confident about go to the teacher; the rest get short feedback
 # Output, next to the input file:
 #   <name>_graded.csv  every answer with grade, confidence, status (auto / teacher / teacher-graded)
 #                      and feedback text
-#   <name>_review.csv  only the answers the teacher must check, with an empty teacher_label column.
+#   <name>_review.csv  only the answers the teacher must check, with the two most likely grades
+#                      and an empty teacher_label column.
 #                      Fill it in, copy those grades into the input file's teacher_label column and
 #                      run again: they join the answer bank and improve the next grades.
 #
@@ -31,10 +33,11 @@ import time
 
 from src.agents import LABEL_WORDS
 from src.graders import grade_with_prompt, rag_prompt
-from src.health import benched, canary_set, check_input, expected_canary_accuracy
+from src.health import (benched, canary_set, check_input, expected_canary_accuracy, fit_reference_check,
+                        reference_looks_wrong)
 from src.judge import EXTRA_GRADERS, LABELS, MODELS, REGIME_MODES, choose_threshold, judge_predict, train_judge
 from src.finetuned import finetuned_probs
-from src.pipeline_v2 import FEEDBACK_VERSION, tfidf_probs, tutor, write_feedback
+from src.pipeline_v2 import FEEDBACK_VERSION, check_reference, tfidf_probs, tutor, write_feedback
 from src.retrieval import has_same_question_examples, retrieve, use_answer_bank
 from scripts.run_grader import build_prompt
 from scripts.run_pipeline_v2 import CACHE_DIR, FEEDBACK_MODEL, key_of, load_cache, save_to_cache
@@ -146,6 +149,7 @@ def main():
 
     # Judge, checks and feedback.
     text_cache = load_cache("text")
+    reference_check = fit_reference_check(rows)
     for n, r in enumerate(todo, start=1):
         columns = []
         for model, mode, prompt in plans[r["task_id"]]:
@@ -156,7 +160,11 @@ def main():
             columns += finetuned_probs(r, name)
         labels, probs = judge_predict(judges[r["regime"]], [columns])
         r["label"], r["confidence"] = labels[0], round(float(max(probs[0])), 3)
+        top = sorted(zip(LABELS, probs[0]), key=lambda lp: -lp[1])[:2]
+        r["top_two"] = " / ".join(f"{LABEL_WORDS[l]} {p:.2f}" for l, p in top)
         problems = check_input(r)
+        if check_reference(r)[0] == "unknown question" and reference_looks_wrong(r, reference_check):
+            problems.append("reference answer shares almost no words with the question - please check it")
         if problems:
             r["status"], r["reason"] = "teacher", problems[0]
         elif r["confidence"] < threshold[r["regime"]]:
@@ -186,7 +194,7 @@ def main():
     write_csv(base + "_graded.csv", rows, out_columns)
     review = [dict(r, teacher_label="") for r in rows if r["status"] == "teacher"]
     write_csv(base + "_review.csv", review, ["student", "question", "reference_answer", "student_answer",
-                                             "grade", "confidence", "reason", "teacher_label"])
+                                             "grade", "confidence", "top_two", "reason", "teacher_label"])
     auto = sum(r["status"] == "auto" for r in rows)
     print(f"\nDone in {time.time() - start:.0f}s: {auto} graded automatically, {len(review)} for the teacher to check.")
     print(f"  {base}_graded.csv\n  {base}_review.csv")

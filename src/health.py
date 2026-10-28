@@ -6,16 +6,26 @@
 #     score is far below what it normally achieves (less than a 1% chance of being that low by bad
 #     luck). This catches a grader that has gone wrong in a way message checks cannot see (for
 #     example one that confidently gives wrong labels) without benching graders that are simply weak.
+#   - reference check for new questions: a reference answer that shares almost no words with its
+#     question was probably mixed up with another question's, so the answer goes to a teacher.
 import json
 import math
 import os
 import random
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 from src.retrieval import LABELS, load_train
 
 CANARIES_PER_LABEL = 8
 BENCH_IF_CHANCE_BELOW = 0.01
 SENTENCE_ENDINGS = ".!?)\"'"
+# Lowest word similarity between a question and its reference answer before the reference is
+# suspected to belong to another question. Chosen on the train split so that 5% of genuine
+# question/reference pairs are flagged (train: 94.9% of swapped references caught); on the test
+# sets it flagged 5.5% / 4.5% of genuine pairs and caught 94.5% / 92.2% of swaps (test_uq / test_ud).
+REFERENCE_SIMILARITY_MIN = 0.059
 
 
 def check_input(task):
@@ -28,6 +38,19 @@ def check_input(task):
     if answer[-1] not in SENTENCE_ENDINGS:
         return ["student answer does not end like a sentence (possibly cut off)"]
     return []
+
+
+def fit_reference_check(tasks):
+    """Learn the words used in this session's questions and reference answers (common English words
+    left out), for reference_looks_wrong."""
+    return TfidfVectorizer(stop_words="english").fit([t["question"] + " " + t["reference_answer"] for t in tasks])
+
+
+def reference_looks_wrong(task, vectorizer):
+    """True if the reference answer shares almost no words with the question (similarity below
+    REFERENCE_SIMILARITY_MIN), which suggests it belongs to a different question."""
+    sim = cosine_similarity(vectorizer.transform([task["question"]]), vectorizer.transform([task["reference_answer"]]))
+    return float(sim[0, 0]) < REFERENCE_SIMILARITY_MIN
 
 
 def canary_set():

@@ -15,7 +15,8 @@
 #   --judge plain uses a judge trained without fault-aware copies (saved in <set>/, for comparison);
 #   the default robust judge saves in <set>_robust/.
 #   --verdict-only skips writing the advice text (the verdict is fixed to the label anyway).
-#   --checks basic leaves out the input check and canary check (saved without the _full suffix).
+#   --checks basic leaves out the input check, canary check and new-question reference check (saved
+#   without the _full_refsim suffix; folders named _full are from before the new-question reference check).
 #   Extra (fine-tuned) graders used by the judge (src/judge.py EXTRA_GRADERS) are added to the folder name.
 import hashlib
 import json
@@ -26,7 +27,8 @@ import time
 from src.agents import parse_verdict
 from src.faults import OVERCLAIM_TEXT, corrupt_task, donor_index, flip_label
 from src.graders import grade_with_prompt, rag_prompt
-from src.health import benched, canary_set, check_input, expected_canary_accuracy
+from src.health import (benched, canary_set, check_input, expected_canary_accuracy, fit_reference_check,
+                        reference_looks_wrong)
 from src.judge import EXTRA_GRADERS, LABELS, MODELS, REGIME_MODES, judge_predict, train_judge, choose_threshold
 from src.finetuned import finetuned_probs
 from src.pipeline_v2 import (FEEDBACK_VERSION, check_message, check_reference, make_message, write_feedback,
@@ -48,6 +50,7 @@ FAULTS_V2 = {
     "tutor_overclaim": "Tutor claims the answer covers every key point with no errors",
 }
 CACHE_DIR = os.path.join("results", "pipeline_v2", "cache")
+_reference_checks = {}  # one fitted reference check per task list
 
 
 # ---------------------------------------------------------------- caching of model answers
@@ -202,8 +205,9 @@ def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges
 
 
 def prepare(task, tasks, i, fault, ft, full_checks=False):
-    """Apply input faults, the reference check and (full checks) the input check, then the Planner
-    stage. Returns (task the agents see, regime, grader prompts, notes, input flagged)."""
+    """Apply input faults, the reference check and (full checks) the input check and the reference
+    check for new questions, then the Planner stage. Returns (task the agents see, regime, grader
+    prompts, notes, input flagged)."""
     notes = []
     donor = tasks[donor_index(tasks, i)]
     seen_task = corrupt_task(task, fault, donor) if fault in ("reference_swap", "student_truncate") else dict(task)
@@ -217,6 +221,12 @@ def prepare(task, tasks, i, fault, ft, full_checks=False):
         for problem in check_input(seen_task):
             notes.append(f"input check: {problem} -> sent to a teacher")
             input_flagged = True
+        if status == "unknown question":
+            if id(tasks) not in _reference_checks:
+                _reference_checks[id(tasks)] = fit_reference_check(tasks)
+            if reference_looks_wrong(seen_task, _reference_checks[id(tasks)]):
+                notes.append("reference answer does not seem to match the question -> sent to a teacher")
+                input_flagged = True
     regime, plans = plan_stage(seen_task, fault, ft, donor, notes)
     return seen_task, regime, grader_prompts(seen_task, regime, plans), notes, input_flagged
 
@@ -247,7 +257,7 @@ def main():
     robust = option("--judge", "robust") == "robust"
     verdict_only = "--verdict-only" in args
     full_checks = option("--checks", "full") == "full"
-    suffix = (("_robust" if robust else "") + ("_full" if full_checks else "")
+    suffix = (("_robust" if robust else "") + ("_full_refsim" if full_checks else "")
               + ("_" + "_".join(EXTRA_GRADERS) if EXTRA_GRADERS else "") + (f"_limit{limit}" if limit else ""))
     out_dir = os.path.join("results", "pipeline_v2", set_name + suffix)
     os.makedirs(out_dir, exist_ok=True)
