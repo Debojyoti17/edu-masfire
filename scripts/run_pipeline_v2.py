@@ -29,7 +29,7 @@ from src.graders import grade_with_prompt, rag_prompt
 from src.health import benched, canary_set, check_input, expected_canary_accuracy
 from src.judge import EXTRA_GRADERS, LABELS, MODELS, REGIME_MODES, judge_predict, train_judge, choose_threshold
 from src.finetuned import finetuned_probs
-from src.pipeline_v2 import (check_message, check_reference, make_message, write_feedback,
+from src.pipeline_v2 import (FEEDBACK_VERSION, check_message, check_reference, make_message, write_feedback,
                              tfidf_probs, tutor)
 from src.retrieval import has_same_question_examples, retrieve
 from scripts.run_grader import build_prompt
@@ -186,7 +186,7 @@ def finish_task(task, original, fault, ft, regime, prompts, grader_cache, judges
         save_to_cache("text", tutor_key, tutor(task, FEEDBACK_MODEL), text_cache)
     tutor_notes = OVERCLAIM_TEXT if fault == "tutor_overclaim" else text_cache[tutor_key]
 
-    fb_key = key_of("feedback-fixed-verdict", FEEDBACK_MODEL, task["question"], task["reference_answer"],
+    fb_key = key_of(FEEDBACK_VERSION, FEEDBACK_MODEL, task["question"], task["reference_answer"],
                     task["student_answer"], str(sent), tutor_notes)
     if fb_key not in text_cache:
         save_to_cache("text", fb_key, list(write_feedback(task, sent, tutor_notes, FEEDBACK_MODEL)), text_cache)

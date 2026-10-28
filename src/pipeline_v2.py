@@ -18,6 +18,10 @@ from scripts.run_tfidf_baseline import build_features, load_split
 LABELS = ["correct", "contradictory", "partially_correct_incomplete", "irrelevant"]
 TUTOR_MAX_TOKENS = 160
 FEEDBACK_MAX_TOKENS = 120
+# Name of the current Feedback prompt, used in the cache key so a changed prompt is not answered
+# from old cached text. v2: write to the student as "you" (v1 sometimes greeted a character from
+# the question, e.g. "Great job, David!").
+FEEDBACK_VERSION = "feedback-fixed-verdict-v2"
 _cache = {}
 
 
@@ -89,7 +93,8 @@ Tutor's comparison:
 {notes or "(none provided)"}
 
 Write 2-3 short, encouraging sentences for the student that are consistent with that verdict,
-explaining what was good and what to improve.
+explaining what was good and what to improve. Speak directly to the student as "you". Do not greet
+or name anyone: names in the question belong to people in the question, not to the student.
 """
     rest = generate(prompt, model=model, max_tokens=FEEDBACK_MAX_TOKENS, prefill=fixed)
     text = fixed + rest.strip()

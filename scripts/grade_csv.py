@@ -34,7 +34,7 @@ from src.graders import grade_with_prompt, rag_prompt
 from src.health import benched, canary_set, check_input, expected_canary_accuracy
 from src.judge import EXTRA_GRADERS, LABELS, MODELS, REGIME_MODES, choose_threshold, judge_predict, train_judge
 from src.finetuned import finetuned_probs
-from src.pipeline_v2 import tfidf_probs, tutor, write_feedback
+from src.pipeline_v2 import FEEDBACK_VERSION, tfidf_probs, tutor, write_feedback
 from src.retrieval import has_same_question_examples, retrieve, use_answer_bank
 from scripts.run_grader import build_prompt
 from scripts.run_pipeline_v2 import CACHE_DIR, FEEDBACK_MODEL, key_of, load_cache, save_to_cache
@@ -167,7 +167,7 @@ def main():
             key = key_of("tutor", FEEDBACK_MODEL, r["question"], r["reference_answer"], r["student_answer"])
             if key not in text_cache:
                 save_to_cache("text", key, tutor(r, FEEDBACK_MODEL), text_cache)
-            fb_key = key_of("feedback-fixed-verdict", FEEDBACK_MODEL, r["question"], r["reference_answer"],
+            fb_key = key_of(FEEDBACK_VERSION, FEEDBACK_MODEL, r["question"], r["reference_answer"],
                             r["student_answer"], r["label"], text_cache[key])
             if fb_key not in text_cache:
                 save_to_cache("text", fb_key, list(write_feedback(r, r["label"], text_cache[key], FEEDBACK_MODEL)),
