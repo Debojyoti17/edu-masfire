@@ -449,6 +449,115 @@ def chart_v2(set_name="120"):
     save(fig, f"10_v2_faults_{set_name}.png")
 
 
+def chart_tradeoff():
+    """11: the safety trade-off for the judge with and without the fine-tuned DeBERTa grader: for every
+    share of answers held back for a teacher (least confident first), the share of wrong grades that
+    still reach students. Familiar questions (test_ua) and new questions (test_uq)."""
+    import numpy as np
+    setups = [("Judge: 3 LLMs + TF-IDF", "_robust_full", DEEMPH),
+              ("Judge: 3 LLMs + TF-IDF + fine-tuned DeBERTa", "_robust_full_deberta-v3-base-nli", SERIES[0])]
+    panels = [("test_ua", "Questions with teacher-graded examples (537 answers)"),
+              ("test_uq", "New questions (733 answers)")]
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4.6), sharey=True)
+    fig.subplots_adjust(left=0.07, right=0.98, top=0.78, bottom=0.2, wspace=0.08)
+    for ax, (set_name, label) in zip(axes, panels):
+        for name, suffix, color in setups:
+            recs = load_jsonl(os.path.join("results", "pipeline_v2", set_name + suffix, "none_on.jsonl"))
+            if not recs:
+                continue
+            order = np.argsort([r["confidence"] for r in recs], kind="stable")
+            right = np.array([r["final_label"] == r["gold_label"] for r in recs])[order]
+            n = len(recs)
+            held = np.arange(n + 1) / n
+            wrong = np.array([(~right[k:]).sum() / n for k in range(n + 1)])
+            ax.plot(100 * held, 100 * wrong, color=color, linewidth=2.2, label=name)
+        ax.set_title(label, fontsize=10.5, color=INK2, loc="left")
+        ax.set_xlabel("Answers held back for a teacher (%)")
+        ax.set_xlim(0, 100)
+        ax.set_ylim(0, 45)
+    axes[0].set_ylabel("Wrong grades reaching students (%)")
+    fig.legend(*axes[0].get_legend_handles_labels(), loc="lower center", ncol=2, frameon=False)
+    titles(fig, "Adding the fine-tuned grader: fewer wrong grades at every level of teacher review",
+           "No faults, safety layer on. Least confident grades are held back first; lower is better.")
+    save(fig, "11_judge_tradeoff.png")
+
+
+def chart_budget():
+    """12: accuracy of the judge built from different hardware tiers, on the three test sets
+    (results/budget/benchmark.json), with speed per answer on a CPU-only laptop."""
+    path = os.path.join("results", "budget", "benchmark.json")
+    if not os.path.exists(path):
+        return
+    bench = json.load(open(path, encoding="utf-8"))
+    acc = {(j["judge"], j["set"]): j["accuracy"] for j in bench["judges"]}
+    setups = [("full + deberta-v3-base-nli", "8 GB GPU: 3 LLMs (7-9B) + TF-IDF + DeBERTa", SERIES[0]),
+              ("budget + deberta-v3-base-nli", "~4 GB GPU: 3 small LLMs (2-3B) + TF-IDF + DeBERTa", SERIES[1]),
+              ("no LLM: TF-IDF + deberta-v3-base-nli", "No GPU: TF-IDF + DeBERTa only", SERIES[2])]
+    sets = [("test_ua", "Questions with\ngraded examples"), ("test_uq", "New questions"), ("test_ud_600", "New topics")]
+    fig, ax = plt.subplots(figsize=(10, 4.8))
+    fig.subplots_adjust(left=0.08, right=0.98, top=0.8, bottom=0.25)
+    w = 0.26
+    for k, (key, name, color) in enumerate(setups):
+        xs = [i + (k - 1) * w for i in range(len(sets))]
+        vals = [acc.get((key, s), 0) for s, _ in sets]
+        ax.bar(xs, [100 * v for v in vals], width=w * 0.92, color=color, label=name)
+        for x, v in zip(xs, vals):
+            ax.text(x, 100 * v + 1, f"{v:.2f}", ha="center", fontsize=9, color=INK)
+    ax.set_xticks(range(len(sets)), [l for _, l in sets])
+    ax.set_ylabel("Judge accuracy (%)")
+    ax.set_ylim(0, 85)
+    ax.grid(axis="x", visible=False)
+    fig.legend(*ax.get_legend_handles_labels(), loc="lower center", ncol=1, frameon=False)
+    cpu = {c["model"]: c["cpu_seconds_per_answer"] for c in bench.get("cpu_timing", [])}
+    speed = (f"On a CPU only: DeBERTa {cpu.get('deberta-v3-base-nli', float('nan')):.2f} s per answer, "
+             f"a 3B LLM about {cpu.get('qwen2.5:3b', float('nan')):.0f} s, a 7B LLM about {cpu.get('qwen2.5:7b', float('nan')):.0f} s.")
+    titles(fig, "It also runs on cheaper laptops: small accuracy cost, even with no graphics card", speed)
+    save(fig, "12_budget_tiers.png")
+
+
+def chart_answer_bank():
+    """13: what happens when the teacher grades the first k answers to each new question by hand
+    (results/answer_bank): accuracy rises, but the teacher's total workload at the same safety level
+    (at most 5% wrong grades reaching students) does not fall."""
+    from scripts.analyze_answer_bank import workload
+    from src.judge import LABELS
+    from collections import Counter
+    import numpy as np
+    sets = [("test_uq", "New questions (test_uq)", SERIES[0]), ("test_ud_600", "New topics (test_ud)", SERIES[1])]
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4.4))
+    fig.subplots_adjust(left=0.08, right=0.98, top=0.78, bottom=0.2, wspace=0.25)
+    for set_name, label, color in sets:
+        path = os.path.join("results", "answer_bank", f"{set_name}.json")
+        if not os.path.exists(path):
+            continue
+        run = json.load(open(path, encoding="utf-8"))
+        tasks = json.load(open(os.path.join("data", f"eval_{set_name}.json"), encoding="utf-8"))
+        gold = {t["task_id"]: t["gold_label"] for t in tasks}
+        questions = len(Counter(t["question"] for t in tasks))
+        ks, accs, loads = [], [], []
+        for k in ["0", "2", "4", "8"]:
+            answers = run["per_answer"][k]
+            probs = np.array(list(answers.values()))
+            right = [LABELS[int(p.argmax())] == gold[i] for i, p in zip(answers, probs)]
+            ks.append(int(k))
+            accs.append(np.mean(right))
+            loads.append(workload(probs.max(axis=1), right, int(k) * questions, 0.05))
+        axes[0].plot(ks, [100 * a for a in accs], marker="o", color=color, linewidth=2.2, label=label)
+        axes[1].plot(ks, loads, marker="o", color=color, linewidth=2.2, label=f"{label}, {len(answers)} answers scored")
+    axes[0].set_ylabel("Accuracy (%)")
+    axes[1].set_ylabel("Answers the teacher grades by hand")
+    axes[0].set_title("Accuracy goes up", fontsize=10.5, color=INK2, loc="left")
+    axes[1].set_title("Hand-grading needed for <= 5% wrong grades does not go down", fontsize=10.5, color=INK2, loc="left")
+    for ax in axes:
+        ax.set_xticks([0, 2, 4, 8])
+        ax.set_xlabel("Answers per question graded by the teacher first")
+    axes[0].set_ylim(40, 80)
+    fig.legend(*axes[1].get_legend_handles_labels(), loc="lower center", ncol=2, frameon=False)
+    titles(fig, "Teacher answer bank: a trade of teacher time for accuracy",
+           "Simulation: the teacher grades the first k answers to each new question; the rest are graded with those as examples.")
+    save(fig, "13_answer_bank.png")
+
+
 def main():
     """Make every chart whose data exists."""
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -471,6 +580,10 @@ def main():
     chart_test_ua()
     chart_v2("120")
     chart_v2("120_robust_full")
+    chart_v2("120_robust_full_deberta-v3-base-nli")
+    chart_tradeoff()
+    chart_budget()
+    chart_answer_bank()
 
 
 if __name__ == "__main__":

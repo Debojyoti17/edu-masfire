@@ -27,6 +27,7 @@ GREY = RGBColor(0x52, 0x51, 0x4E)
 HEADER_FILL = RGBColor(0xD9, 0xE2, 0xF3)
 MODELS = ["qwen2.5:7b", "llama3.1:8b", "mistral:7b", "gemma2:9b"]
 NOTES = "[Your talking points]"
+FOOTER = "Fault-tolerant multi-agent grading  |  Final presentation, 24 October 2026"
 
 prs = Presentation()
 prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
@@ -51,8 +52,7 @@ def new_slide(title, number):
     """A blank slide with a title, a footer, a slide number and the talking-points note."""
     slide = prs.slides.add_slide(BLANK)
     text_box(slide, 0.5, 0.3, 12.3, 0.8, title, size=28, bold=True, color=NAVY)
-    text_box(slide, 0.5, 7.0, 9, 0.35, "Fault-tolerant multi-agent grading  |  Final presentation, 24 October 2026",
-             size=10, color=GREY)
+    text_box(slide, 0.5, 7.0, 9, 0.35, FOOTER, size=10, color=GREY)
     text_box(slide, 12.0, 7.0, 0.8, 0.35, str(number), size=10, color=GREY, align=PP_ALIGN.RIGHT)
     slide.notes_slide.notes_text_frame.text = NOTES
     return slide
