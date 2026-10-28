@@ -6,6 +6,9 @@
 # first few answers to a new question): those grades are kept as they are AND become worked
 # examples for grading the rest ("answer bank"). Accepted labels: correct, partially correct,
 # contradictory, irrelevant.
+# Handwritten answers: add a `photo` column with the path of a photo of the answer (relative to the
+# CSV file) and leave student_answer empty. A local vision model reads the photo first; the reading
+# is shown in the output, and readings with many unknown words go to the teacher.
 #
 # What happens:
 #   1. canary check: each LLM grader grades 32 answers with known grades; a grader that scores
@@ -25,6 +28,7 @@
 # Usage:
 #   python -m scripts.grade_csv examples/class_quiz.csv
 #   python -m scripts.grade_csv examples/class_quiz.csv --no-feedback     grades only (faster)
+#   python -m scripts.grade_csv results/handwriting/class_photos.csv         answers read from photos
 import csv
 import os
 import pickle
@@ -34,7 +38,7 @@ import time
 from src.agents import LABEL_WORDS
 from src.graders import grade_with_prompt, rag_prompt
 from src.health import (benched, canary_set, check_input, expected_canary_accuracy, fit_reference_check,
-                        reference_looks_wrong)
+                        looks_misread, reference_looks_wrong)
 from src.judge import EXTRA_GRADERS, LABELS, MODELS, REGIME_MODES, choose_threshold, judge_predict, train_judge
 from src.finetuned import finetuned_probs
 from src.pipeline_v2 import FEEDBACK_VERSION, check_reference, tfidf_probs, tutor, write_feedback
@@ -120,6 +124,14 @@ def main():
     path, with_feedback = args[0], "--no-feedback" not in args
     start = time.time()
     rows = read_rows(path)
+    photos = [r for r in rows if not (r.get("student_answer") or "").strip() and (r.get("photo") or "").strip()]
+    if photos:
+        from src.ocr import read_photo
+        print(f"Reading {len(photos)} handwritten answers from photos ...", flush=True)
+        for r in photos:
+            r["student_answer"], confidence = read_photo(os.path.join(os.path.dirname(path), r["photo"]))
+            r["read_from_photo"] = "yes"
+            r["reading_confidence"] = "" if confidence is None else round(confidence, 3)
     bank = [{"id": r["task_id"], "question": r["question"], "reference_answer": r["reference_answer"],
              "student_answer": r["student_answer"], "label_name": r["label"]} for r in rows if r["label"]]
     use_answer_bank(bank)
@@ -163,6 +175,8 @@ def main():
         top = sorted(zip(LABELS, probs[0]), key=lambda lp: -lp[1])[:2]
         r["top_two"] = " / ".join(f"{LABEL_WORDS[l]} {p:.2f}" for l, p in top)
         problems = check_input(r)
+        if r.get("read_from_photo") and looks_misread(r):
+            problems.append("many unknown words in the reading of the photo - handwriting may be misread")
         if check_reference(r)[0] == "unknown question" and reference_looks_wrong(r, reference_check):
             problems.append("reference answer shares almost no words with the question - please check it")
         if problems:
@@ -191,10 +205,12 @@ def main():
         r["grade"] = LABEL_WORDS[r["label"]]
     base = os.path.splitext(path)[0]
     out_columns = ["student", "question", "student_answer", "grade", "confidence", "status", "reason", "feedback"]
+    if photos:
+        out_columns[3:3] = ["photo", "reading_confidence"]
     write_csv(base + "_graded.csv", rows, out_columns)
     review = [dict(r, teacher_label="") for r in rows if r["status"] == "teacher"]
-    write_csv(base + "_review.csv", review, ["student", "question", "reference_answer", "student_answer",
-                                             "grade", "confidence", "top_two", "reason", "teacher_label"])
+    write_csv(base + "_review.csv", review, ["student", "question", "reference_answer", "student_answer"]
+              + (["photo"] if photos else []) + ["grade", "confidence", "top_two", "reason", "teacher_label"])
     auto = sum(r["status"] == "auto" for r in rows)
     print(f"\nDone in {time.time() - start:.0f}s: {auto} graded automatically, {len(review)} for the teacher to check.")
     print(f"  {base}_graded.csv\n  {base}_review.csv")

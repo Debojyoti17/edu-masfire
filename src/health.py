@@ -8,10 +8,13 @@
 #     example one that confidently gives wrong labels) without benching graders that are simply weak.
 #   - reference check for new questions: a reference answer that shares almost no words with its
 #     question was probably mixed up with another question's, so the answer goes to a teacher.
+#   - word check for answers read from photos: if many words of the reading are not real words seen
+#     before, the handwriting was probably misread, so the answer goes to a teacher.
 import json
 import math
 import os
 import random
+import re
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -21,11 +24,18 @@ from src.retrieval import LABELS, load_train
 CANARIES_PER_LABEL = 8
 BENCH_IF_CHANCE_BELOW = 0.01
 SENTENCE_ENDINGS = ".!?)\"'"
+_known = {}
 # Lowest word similarity between a question and its reference answer before the reference is
 # suspected to belong to another question. Chosen on the train split so that 5% of genuine
 # question/reference pairs are flagged (train: 94.9% of swapped references caught); on the test
 # sets it flagged 5.5% / 4.5% of genuine pairs and caught 94.5% / 92.2% of swaps (test_uq / test_ud).
 REFERENCE_SIMILARITY_MIN = 0.059
+# Highest share of unknown words (not in the train answers, questions and reference answers, nor in
+# this question and its reference answer) before a photo reading is suspected to be misread. Chosen
+# so that 5% of genuine train answers are flagged, scoring each half of the train questions with a
+# vocabulary built from the other half. On simulated misreadings (about 7% of characters wrong) it
+# caught 75% / 72% / 78% and flagged 1.1% / 1.8% / 10.2% of genuine answers (test_ua / test_uq / test_ud).
+UNKNOWN_WORDS_MAX = 0.167
 
 
 def check_input(task):
@@ -51,6 +61,28 @@ def reference_looks_wrong(task, vectorizer):
     REFERENCE_SIMILARITY_MIN), which suggests it belongs to a different question."""
     sim = cosine_similarity(vectorizer.transform([task["question"]]), vectorizer.transform([task["reference_answer"]]))
     return float(sim[0, 0]) < REFERENCE_SIMILARITY_MIN
+
+
+def words(text):
+    """The words of a text, lower-cased, letters only."""
+    return re.findall(r"[a-z]+", text.lower())
+
+
+def known_words():
+    """Every word in the train split's answers, questions and reference answers (built once)."""
+    if "known" not in _known:
+        rows, _, _, _ = load_train()
+        _known["known"] = {w for r in rows for w in words(r["student_answer"] + " " + r["question"] + " " + r["reference_answer"])}
+    return _known["known"]
+
+
+def looks_misread(task):
+    """True if the share of unknown words in the student answer is above UNKNOWN_WORDS_MAX (used for
+    answers read from photos, where unknown words usually mean the handwriting was misread)."""
+    answer = words(task["student_answer"])
+    context = set(words(task["question"] + " " + task["reference_answer"]))
+    unknown = sum(w not in known_words() and w not in context for w in answer)
+    return unknown / max(1, len(answer)) > UNKNOWN_WORDS_MAX
 
 
 def canary_set():
