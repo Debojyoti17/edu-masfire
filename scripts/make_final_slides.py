@@ -294,7 +294,8 @@ def main():
         "review step; it is a grading assistant, not a replacement.",
         "On new questions a wrong reference answer is only caught by word overlap with the question "
         "(about 92-95% caught, about 5% false alarms); it is sent to the teacher, not repaired.",
-        "Feedback advice text has not yet been rated by people; only its verdict line is checked.",
+        "Feedback advice text: a small pilot rating by two team members was inconclusive (raters read the task "
+        "differently; 13 shared messages, agreement at chance level); a proper rating is still needed.",
         "Faults were injected one at a time; real failures can combine.",
     ])
 

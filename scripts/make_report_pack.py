@@ -213,7 +213,10 @@ def main():
         "Accuracy 0.72 on familiar questions and 0.63-0.64 on new ones: teacher review stays necessary.",
         "On new questions a wrong reference answer is only caught by word overlap with the question (it is sent to the "
         "teacher, not repaired); about 5% of genuine pairs are flagged as false alarms.",
-        "Feedback advice text has not been rated by people; only its verdict line is checked.",
+        "Feedback advice text: a pilot rating by two team members was inconclusive. One rater recorded whether he "
+        "understood the feedback rather than whether it helps; after mapping the answers to helpful / not helpful, "
+        "only 13 messages were rated by both, with agreement at chance level (Cohen's kappa 0.06; "
+        "results/human_rating/summary.md). A proper rating with trained raters is still needed.",
         "Faults are injected one at a time; the input check relies on answers ending like a sentence, which suits this "
         "cleaned dataset but should be tuned for real pupils' typing.",
         "Results from before 23 Oct 2026 used Ollama 0.40.4; the redesigned pipeline ran on 0.40.9.",

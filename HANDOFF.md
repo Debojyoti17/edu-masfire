@@ -73,6 +73,9 @@ autocast, more epochs, or lr 1e-5/3e-5.
   seeing this (would be tuning on the test); reported as limitations.
 - Rating sheets: first versions unusable (Sammo rated "understand"; Prottoy 22/60 valid). Originals kept as
   results/human_rating/rater_*_received.xlsx, blanks as rater_*_blank.csv. Team asked to redo on 29 Oct.
+- User's rules (29 Oct): Sammo "understand" = helpful, "don't understand" = neutral or harmful (recorded as
+  "not helpful"); Prottoy misspellings corrected, extra words ignored (scripts/clean_ratings.py -> *_clean.csv).
+  Result: 13 rows rated by both, agreement 6/13, kappa 0.06 (chance level) -> reported as an inconclusive pilot.
 
 ## Next steps (older list)
 1. If fine-tuning works: set `EXTRA_GRADERS` in `src/judge.py` only if it raises the judge's
