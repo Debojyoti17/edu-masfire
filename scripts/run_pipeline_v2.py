@@ -28,7 +28,8 @@ from src.agents import parse_verdict
 from src.faults import OVERCLAIM_TEXT, corrupt_task, donor_index, flip_label
 from src.graders import grade_with_prompt, rag_prompt
 from src.health import (benched, canary_set, check_input, expected_canary_accuracy, fit_reference_check,
-                        reference_looks_wrong)
+                        looks_misread, reference_looks_wrong)
+from src.ocr import simulate_misreading
 from src.judge import EXTRA_GRADERS, LABELS, MODELS, REGIME_MODES, judge_predict, train_judge, choose_threshold
 from src.finetuned import finetuned_probs
 from src.pipeline_v2 import (FEEDBACK_VERSION, check_message, check_reference, make_message, write_feedback,
@@ -48,6 +49,7 @@ FAULTS_V2 = {
     "reference_swap": "Data corruption: the reference answer belongs to a different question",
     "student_truncate": "Input noise: the student answer is cut to its first half",
     "tutor_overclaim": "Tutor claims the answer covers every key point with no errors",
+    "handwriting_misread": "The answer was read from a photo of handwriting, with reading mistakes",
 }
 CACHE_DIR = os.path.join("results", "pipeline_v2", "cache")
 _reference_checks = {}  # one fitted reference check per task list
@@ -211,6 +213,8 @@ def prepare(task, tasks, i, fault, ft, full_checks=False):
     notes = []
     donor = tasks[donor_index(tasks, i)]
     seen_task = corrupt_task(task, fault, donor) if fault in ("reference_swap", "student_truncate") else dict(task)
+    if fault == "handwriting_misread":
+        seen_task["student_answer"] = simulate_misreading(task["student_answer"], task["task_id"])
     if ft == "on":
         status, bank = check_reference(seen_task)
         if status == "mismatch":
@@ -220,6 +224,11 @@ def prepare(task, tasks, i, fault, ft, full_checks=False):
     if ft == "on" and full_checks:
         for problem in check_input(seen_task):
             notes.append(f"input check: {problem} -> sent to a teacher")
+            input_flagged = True
+        # The system knows which answers it read from photos (here: all answers in this condition),
+        # and checks those readings for misread words.
+        if fault == "handwriting_misread" and looks_misread(seen_task):
+            notes.append("input check: many unknown words in the photo reading (possibly misread) -> sent to a teacher")
             input_flagged = True
         if status == "unknown question":
             if id(tasks) not in _reference_checks:

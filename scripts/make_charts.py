@@ -435,7 +435,7 @@ def chart_v2(set_name="120"):
     names = {"none": "No fault", "plan_lost": "Planner message lost", "plan_misrouted": "Planner message misrouted",
              "grader_crash": "One grader crashes", "grader_lying": "One grader lies",
              "label_corrupted": "Label corrupted in transit", "reference_swap": "Wrong reference answer",
-             "student_truncate": "Student answer truncated", "tutor_overclaim": "Tutor overclaims"}
+             "student_truncate": "Student answer truncated", "tutor_overclaim": "Tutor overclaims", "handwriting_misread": "Handwriting misread"}
     axes[0].set_yticks(range(len(faults)), [names[f] for f in faults])
     axes[0].invert_yaxis()
     axes[0].set_xlabel("Wrong feedback reaching the student (%)")

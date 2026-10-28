@@ -27,7 +27,7 @@ SETS = [("120", "120-task set"), ("test_ua", "Familiar questions (537)"),
 FAULT_NAMES = {"plan_lost": "Planner message lost", "plan_misrouted": "Planner message misrouted",
                "grader_crash": "One grader crashes", "grader_lying": "One grader lies confidently",
                "label_corrupted": "Grade corrupted in transit", "reference_swap": "Wrong reference answer",
-               "student_truncate": "Student answer cut off", "tutor_overclaim": "Tutor overclaims"}
+               "student_truncate": "Student answer cut off", "tutor_overclaim": "Tutor overclaims", "handwriting_misread": "Handwriting misread"}
 
 
 def run(set_name, fault, ft):
