@@ -14,7 +14,7 @@ from scripts.run_pipeline import load_jsonl
 from scripts.run_pipeline_v2 import FAULTS_V2
 
 OUT = os.path.join("results", "report_pack.html")
-FINAL = "_robust_full_deberta-v3-base-nli"
+FINAL = "_robust_full_refsim_deberta-v3-base-nli"
 SETS = [("120", "120-task set"), ("test_ua", "test_ua: familiar questions"),
         ("test_uq", "test_uq: new questions"), ("test_ud_600", "test_ud: new topics (600 sample)")]
 parts = []
@@ -72,7 +72,9 @@ def main():
         "new questions) chooses regularisation; fault-aware copies where one LLM grader gives a random wrong label "
         "(confidence 0.5-0.99) or crashes; escalation threshold = lowest confidence where cross-validated accuracy >= 0.80.",
         "Safety layer: message envelopes (task ID, question fingerprint, checksum; re-request on failure); "
-        "reference-answer check against the question bank; input check (empty / not ending like a sentence); canary "
+        "reference-answer check against the question bank; for questions not in the bank, a word-similarity check "
+        "between question and reference answer (TF-IDF cosine < 0.059, threshold set on the train split for 5% false "
+        "alarms) sends the answer to a teacher; input check (empty / not ending like a sentence); canary "
         "check (32 known-grade answers, a grader is benched if binomial P(score this low) < 0.01); confidence escalation; "
         "Feedback verdict line fixed to the judge's label by prefilling.",
         "Faults (redesigned pipeline): " + "; ".join(f"{k} = {v}" for k, v in FAULTS_V2.items() if k != "none") + ".",
@@ -181,7 +183,8 @@ def main():
     text("Limitations", [
         "One dataset (SciEntsBank, English school science); typed answers only.",
         "Accuracy 0.72 on familiar questions and 0.63-0.64 on new ones: teacher review stays necessary.",
-        "A wrong reference answer for a brand-new question is not detected.",
+        "On new questions a wrong reference answer is only caught by word overlap with the question (it is sent to the "
+        "teacher, not repaired); about 5% of genuine pairs are flagged as false alarms.",
         "Feedback advice text has not been rated by people; only its verdict line is checked.",
         "Faults are injected one at a time; the input check relies on answers ending like a sentence, which suits this "
         "cleaned dataset but should be tuned for real pupils' typing.",

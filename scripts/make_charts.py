@@ -455,7 +455,7 @@ def chart_tradeoff():
     still reach students. Familiar questions (test_ua) and new questions (test_uq)."""
     import numpy as np
     setups = [("Judge: 3 LLMs + TF-IDF", "_robust_full", DEEMPH),
-              ("Judge: 3 LLMs + TF-IDF + fine-tuned DeBERTa", "_robust_full_deberta-v3-base-nli", SERIES[0])]
+              ("Judge: 3 LLMs + TF-IDF + fine-tuned DeBERTa", "_robust_full_refsim_deberta-v3-base-nli", SERIES[0])]
     panels = [("test_ua", "Questions with teacher-graded examples (537 answers)"),
               ("test_uq", "New questions (733 answers)")]
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.6), sharey=True)
@@ -580,7 +580,7 @@ def main():
     chart_test_ua()
     chart_v2("120")
     chart_v2("120_robust_full")
-    chart_v2("120_robust_full_deberta-v3-base-nli")
+    chart_v2("120_robust_full_refsim_deberta-v3-base-nli")
     chart_tradeoff()
     chart_budget()
     chart_answer_bank()

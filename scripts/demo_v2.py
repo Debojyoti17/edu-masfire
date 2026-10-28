@@ -116,7 +116,7 @@ def show_outcome(rec):
 def suggest():
     """From the saved final runs, answers where the fault turns a right grade into a wrong one with
     the safety layer off, and say what the safety layer does with them."""
-    folder = os.path.join("results", "pipeline_v2", "120_robust_full_deberta-v3-base-nli")
+    folder = os.path.join("results", "pipeline_v2", "120_robust_full_refsim_deberta-v3-base-nli")
     tasks = json.load(open(TASKS_PATH, encoding="utf-8"))
     index = {t["task_id"]: i for i, t in enumerate(tasks)}
     base = {r["task_id"]: r for r in load_jsonl(os.path.join(folder, "none_off.jsonl"))}

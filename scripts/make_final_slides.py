@@ -21,7 +21,7 @@ from scripts.run_pipeline_v2 import FAULTS_V2
 
 OUT = os.path.join("results", "slides", "final_presentation.pptx")
 deck.FOOTER = "Fault-tolerant multi-agent grading  |  Team 2  |  Final review"
-FINAL = "_robust_full_deberta-v3-base-nli"
+FINAL = "_robust_full_refsim_deberta-v3-base-nli"
 SETS = [("120", "120-task set"), ("test_ua", "Familiar questions (537)"),
         ("test_uq", "New questions (733)"), ("test_ud_600", "New topics (600)")]
 FAULT_NAMES = {"plan_lost": "Planner message lost", "plan_misrouted": "Planner message misrouted",
@@ -154,6 +154,7 @@ def main():
     table(slide, ["Check", "What it catches", "What happens"], [
         ["Message envelopes (ID, fingerprint, checksum)", "lost, misrouted or corrupted messages", "re-requested"],
         ["Reference-answer check", "wrong reference answer (known questions)", "restored from the question bank"],
+        ["Question/reference word match", "wrong reference answer (new questions)", "sent to the teacher"],
         ["Input check", "empty or cut-off student answers", "sent to the teacher"],
         ["Canary check (32 known-grade answers)", "a grader that has gone wrong, e.g. lies", "benched for the session"],
         ["Confidence threshold", "grades the judge is unsure about", "sent to the teacher"],
@@ -247,7 +248,8 @@ def main():
         "One dataset (SciEntsBank, school science, English); typed answers only - no handwriting yet.",
         "Accuracy is about 0.72 on familiar questions and 0.63-0.64 on new ones: the system needs the teacher "
         "review step; it is a grading assistant, not a replacement.",
-        "A wrong reference answer for a brand-new question is not detected.",
+        "On new questions a wrong reference answer is only caught by word overlap with the question "
+        "(about 92-95% caught, about 5% false alarms); it is sent to the teacher, not repaired.",
         "Feedback advice text has not yet been rated by people; only its verdict line is checked.",
         "Faults were injected one at a time; real failures can combine.",
     ])
