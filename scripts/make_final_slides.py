@@ -20,6 +20,7 @@ from scripts.run_pipeline import load_jsonl
 from scripts.run_pipeline_v2 import FAULTS_V2
 
 OUT = os.path.join("results", "slides", "final_presentation.pptx")
+deck.FOOTER = "Fault-tolerant multi-agent grading  |  Team 2  |  Final review"
 FINAL = "_robust_full_deberta-v3-base-nli"
 SETS = [("120", "120-task set"), ("test_ua", "Familiar questions (537)"),
         ("test_uq", "New questions (733)"), ("test_ud_600", "New topics (600)")]
@@ -203,7 +204,7 @@ def main():
     n += 1
     slide = new_slide("How a school would use it", n)
     boxes(slide, [("Answers in", "CSV / spreadsheet\n(online form export\nor typed)"),
-                  ("Teacher grades\na few (optional)", "they become\nworked examples"),
+                  ("Teacher grades", "a few answers first\n(optional); they become\nworked examples"),
                   ("System grades", "grade, confidence\nand feedback\nfor every answer"),
                   ("Review list", "only doubtful or\nflagged answers"),
                   ("Teacher checks", "corrections join the\nanswer bank")], 1.5, 1.6)
