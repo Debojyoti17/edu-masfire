@@ -180,7 +180,7 @@ def main():
     rows = []
     for name, path in [("Handwriting fonts (5 fonts x 30 answers, clean and blurry/tilted/faded)",
                         os.path.join("results", "handwriting", "stress", "readings.csv")),
-                       ("Real handwriting (phone photos, one team member)", os.path.join("results", "handwriting", "readings.csv"))]:
+                       ("Real handwriting (phone photos, two team members)", os.path.join("results", "handwriting", "readings.csv"))]:
         if not os.path.exists(path):
             rows.append([name, "-", "not yet run", "-", "-"])
             continue
@@ -205,18 +205,22 @@ def main():
     text("Figures (results/charts/)", [f"{f}: {d}" for f, d in figures if os.path.exists(os.path.join("results", "charts", f))])
     text("Limitations", [
         "One dataset (SciEntsBank, English school science). Photo reading is a prototype: tested on handwriting fonts "
-        "(easier than real handwriting) and 15 phone photos written by one team member, one answer per photo.",
-        "On real handwriting the reader's mistakes were real words (e.g. 'Because' read as 'Became'), so the "
-        "misread-word check caught none of them (it was built and tested on simulated mistakes that create non-words); "
+        "(easier than real handwriting) and 28 phone photos written by two team members, one answer per photo.",
+        "Real handwriting depends strongly on the writer and the photo: 3.2% of characters wrong for one writer "
+        "(15 photos) and 26.2% for the other (13 photos); photos taken sideways 27.7% vs upright 7.3%. Photos "
+        "should be taken upright (or rotated automatically, not yet built).",
+        "On real handwriting the reader's mistakes were mostly real words (e.g. 'Because' read as 'Became'), so the "
+        "misread-word check caught almost none of them (it was built and tested on simulated mistakes that create non-words); "
         "and answers written without a final full stop were held back by the cut-off check, which was designed for "
         "typed answers. Both checks need redesigning for photos; photo answers should be checked by a teacher.",
         "Accuracy 0.72 on familiar questions and 0.63-0.64 on new ones: teacher review stays necessary.",
         "On new questions a wrong reference answer is only caught by word overlap with the question (it is sent to the "
         "teacher, not repaired); about 5% of genuine pairs are flagged as false alarms.",
-        "Feedback advice text: a pilot rating by two team members was inconclusive. One rater recorded whether he "
-        "understood the feedback rather than whether it helps; after mapping the answers to helpful / not helpful, "
-        "only 13 messages were rated by both, with agreement at chance level (Cohen's kappa 0.06; "
-        "results/human_rating/summary.md). A proper rating with trained raters is still needed.",
+        "Feedback advice text: a pilot rating by two team members was inconclusive. 31 of the 60 messages were "
+        "rated by both; on the helpful / not-helpful scale they agreed on 16 (52%), Cohen's kappa 0.06 - chance "
+        "level. One rater first recorded whether he understood the feedback, and the instructions were read "
+        "differently, so the ratings say more about the rating instructions than about the feedback "
+        "(results/human_rating/summary.md). A proper rating with clearer instructions is still needed.",
         "Faults are injected one at a time; the input check relies on answers ending like a sentence, which suits this "
         "cleaned dataset but should be tuned for real pupils' typing.",
         "Results from before 23 Oct 2026 used Ollama 0.40.4; the redesigned pipeline ran on 0.40.9.",

@@ -243,7 +243,7 @@ def main():
             real = list(csv.DictReader(f))
         with open(os.path.join("results", "handwriting", "class_photos_graded.csv"), encoding="utf-8-sig", newline="") as f:
             flagged = sum("misread" in r["reason"] for r in csv.DictReader(f))
-        rows.append([f"Real handwriting ({len(real)} phone photos, 1 writer)",
+        rows.append([f"Real handwriting ({len(real)} phone photos, 2 writers)",
                      f"{sum(float(r['cer']) for r in real) / len(real):.1%}",
                      f"{sum(float(r['cer']) == 0 for r in real)} of {len(real)}", f"{flagged} of {len(real)}"])
     else:
@@ -255,8 +255,9 @@ def main():
     bullets(slide, [f"Simulated misreading (about 7% of characters wrong, 537 answers): wrong grades reaching students "
                     f"{share(off, wrong_reaching):.1%} with the safety layer off, {share(on, wrong_reaching):.1%} with it on; "
                     f"the misread check fired on {caught:.0%}.",
-                    "Real handwriting: the reader's mistakes are real words ('Because' read as 'Became'), which the "
-                    "misread check cannot see; a teacher check of photo answers stays necessary."],
+                    "Real handwriting: 3% of characters wrong for one writer, 26% for the other; sideways photos 28% vs "
+                    "upright 7%. Mistakes are mostly real words ('Because' read as 'Became'), so the misread check rarely "
+                    "fires: photo answers still need a teacher's check."],
             top=5.45, size=13, height=1.4)
 
     # 14-15. Practical charts
@@ -295,7 +296,7 @@ def main():
         "On new questions a wrong reference answer is only caught by word overlap with the question "
         "(about 92-95% caught, about 5% false alarms); it is sent to the teacher, not repaired.",
         "Feedback advice text: a small pilot rating by two team members was inconclusive (raters read the task "
-        "differently; 13 shared messages, agreement at chance level); a proper rating is still needed.",
+        "differently; 31 shared messages, agreement at chance level); a proper rating is still needed.",
         "Faults were injected one at a time; real failures can combine.",
     ])
 

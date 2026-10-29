@@ -76,6 +76,9 @@ autocast, more epochs, or lr 1e-5/3e-5.
 - User's rules (29 Oct): Sammo "understand" = helpful, "don't understand" = neutral or harmful (recorded as
   "not helpful"); Prottoy misspellings corrected, extra words ignored (scripts/clean_ratings.py -> *_clean.csv).
   Result: 13 rows rated by both, agreement 6/13, kappa 0.06 (chance level) -> reported as an inconclusive pilot.
+- 30 Oct: redone sheets (rater_*_received_v2.xlsx): Sammo rows 1-31, Prottoy rows 1-46; 31 shared, 16/31
+  agree, kappa 0.06 - still chance level. Prottoy's 13 photos added (codes on 4 sheets were swapped, matched
+  by text; H21, H28 missing; H16 sent twice) -> 28 photos, 2 writers.
 
 ## Next steps (older list)
 1. If fine-tuning works: set `EXTRA_GRADERS` in `src/judge.py` only if it raises the judge's

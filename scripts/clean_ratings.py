@@ -41,7 +41,7 @@ def main():
     """Clean both sheets and print every change so it can be checked."""
     for rater, clean in [("rater_A", clean_a), ("rater_B", clean_b)]:
         with open(os.path.join(DIR, f"{rater}.csv"), encoding="utf-8-sig", newline="") as f:
-            rows = [{k: v for k, v in r.items() if k} for r in csv.DictReader(f)]
+            rows = [{k: v for k, v in r.items() if k} for r in csv.DictReader(f) if (r["row"] or "").strip()]  # Excel adds empty lines
         for r in rows:
             r["original_rating"] = (r["rating"] or "").strip()
             r["rating"] = clean(r["original_rating"]) if r["original_rating"] else ""
