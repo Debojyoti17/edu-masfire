@@ -10,6 +10,8 @@ answers using small local models. We inject faults on purpose, measure how often
 
 wrong feedback reaches the student, and test a confidence check that catches it.
 
+(Since 23 Oct 2026 the system is the redesigned pipeline - see "Current state" under Decisions.)
+
 
 
 \## Data
@@ -40,7 +42,9 @@ The Grader's job is to pick the right label for the student's answer.
 
 \## Decisions
 
-\- Main config (current): v2 prompt (rubric definitions, no examples, single-step) running on qwen2.5:7b. llama3.1:8b stays as the second model for side-by-side comparison.
+\- Current state (final, Oct 2026): the redesigned pipeline (scripts/run_pipeline_v2.py) replaced the 4-agent pipeline, which was less accurate than a single Grader. Retrieval Planner (teacher-graded examples for the same question) -> five graders (qwen2.5:7b, mistral:7b, gemma2:9b via Ollama, TF-IDF classifier, fine-tuned DeBERTa-v3-base) -> logistic-regression judge (fault-aware, separate judges for seen and new questions) -> safety layer (message envelopes, reference checks, input check, canary check, misread-word check for photos, low-confidence escalation to a teacher) -> Feedback with the verdict line fixed to the judge's label. Final results: results/pipeline_v2/<set>_robust_full_refsim_deberta-v3-base-nli/, summarised in results/report_pack.html. Photo reader: src/ocr.py with qwen2.5vl:7b. HANDOFF.md has the latest status. The decisions below are the history of the original pipeline.
+
+\- Main config of the original pipeline: v2 prompt (rubric definitions, no examples, single-step) running on qwen2.5:7b. llama3.1:8b stays as the second model for side-by-side comparison.
 
 \- Why: after fixing the mass-capture measurement bug (see finding below) and rerunning every version x model combination on all 120 tasks with prefilling, v2+qwen2.5:7b is now the best on both accuracy (59/120 = 0.492, the highest of any combo tested) and confidence gap (avg top probability 0.792 when correct vs 0.727 when wrong, gap 0.065, also the highest of any combo tested). No combo tested has a strong gap in absolute terms, so treat this as "least bad," not "solved" - a confidence threshold gate built on this will still let a meaningful share of wrong answers through.
 

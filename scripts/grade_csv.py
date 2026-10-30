@@ -37,8 +37,8 @@ import time
 
 from src.agents import LABEL_WORDS
 from src.graders import grade_with_prompt, rag_prompt
-from src.health import (benched, canary_set, check_input, expected_canary_accuracy, fit_reference_check,
-                        looks_misread, reference_looks_wrong)
+from src.health import (READING_CONFIDENCE_MIN, benched, canary_set, check_input, expected_canary_accuracy,
+                        fit_reference_check, looks_misread, reference_looks_wrong)
 from src.judge import EXTRA_GRADERS, LABELS, MODELS, REGIME_MODES, choose_threshold, judge_predict, train_judge
 from src.finetuned import finetuned_probs
 from src.pipeline_v2 import FEEDBACK_VERSION, check_reference, tfidf_probs, tutor, write_feedback
@@ -175,8 +175,13 @@ def main():
         top = sorted(zip(LABELS, probs[0]), key=lambda lp: -lp[1])[:2]
         r["top_two"] = " / ".join(f"{LABEL_WORDS[l]} {p:.2f}" for l, p in top)
         problems = check_input(r)
-        if r.get("read_from_photo") and looks_misread(r):
-            problems.append("many unknown words in the reading of the photo - handwriting may be misread")
+        if r.get("read_from_photo"):
+            # a photo cannot arrive cut in half, and handwritten answers often have no final full stop
+            problems = [p for p in problems if "end like a sentence" not in p]
+            if r["reading_confidence"] != "" and float(r["reading_confidence"]) < READING_CONFIDENCE_MIN:
+                problems.append("the photo was hard to read (low reading confidence) - please check what was read")
+            if looks_misread(r):
+                problems.append("many unknown words in the reading of the photo - handwriting may be misread")
         if check_reference(r)[0] == "unknown question" and reference_looks_wrong(r, reference_check):
             problems.append("reference answer shares almost no words with the question - please check it")
         if problems:

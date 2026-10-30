@@ -37,9 +37,10 @@ The first pipeline turned out to be less accurate than a single Grader, so it wa
 4. **Tutor + Feedback** write the advice; the verdict line is fixed to the judge's label.
 
 Safety layer: checked message envelopes (lost / misrouted / corrupted messages are re-requested),
-reference-answer check against the question bank, input check (empty or cut-off answers),
-canary check (a grader that fails known-grade answers is benched for the session), and
-escalation of low-confidence grades to a teacher.
+reference-answer check against the question bank (and a question/reference word-match check for
+new questions), input check (empty or cut-off answers), canary check (a grader that fails
+known-grade answers is benched for the session), a misread-word check for answers read from
+photos, and escalation of low-confidence grades to a teacher.
 
 ## Using it in a school
 
@@ -58,22 +59,37 @@ teacher must check). Answers the teacher has already graded become worked exampl
 
 | Path | Contents |
 |---|---|
-| `src/` | Model wrapper (`llm.py`), rubric, the four agents, the fault definitions |
-| `scripts/` | Experiment runners, analysis and chart scripts |
-| `data/` | `tasks.json` (120-task evaluation set), `examples.json` (8 worked examples) |
-| `results/` | Result files, summaries and charts |
+| `src/` | Model wrapper (`llm.py`), the original four agents (`agents.py`), the redesigned pipeline: Planner (`retrieval.py`), graders (`graders.py`, `finetuned.py`), judge (`judge.py`), safety layer (`pipeline_v2.py`, `health.py`), faults (`faults.py`), photo reader (`ocr.py`) |
+| `scripts/` | Experiment runners, analysis, charts, slides and report pack; the demo (`demo_v2.py`); the teacher tools (`grade_csv.py`, `grade_photo.py`) |
+| `tests/` | Automatic tests of the safety layer and fault injection (`python -m unittest discover -s tests -t .`) |
+| `data/` | `tasks.json` (120-task evaluation set), `eval_test_*.json` (larger test sets), `examples.json` |
+| `examples/` | Example class spreadsheets and answer-sheet images for the teacher tools |
+| `results/` | Result files, summaries, charts, slides, report pack, handwriting and rating tests |
 | `get_splits.py`, `make_tasks.py`, `make_eval_sets.py`, `make_examples.py` | Build the datasets |
+| `scripts/early_checks/` | First quick checks of the Ollama connection and log-probabilities (kept for history) |
 
 ## Setup
 
 1. Python 3.13 and a virtual environment: `pip install -r requirements.txt`
-2. [Ollama](https://ollama.com) with the models used: `ollama pull qwen2.5:7b` and `ollama pull llama3.1:8b`
-   (also `mistral:7b`, `gemma2:9b` for the extended runs)
+2. [Ollama](https://ollama.com) with the models used: `ollama pull qwen2.5:7b`, `mistral:7b`, `gemma2:9b`
+   (redesigned pipeline), `qwen2.5vl:7b` (photo reader) and `llama3.1:8b` (original comparison)
 3. Data: `python get_splits.py` then `python make_eval_sets.py` (downloads SciEntsBank from Hugging Face)
 
 All model calls use temperature 0, seed 42 and a 4096-token context.
 
 ## Reproducing the main results
+
+Redesigned pipeline (final results):
+
+```
+python -m scripts.run_pipeline_v2 data/tasks.json            # every fault, safety layer off and on (also test sets)
+python -m scripts.analyze_pipeline_v2                        # tables -> results/pipeline_v2_summary.md
+python -m scripts.make_report_pack                           # all tables -> results/report_pack.html
+python -m scripts.evaluate_handwriting                       # photo test -> results/handwriting/summary.md
+python -m unittest discover -s tests -t .                    # automatic tests of the safety layer
+```
+
+Original pipeline:
 
 ```
 python -m scripts.run_grader v2 qwen2.5:7b --prefill        # single Grader, main configuration

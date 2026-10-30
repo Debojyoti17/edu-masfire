@@ -10,12 +10,15 @@
 #   python -m scripts.demo_v2 --task 5                        one answer, no fault
 #   python -m scripts.demo_v2 --task 5 --fault grader_lying   then the fault, safety layer off and on
 #   python -m scripts.demo_v2 --task 5 --fault grader_lying --save    also save a transcript
+#   python -m scripts.demo_v2 --task 5 --live                 ask the models again now instead of reusing
+#                                                             their saved answers (slower; shows it is not preset)
 # Faults: plan_lost, plan_misrouted, grader_crash, grader_lying, label_corrupted, reference_swap,
 #         student_truncate, tutor_overclaim
 import json
 import os
 import sys
 import textwrap
+import time
 
 from src.agents import LABEL_WORDS
 from src.graders import grade_with_prompt, rag_prompt
@@ -31,6 +34,7 @@ from scripts.run_pipeline_v2 import (CACHE_DIR, FAULTS_V2, finish_task, key_of, 
 TASKS_PATH = os.path.join("data", "tasks.json")
 WIDTH = 92
 transcript = []
+live = {"on": False, "asked": set(), "calls": 0}  # --live: prompts already re-asked this run, number of model calls
 
 
 def say(text=""):
@@ -56,14 +60,19 @@ def wrapped(label, text, indent=4):
 def fill_cache(prompts, cache):
     """Make sure every grader prompt has an answer in the cache (asks the model if it is new)."""
     for model, _, prompt in prompts:
-        if key_of(model, prompt) not in cache:
-            save_to_cache("graders", key_of(model, prompt), list(grade_with_prompt(prompt, model)), cache)
+        key = key_of(model, prompt)
+        if key not in cache or (live["on"] and key not in live["asked"]):
+            live["asked"].add(key)
+            live["calls"] += 1
+            save_to_cache("graders", key, list(grade_with_prompt(prompt, model)), cache)
 
 
 def canary_benched(fault, cache):
-    """Run the canary check for this fault: the (model, mode) graders that would be benched."""
+    """Run the canary check for this fault: the (model, mode) graders that would be benched.
+    It uses saved answers even with --live (otherwise 288 model calls, several minutes)."""
     canaries = canary_set()
     out = set()
+    was_live, live["on"] = live["on"], False
     for model in MODELS:
         for mode in ["same", "similar", "zeroshot"]:
             prompts = [(model, mode, build_prompt(c, "v2") if mode == "zeroshot" else rag_prompt(c, retrieve(c, mode), mode))
@@ -74,6 +83,7 @@ def canary_benched(fault, cache):
                 labels = [lie(l)[0] if l else l for l in labels]
             if benched(labels, [c["gold_label"] for c in canaries], expected_canary_accuracy(model, mode)):
                 out.add((model, mode))
+    live["on"] = was_live
     return frozenset(out)
 
 
@@ -162,10 +172,12 @@ def main():
     for model in MODELS:
         seed_grader_cache(model, "test_ua", tasks, cache)
     cache.update(load_cache("graders"))
-    text_cache = load_cache("text")
+    live["on"] = "--live" in args
+    text_cache = {} if live["on"] else load_cache("text")  # empty: Tutor notes and feedback are written again now
+    started = time.time()
 
     say("=" * WIDTH)
-    say(f"REDESIGNED PIPELINE - task {i} ({task['task_id']})")
+    say(f"REDESIGNED PIPELINE - task {i} ({task['task_id']})" + ("   [LIVE: every model is asked again now]" if live["on"] else ""))
     say("=" * WIDTH)
     wrapped("Question:", task["question"])
     wrapped("Reference answer (from the teacher):", task["reference_answer"])
@@ -203,6 +215,11 @@ def main():
                     + ", ".join(f"{m} ({mode})" for m, mode in sorted(benched_graders)))
             show_votes(rec)
             show_outcome(rec)
+
+    if live["on"]:
+        say()
+        say(f"LIVE run: {live['calls']} grader calls and every Tutor/Feedback text were made just now, "
+            f"in {time.time() - started:.0f} seconds (the canary check used saved answers).")
 
     if "--save" in args:
         os.makedirs(os.path.join("results", "demo"), exist_ok=True)

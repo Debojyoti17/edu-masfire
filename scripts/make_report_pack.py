@@ -3,11 +3,16 @@
 # browser and copy tables into Word; they keep their layout. All numbers are read from the result
 # files. The summary text is reference material - the team writes the report prose in its own words.
 #
-# Usage: python -m scripts.make_report_pack
+# Main percentages come with a 95% confidence interval in brackets (bootstrap: the answers are
+# resampled 1,000 times with seed 42; the interval holds the middle 95% of the results).
+#
+# Usage: python -m scripts.make_report_pack [output file, default results/report_pack.html]
 import csv
 import html
 import json
 import os
+import random
+import sys
 from collections import Counter
 
 from scripts.compare_eval_sets import grader_file
@@ -39,9 +44,26 @@ def share(recs, test):
     return sum(test(r) for r in recs) / len(recs)
 
 
+def with_ci(recs, value, percent=True):
+    """value(records) followed by its 95% bootstrap confidence interval, e.g. '15.0% (11.4-18.9%)'."""
+    rng = random.Random(42)
+    samples = sorted(value([rng.choice(recs) for _ in recs]) for _ in range(1000))
+    low, high, point = samples[25], samples[974], value(recs)
+    if percent:
+        return f"{point:.1%} ({low * 100:.1f}-{high:.1%})"
+    return f"{point:.3f} ({low:.3f}-{high:.3f})"
+
+
 def wrong_reaching(r):
     """A wrong grade that reached the student (not held back for the teacher)."""
     return not r["escalated"] and r["delivered"] != r["gold_label"]
+
+
+def wrong_after_holdback(recs, held=0.25):
+    """Share of all answers that reach the student with a wrong grade when the least confident
+    `held` share is sent to the teacher."""
+    keep = sorted(recs, key=lambda r: r["confidence"])[round(held * len(recs)):]
+    return sum(r["final_label"] != r["gold_label"] for r in keep) / len(recs)
 
 
 def v2(set_name, fault, ft, suffix=FINAL):
@@ -104,11 +126,12 @@ def main():
     rows = []
     for set_name, label in SETS:
         off, on = v2(set_name, "none", "off"), v2(set_name, "none", "on")
-        rows.append([label, len(off), f"{share(off, lambda r: r['final_label'] == r['gold_label']):.3f}",
-                     f"{share(off, wrong_reaching):.1%}", f"{share(on, wrong_reaching):.1%}",
+        rows.append([label, len(off), with_ci(off, lambda rs: share(rs, lambda r: r['final_label'] == r['gold_label']), False),
+                     with_ci(off, lambda rs: share(rs, wrong_reaching)), with_ci(on, lambda rs: share(rs, wrong_reaching)),
                      f"{share(on, lambda r: r['escalated']):.1%}"])
-    table("Table 2. Redesigned pipeline, no faults", ["Set", "Answers", "Judge accuracy", "Wrong to student (safety off)",
-          "Wrong to student (safety on)", "Held for teacher"], rows, f"results/pipeline_v2/<set>{FINAL}/none_*.jsonl")
+    table("Table 2. Redesigned pipeline, no faults (95% confidence intervals in brackets)",
+          ["Set", "Answers", "Judge accuracy", "Wrong to student (safety off)",
+           "Wrong to student (safety on)", "Held for teacher"], rows, f"results/pipeline_v2/<set>{FINAL}/none_*.jsonl")
 
     # Faults
     for set_name, label in [("test_ua", "familiar questions, 537 answers"), ("test_uq", "new questions, 733 answers")]:
@@ -127,14 +150,24 @@ def main():
     rows = []
     for set_name, label in SETS:
         row = [label]
-        for suffix in ["_robust_full", FINAL]:
-            recs = v2(set_name, "none", "on", suffix)
-            ranked = sorted(recs, key=lambda r: r["confidence"])
-            keep = ranked[round(0.25 * len(recs)):]
-            row.append(f"{sum(r['final_label'] != r['gold_label'] for r in keep) / len(recs):.1%}")
+        both = [v2(set_name, "none", "on", suffix) for suffix in ["_robust_full", FINAL]]
+        row += [with_ci(recs, wrong_after_holdback) for recs in both]
+        # paired: both judges on the same resampled answers, so the interval is for the difference itself
+        old, new = ({r["task_id"]: r for r in recs} for recs in both)
+        ids = sorted(set(old) & set(new))
+        rng = random.Random(42)
+        diffs = []
+        for _ in range(1000):
+            pick = [rng.choice(ids) for _ in ids]
+            diffs.append(wrong_after_holdback([new[i] for i in pick]) - wrong_after_holdback([old[i] for i in pick]))
+        diffs.sort()
+        point = wrong_after_holdback([new[i] for i in ids]) - wrong_after_holdback([old[i] for i in ids])
+        row.append(f"{point * 100:+.1f} points ({diffs[25] * 100:+.1f} to {diffs[974] * 100:+.1f})"
+                   + (" - clear" if diffs[974] < 0 or diffs[25] > 0 else " - not clear"))
         rows.append(row)
-    table("Table 4. Wrong grades reaching students when the least confident 25% go to the teacher",
-          ["Set", "Judge: 3 LLMs + TF-IDF", "Judge: + fine-tuned DeBERTa"], rows,
+    table("Table 4. Wrong grades reaching students when the least confident 25% go to the teacher "
+          "(95% confidence intervals in brackets)",
+          ["Set", "Judge: 3 LLMs + TF-IDF", "Judge: + fine-tuned DeBERTa", "Difference, paired (95% CI)"], rows,
           "results/pipeline_v2/<set>_robust_full and <set>" + FINAL + " (none_on.jsonl)")
 
     # Budget tiers
@@ -236,9 +269,10 @@ def main():
             "<body><h1>Report pack: Fault-tolerant multi-agent grading (Team 2)</h1>"
             "<p>All numbers are generated from the result files by scripts/make_report_pack.py.</p>"
             + "".join(parts) + "</body></html>")
-    with open(OUT, "w", encoding="utf-8") as f:
+    out = sys.argv[1] if len(sys.argv) > 1 else OUT
+    with open(out, "w", encoding="utf-8") as f:
         f.write(page)
-    print(f"Saved {OUT}")
+    print(f"Saved {out}")
 
 
 if __name__ == "__main__":

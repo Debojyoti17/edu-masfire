@@ -10,6 +10,8 @@
 #     question was probably mixed up with another question's, so the answer goes to a teacher.
 #   - word check for answers read from photos: if many words of the reading are not real words seen
 #     before, the handwriting was probably misread, so the answer goes to a teacher.
+#   - reading-confidence check for photos: if the vision model was unsure of what it read, the answer
+#     goes to a teacher (real misreadings are often real words, which the word check cannot see).
 import json
 import math
 import os
@@ -36,6 +38,10 @@ REFERENCE_SIMILARITY_MIN = 0.059
 # vocabulary built from the other half. On simulated misreadings (about 7% of characters wrong) it
 # caught 75% / 72% / 78% and flagged 1.1% / 1.8% / 10.2% of genuine answers (test_ua / test_uq / test_ud).
 UNKNOWN_WORDS_MAX = 0.167
+# Lowest reading confidence (average probability of the words the vision model wrote) before a photo
+# answer goes to a teacher. Set from the team's 28 handwriting photos (scripts/analyze_photo_checks.py);
+# 0 = check switched off until then.
+READING_CONFIDENCE_MIN = 0.0
 
 
 def check_input(task):

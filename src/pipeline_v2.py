@@ -20,8 +20,20 @@ TUTOR_MAX_TOKENS = 160
 FEEDBACK_MAX_TOKENS = 120
 # Name of the current Feedback prompt, used in the cache key so a changed prompt is not answered
 # from old cached text. v2: write to the student as "you" (v1 sometimes greeted a character from
-# the question, e.g. "Great job, David!").
-FEEDBACK_VERSION = "feedback-fixed-verdict-v2"
+# the question, e.g. "Great job, David!"). v3: separate instructions for each verdict (v2 asked for
+# "encouraging" advice on "what was good" even for wrong answers, so it often praised wrong ideas).
+FEEDBACK_VERSION = "feedback-per-verdict-v3"
+# What the advice must do for each verdict.
+FEEDBACK_GUIDE = {
+    "correct": "Say specifically which scientific idea the student got right. If the reference answer has a "
+               "detail the student left out, suggest adding it.",
+    "partially_correct_incomplete": "Name the part of the answer that is right, then explain the key idea from the "
+                                    "reference answer that is missing.",
+    "contradictory": "Do not praise the student's claim and do not call any of it correct or a good idea. Say kindly "
+                     "which part disagrees with the reference answer, and explain the correct idea in simple words.",
+    "irrelevant": "Do not praise the content of the answer. Say kindly that it does not answer the question that "
+                  "was asked, and explain what the question is asking for.",
+}
 _cache = {}
 
 
@@ -92,8 +104,9 @@ The verdict for this answer is: {LABEL_WORDS.get(label, label)}.
 Tutor's comparison:
 {notes or "(none provided)"}
 
-Write 2-3 short, encouraging sentences for the student that are consistent with that verdict,
-explaining what was good and what to improve. Speak directly to the student as "you". Do not greet
+Write 2-3 short, kind and honest sentences for the student that are consistent with that verdict.
+{FEEDBACK_GUIDE.get(label, "")}
+Never call a wrong idea right or good. Speak directly to the student as "you". Do not greet
 or name anyone: names in the question belong to people in the question, not to the student.
 """
     rest = generate(prompt, model=model, max_tokens=FEEDBACK_MAX_TOKENS, prefill=fixed)
