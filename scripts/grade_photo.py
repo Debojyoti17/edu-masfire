@@ -6,6 +6,8 @@
 #   python -m scripts.grade_photo --questions              show the questions to choose from
 #   python -m scripts.grade_photo PHOTO --question 1       grade the photo as an answer to question 1
 #   python -m scripts.grade_photo latest --question 1      use the newest photo in Downloads / Pictures / Desktop
+#   python -m scripts.grade_photo --code H16               one of the team's test photos, with its own question
+#                                                          (from results/handwriting/to_write.csv) and the teacher's grade
 import csv
 import glob
 import json
@@ -39,9 +41,20 @@ def main():
         for k, n in enumerate(QUESTIONS, start=1):
             print(f"Question {k}: {tasks[n]['question']}\n")
         return
-    number = int(args[args.index("--question") + 1]) if "--question" in args else 1
-    task = tasks[QUESTIONS[number - 1]]
-    source = newest_photo() if args[0] == "latest" else args[0]
+    teacher = None
+    if "--code" in args:  # a team test photo: its question is found through the handwriting test sheet
+        code = args[args.index("--code") + 1].upper()
+        with open(os.path.join("results", "handwriting", "to_write.csv"), encoding="utf-8-sig", newline="") as f:
+            row = next((r for r in csv.DictReader(f) if r["code"] == code), None)
+        if row is None or not glob.glob(os.path.join("results", "handwriting", "photos", code + ".*")):
+            sys.exit(f"No test photo {code} (see results/handwriting/photos/)")
+        task, number = tasks[int(row["task_number"])], code
+        source = glob.glob(os.path.join("results", "handwriting", "photos", code + ".*"))[0]
+        teacher = task["gold_label"].replace("_", " ")
+    else:
+        number = int(args[args.index("--question") + 1]) if "--question" in args else 1
+        task = tasks[QUESTIONS[number - 1]]
+        source = newest_photo() if args[0] == "latest" else args[0]
     os.makedirs(OUT_DIR, exist_ok=True)
     name = time.strftime("answer_%H%M%S") + os.path.splitext(source)[1].lower()
     shutil.copy(source, os.path.join(OUT_DIR, name))
@@ -60,6 +73,8 @@ def main():
     print(f"Grade:                {r['grade']}  (confidence {r['confidence']})")
     print(f"Status:               {r['status']}  {r['reason']}")
     print(f"Feedback:\n{r['feedback']}")
+    if teacher:
+        print(f"\nTeacher's grade for this answer: {teacher}")
 
 
 if __name__ == "__main__":
