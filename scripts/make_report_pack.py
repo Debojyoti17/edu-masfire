@@ -24,10 +24,12 @@ FINAL = "_robust_full_refsim_deberta-v3-base-nli"
 SETS = [("120", "120-task set"), ("test_ua", "test_ua: familiar questions"),
         ("test_uq", "test_uq: new questions"), ("test_ud_600", "test_ud: new topics (600 sample)")]
 parts = []
+tables = []  # every table as (caption, headers, rows, source), reused by scripts/make_report_template.py
 
 
 def table(caption, headers, rows, source):
     """Add a table with a caption and the file(s) its numbers come from."""
+    tables.append((caption, headers, rows, source))
     parts.append(f"<h3>{html.escape(caption)}</h3><table><tr>"
                  + "".join(f"<th>{html.escape(h)}</th>" for h in headers) + "</tr>"
                  + "".join("<tr>" + "".join(f"<td>{html.escape(str(c))}</td>" for c in row) + "</tr>" for row in rows)
@@ -71,8 +73,8 @@ def v2(set_name, fault, ft, suffix=FINAL):
     return load_jsonl(os.path.join("results", "pipeline_v2", set_name + suffix, f"{fault}_{ft}.jsonl"))
 
 
-def main():
-    """Build every section and save the page."""
+def main(out=None):
+    """Build every section and save the page (to `out` if given)."""
     sizes = {s: len(json.load(open(p, encoding="utf-8"))) for s, p in
              [("train sample", "data/eval_train_sample_2000.json"), ("120", "data/tasks.json"),
               ("test_ua", "data/eval_test_ua.json"), ("test_uq", "data/eval_test_uq.json"),
@@ -269,7 +271,7 @@ def main():
             "<body><h1>Report pack: Fault-tolerant multi-agent grading (Team 2)</h1>"
             "<p>All numbers are generated from the result files by scripts/make_report_pack.py.</p>"
             + "".join(parts) + "</body></html>")
-    out = sys.argv[1] if len(sys.argv) > 1 else OUT
+    out = out or (sys.argv[1] if len(sys.argv) > 1 else OUT)
     with open(out, "w", encoding="utf-8") as f:
         f.write(page)
     print(f"Saved {out}")
